@@ -15,11 +15,15 @@ const Canvas = props => {
         /** Get 2D canvas drawing context. */
         const canvasContext = canvasElement.getContext('2d')
         /** Send context to draw function in App. */
-        props.draw(canvasContext)
-    }, [props.draw])
+        props.saveContext(canvasContext)
+    }, [])
 
     /** Create canvas with ref. */
-    return <canvas ref={canvasRef} />
+    return <canvas 
+        ref={canvasRef} 
+        width={props.width}
+        height={props.height}
+    />
 }
 
 export default Canvas
