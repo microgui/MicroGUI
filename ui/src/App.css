@@ -27,3 +27,15 @@
     display: table;
     clear: both;
 }
+
+.buttons {
+	margin-top: 2%;
+	display: flex;
+	justify-content: center;
+}
+
+.canvasSize {
+	margin-bottom: 2%;
+	display: flex;
+	justify-content: center;
+}

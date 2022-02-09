@@ -2,7 +2,7 @@ import { Grid, Button } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import './ObjectsMenu.css'
 
-const ObjectsMenu = props => {
+export default function ObjectsMenu(props) {
     return (
         <Grid className="grid" container spacing={0} xs={6}>
             <Grid item xs={6}>
@@ -10,8 +10,7 @@ const ObjectsMenu = props => {
                     onClick={() => {
                         props.testLog()
                     }}
-                >
-                    One
+                > One
                 </Button>
             </Grid>
             <Grid item xs={6}>
@@ -19,8 +18,7 @@ const ObjectsMenu = props => {
                     onClick={() => {
                         props.other()
                     }}
-                >
-                    Two
+                > Two
                 </Button>
             </Grid>
             <Grid item xs={6}>
@@ -28,8 +26,7 @@ const ObjectsMenu = props => {
                     onClick={() => {
                         props.btn()
                     }}
-                >
-                    <CheckBoxOutlineBlankIcon fontsize='small'/>
+                > <CheckBoxOutlineBlankIcon />
                 </Button>
             </Grid>
             <Grid item xs={6}>
@@ -44,5 +41,3 @@ const ObjectsMenu = props => {
         </Grid>
     );
 }
-
-export default ObjectsMenu

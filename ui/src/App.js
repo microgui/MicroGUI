@@ -1,5 +1,7 @@
 import './App.css';
 import Canvas from './Components/Canvas.js'
+import CanvasButtons from './Components/CanvasButtons.js'
+import CanvasSize from './Components/CanvasSize';
 import ObjectsMenu from './Components/ObjectsMenu.js'
 
 function App() {
@@ -9,8 +11,11 @@ function App() {
 	/** Save canvas context to variable. */
 	const saveContext = (context) => {
 		ctx = context
-		//ctx.canvas.width = 400
-		//ctx.canvas.height = 300
+	}
+
+	const resizeCanvas = (width, height) => {
+		ctx.canvas.width = width
+		ctx.canvas.height = height
 	}
 
 	/** Draw on canvas. */
@@ -58,12 +63,20 @@ function App() {
 					/>
 				</div>
 				<div className='column middle'>
+					<div className='canvasSize'>
+						<CanvasSize 
+							resize = {resizeCanvas}	
+						/>
+					</div>
 					<Canvas 
 						className='Canvas' 
 						saveContext={saveContext}
 						width='400'
 						height='300'
 					/>
+					<div className='buttons'>
+						<CanvasButtons />
+					</div>
 				</div>
 				<div className='column side'>
 					<h1>Text</h1>
