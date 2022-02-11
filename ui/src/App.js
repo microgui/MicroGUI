@@ -1,21 +1,33 @@
-import './App.css';
+import './App.css'
 import Canvas from './Components/Canvas.js'
 import CanvasButtons from './Components/CanvasButtons.js'
 import CanvasSize from './Components/CanvasSize';
 import ObjectsMenu from './Components/ObjectsMenu.js'
+import ClearCanvasButton from './Components/ClearCanvasButton.js'
 
+import { Stack } from '@mui/material';
+
+/**
+ * Core of the web app.
+ * @returns The web app.
+ */
 function App() {
 	/** Holds canvas context. */
 	var ctx
 
-	/** Save canvas context to variable. */
+	/** Save canvas context to variable ctx. */
 	const saveContext = (context) => {
 		ctx = context
 	}
 
+	/** Resize canvas size (width, height). */
 	const resizeCanvas = (width, height) => {
 		ctx.canvas.width = width
 		ctx.canvas.height = height
+	}
+
+	const clearCanvas = () => {
+		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 	}
 
 	/** Draw on canvas. */
@@ -55,12 +67,21 @@ function App() {
 			<h1>MicroGUI</h1>
 			<div className='row'>
 				<div className='column side'>
-					<ObjectsMenu 
-						className='ObjectsMenu'
-						testLog={drawRed} 
-						other={drawOrng}
-						btn={drawBtn}
-					/>
+					<Stack 
+						spacing={2}
+						justifyContent='center'
+  						alignItems='center'
+					>
+						<ObjectsMenu 
+							className='ObjectsMenu'
+							testLog={drawRed} 
+							other={drawOrng}
+							btn={drawBtn}
+						/>
+						<ClearCanvasButton
+							clear={clearCanvas}
+						/>
+					</Stack>
 				</div>
 				<div className='column middle'>
 					<div className='canvasSize'>

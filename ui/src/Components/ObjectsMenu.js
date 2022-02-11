@@ -2,6 +2,10 @@ import { Grid, Button } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import './ObjectsMenu.css'
 
+/**
+ * Creates a menu with objects.
+ * @returns A menu.
+ */
 export default function ObjectsMenu(props) {
     return (
         <Grid className="grid" container spacing={0} xs={6}>

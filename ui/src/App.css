@@ -14,8 +14,6 @@
 
 .column.side {
   width: 25%;
-  display: flex;
-  justify-content: center;
 }
 
 .column.middle {
