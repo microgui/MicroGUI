@@ -1,110 +1,107 @@
 import './App.css'
-import Canvas from './Components/Canvas.js'
-import CanvasButtons from './Components/CanvasButtons.js'
-import CanvasSize from './Components/CanvasSize';
-import ObjectsMenu from './Components/ObjectsMenu.js'
-import ClearCanvasButton from './Components/ClearCanvasButton.js'
 
-import { Stack } from '@mui/material';
+import { Typography, Paper, Grid, Stack, Button as MaterialButton } from '@mui/material';
+import { Editor, Frame, Element, useEditor } from '@craftjs/core';
+
+import logo from './logo.png'
+
+import { Container } from './Components/Container'
+import { Toolbox } from './Components/Toolbox'
+import { Button } from './Components/Button'
 
 /**
  * Core of the web app.
  * @returns The web app.
  */
-function App() {
-	/** Holds canvas context. */
-	var ctx
-
-	/** Save canvas context to variable ctx. */
-	const saveContext = (context) => {
-		ctx = context
-	}
-
-	/** Resize canvas size (width, height). */
-	const resizeCanvas = (width, height) => {
-		ctx.canvas.width = width
-		ctx.canvas.height = height
-	}
-
-	const clearCanvas = () => {
-		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	}
-
-	/** Draw on canvas. */
-	const drawSmth = () => {
-		//context.fillStyle = '#000000'
-    	//context.fillRect(0, 0, context.canvas.width, context.canvas.height)
-		ctx.fillStyle = '#ff8844'
-		ctx.fillRect(5, 5, 50, 50)
-		ctx.fillStyle = '#db5bb0'
-		ctx.fillRect(75, 50, 50, 50)
-		ctx.fillStyle = '#cc0000'
-		ctx.fillRect(150, 75, 50, 50)
-	}
-
-	const drawRed = () => {
-		ctx.fillStyle = '#cc0000'
-		ctx.fillRect(150, 75, 50, 50)
-	}
-
-	const drawOrng = () => {
-		ctx.fillStyle = '#ff8844'
-		ctx.fillRect(5, 5, 50, 50)
-	}
-
-	const drawBtn = () => {
-		ctx.translate(1, 1)
-		ctx.strokeStyle = "#000000"
-		ctx.lineWidth = 1.5;
-		
-		ctx.strokeRect(150, 70, 50, 50)
-		
-	}
+export default function App() {
 
 	/** Render all components. */
 	return (
 		<div className='App'>
-			<h1>MicroGUI</h1>
-			<div className='row'>
-				<div className='column side'>
-					<Stack 
-						spacing={2}
-						justifyContent='center'
-  						alignItems='center'
-					>
-						<ObjectsMenu 
-							className='ObjectsMenu'
-							testLog={drawRed} 
-							other={drawOrng}
-							btn={drawBtn}
-						/>
-						<ClearCanvasButton
-							clear={clearCanvas}
-						/>
-					</Stack>
-				</div>
-				<div className='column middle'>
-					<div className='canvasSize'>
-						<CanvasSize 
-							resize = {resizeCanvas}	
-						/>
+			<header className='header'>
+				<img
+					src={logo}
+					alt='logo'
+					className='logoTest'
+				/>
+				<h1 className='topText' >MicroGUI</h1>
+			</header>
+			<Editor
+				resolver={{
+					Button
+				}}
+			>
+				<Stack
+					className='row'
+					direction='row'
+					spacing={0}
+				>
+					<div className='left'>
+						<Toolbox />
 					</div>
-					<Canvas 
-						className='Canvas' 
-						saveContext={saveContext}
-						width='400'
-						height='300'
-					/>
-					<div className='buttons'>
-						<CanvasButtons />
+					<div className='middle'>
+						<Frame>
+							<Element 
+								is='div' 
+								// style={{
+								// 	background-color: '#f5f5f5',
+								// 	border: '1px solid #ccc',
+								// 	border-radius: '4px',
+								// }}
+								style={{ 
+									// margin: '0 auto', 
+									// width: '800px'
+									background: 'gray',
+									border: '1px solid #ccc',
+									height: '100%'
+								}}
+								canvas
+							>
+								<h1>Hi</h1>
+								<Button text='button' variant='outlined' />
+							</Element>
+						</Frame>
 					</div>
-				</div>
-				<div className='column side'>
-					<h1>Text</h1>
-				</div>
-			</div>
-		</div>
+					<div className='right'>
+						<h1>Right</h1>
+					</div>
+				</Stack >
+			</Editor>
+		<footer className='footer'>
+			<h1>GitHub</h1>
+		</footer>
+		</div >
 	);
 }
 
-export default App;
+
+
+
+
+{/* <div className='App'>
+	<h1>MicroGUI</h1>
+	<div className='row'>
+		<div className='column side'>
+
+		</div>
+		<div className='column middle'>
+
+		</div>
+		<div className='column side'>
+			<h1>Text</h1>
+		</div>
+	</div>
+</div> */}
+
+{/* <Stack spacing={2}>
+	<h1>MicroGUI</h1>
+	<Stack
+		direction='row'
+		spacing={4}
+	>
+		<h1>Left</h1>
+		<h1>Middle</h1>
+		<h1>Right</h1>
+	</Stack>
+	<h1>Footer</h1>
+</Stack> */}
