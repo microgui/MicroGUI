@@ -163,5 +163,5 @@ Helpful resources
 [issues-shield]: https://img.shields.io/github/issues/CarlClasson/MicroGUI.svg?style=for-the-badge
 [issues-url]: https://github.com/CarlClasson/MicroGUI/issues
 [license-shield]: https://img.shields.io/github/license/CarlClasson/MicroGUI.svg?style=for-the-badge
-[license-url]: https://github.com/CarlClasson/MicroGUI/blob/master/LICENSE.txt
+[license-url]: https://github.com/CarlClasson/MicroGUI/blob/main/LICENSE.md
 [product-screenshot]: images/canvas.png
