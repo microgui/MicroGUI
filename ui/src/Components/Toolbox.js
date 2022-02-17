@@ -7,18 +7,37 @@ export const Toolbox = () => {
     const { connectors } = useEditor();
 
     return (
-        <MaterialButton
-            ref={(ref) =>
-                connectors.create(ref, <Button text="Click me" size="small" />)
-            }
-            // onClick={() => {
-            //     console.log('testar')
-            //     connectors.create(ref, <Button text="Click me" size="small" />)
-            // }}
-            variant="contained"
-            data-cy="toolbox-button"
-        >
-            Button
-        </MaterialButton>
+        <div>
+            <MaterialButton
+                ref={(ref) =>
+                    connectors.create(ref, 
+                                      <Button 
+                                            text="Click me" 
+                                            size="small" 
+                                            variant="outlined" 
+                                            onClick={() => {console.log('Im button1!')}}   
+                                        />)
+                }
+                variant="contained"
+                data-cy="toolbox-button"
+            >
+                Button
+            </MaterialButton>
+            <MaterialButton
+                ref={(ref) =>
+                    connectors.create(ref, 
+                                      <Button 
+                                            text="Click me2" 
+                                            size="small" 
+                                            variant="contained" 
+                                            onClick={() => {console.log('Im button2!')}}
+                                        />)
+                }
+                variant="contained"
+                data-cy="toolbox-button"
+            >
+                Button2
+            </MaterialButton>
+        </div>
     );
 };

@@ -15,6 +15,11 @@ import { Button } from './Components/Button'
  */
 export default function App() {
 
+	const resize = () => {
+		document.getElementById("canvasElement").style.width = '200px'
+		document.getElementById("canvasElement").style.height = '200px'
+	}
+
 	/** Render all components. */
 	return (
 		<div className='App'>
@@ -38,11 +43,21 @@ export default function App() {
 				>
 					<div className='left'>
 						<Toolbox />
+						<MaterialButton
+							variant = 'outlined'
+							onClick={resize}
+							style = {{
+								margin: '20px'
+							}}	
+						>
+							Test Resize	
+						</MaterialButton>
 					</div>
 					<div className='middle'>
 						<Frame>
 							<Element 
-								is='div' 
+								is='div'
+								id='canvasElement' 
 								// style={{
 								// 	background-color: '#f5f5f5',
 								// 	border: '1px solid #ccc',
@@ -58,8 +73,6 @@ export default function App() {
 								className='canvasElement'
 								canvas
 							>
-								<h1>Hi</h1>
-								<Button text='button' variant='outlined' />
 							</Element>
 						</Frame>
 					</div>
