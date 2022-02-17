@@ -19,12 +19,12 @@ export default function App() {
 	return (
 		<div className='App'>
 			<header className='header'>
-				<img
+					<img
 					src={logo}
 					alt='logo'
 					className='logoTest'
-				/>
-				<h1 className='topText' >MicroGUI</h1>
+					/>
+					<h1 className='topText' >MicroGUI</h1>
 			</header>
 			<Editor
 				resolver={{
@@ -50,11 +50,12 @@ export default function App() {
 								// }}
 								style={{ 
 									// margin: '0 auto', 
-									// width: '800px'
-									background: 'gray',
-									border: '1px solid #ccc',
-									height: '100%'
+									width: '400px',
+									height: '400px',
+									// border: '1px solid #ccc',
+									// height: '100%'
 								}}
+								className='canvasElement'
 								canvas
 							>
 								<h1>Hi</h1>
@@ -63,12 +64,17 @@ export default function App() {
 						</Frame>
 					</div>
 					<div className='right'>
-						<h1>Right</h1>
+						<h1>Settings</h1>
 					</div>
 				</Stack >
 			</Editor>
 		<footer className='footer'>
-			<h1>GitHub</h1>
+			<a
+				href='https://github.com/CarlClasson/MicroGUI'
+				target='_blank'
+			>
+				GitHub
+			</a>
 		</footer>
 		</div >
 	);
