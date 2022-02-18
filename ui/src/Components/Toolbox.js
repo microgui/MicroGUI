@@ -16,11 +16,6 @@ export const Toolbox = () => {
                                             size="small" 
                                             variant="outlined" 
                                             onClick={() => {console.log('Im button1!')}}  
-                                            style={{
-                                                position: "absolute",
-                                                top: 250,
-                                                left: 550,
-                                            }}
                                         />)
                 }
                 variant="contained"

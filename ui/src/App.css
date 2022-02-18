@@ -73,7 +73,27 @@ footer {
   justify-content: center;
 }
 
+
+/* // Colors
+$bg-color: hsl(256,33,10);
+$dot-color: hsl(256,33,70);
+
+// Dimensions
+$dot-size: 1px;
+$dot-space: 22px;
+
+body {
+	background:
+		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+		$dot-color;
+	background-size: $dot-space $dot-space;
+} */
 .canvasElement {
-  background-image: linear-gradient(white .1em, transparent .1em), linear-gradient(90deg, white .1em, transparent .1em);
-  background-size: 2em 2em;
+  /* background-image: linear-gradient(white .1em, transparent .1em), linear-gradient(90deg, white .1em, transparent .1em);
+  background-size: 2em 2em; */
+ 
+  background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
+  background-position: 0 0;
+  background-size: 10px 10px;
 }
