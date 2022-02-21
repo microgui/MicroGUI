@@ -1,8 +1,8 @@
-import { Button as MaterialButton } from '@mui/material'
-import { useNode } from '@craftjs/core'
+import { Switch as MaterialSwitch } from '@mui/material';
+import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 
-export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) => {
+export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [offset, setOffset] = useState({
         x: 0,
@@ -19,13 +19,13 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
     } = useNode();
 
     return (
-        <MaterialButton
+        <MaterialSwitch
             // ref={(ref) => connect(drag(ref))}
             style={{
-                margin: '5px',
+                // margin: '5px',
                 position: "absolute",
                 top: coordinates.y,
-                left: coordinates.x
+                left: coordinates.x,
             }}
             onMouseDown={(event) => {
                 setIsDragging(true);
@@ -57,11 +57,10 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
                 });
             }}
             size={size}
-            variant={variant}
-            color={color}
+            // color={color}
+            // defaultChecked={true}
+            // disabled
             {...props}
-        >
-            {text}
-        </MaterialButton>
+        />
     );
 };

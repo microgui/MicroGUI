@@ -61,8 +61,10 @@ footer {
   /* background-color: orange; */
   width: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  padding: 10px;
 }
 
 .right {
@@ -92,8 +94,12 @@ body {
 .canvasElement {
   /* background-image: linear-gradient(white .1em, transparent .1em), linear-gradient(90deg, white .1em, transparent .1em);
   background-size: 2em 2em; */
- 
   background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
   background-position: 0 0;
   background-size: 10px 10px;
+}
+
+.toolbar {
+  margin: 10px;
+  height: 35px;
 }

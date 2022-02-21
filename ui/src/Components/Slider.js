@@ -1,8 +1,9 @@
-import { Button as MaterialButton } from '@mui/material'
-import { useNode } from '@craftjs/core'
+import { Slider as MaterialSlider } from '@mui/material';
+import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 
-export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) => {
+export const Slider = ({ size, color, pageX, pageY,
+    defaultValue, aria_label, valueLabelDisplay, ...props }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [offset, setOffset] = useState({
         x: 0,
@@ -19,13 +20,14 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
     } = useNode();
 
     return (
-        <MaterialButton
+        <MaterialSlider
             // ref={(ref) => connect(drag(ref))}
             style={{
                 margin: '5px',
                 position: "absolute",
                 top: coordinates.y,
-                left: coordinates.x
+                left: coordinates.x,
+                width: '100px'
             }}
             onMouseDown={(event) => {
                 setIsDragging(true);
@@ -57,11 +59,11 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
                 });
             }}
             size={size}
-            variant={variant}
             color={color}
+            defaultValue={defaultValue} 
+            aria-label={aria_label} 
+            valueLabelDisplay={valueLabelDisplay}
             {...props}
-        >
-            {text}
-        </MaterialButton>
+        />
     );
 };

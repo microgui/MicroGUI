@@ -5,16 +5,19 @@ import { Editor, Frame, Element, useEditor } from '@craftjs/core';
 
 import logo from './logo.png'
 
-import { Container } from './Components/Container'
 import { Toolbox } from './Components/Toolbox'
+import { Toolbar } from './Components/Toolbar'
 import { Button } from './Components/Button'
+import { Slider } from './Components/Slider'
+import { Switch } from './Components/Switch'
+import { Textfield } from './Components/Textfield'
 
 /**
  * Core of the web app.
  * @returns The web app.
  */
 export default function App() {
-	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["UHmVvImsmE","1MkOp5R8X2","52V_pTJjuX"],"linkedNodes":{}},"52V_pTJjuX":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me2","size":"small","variant":"contained","pageX":400.3999938964844,"pageY":243.7874984741211},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"UHmVvImsmE":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me2","size":"small","variant":"contained","pageX":212.39999389648438,"pageY":340.7874984741211},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"1MkOp5R8X2":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me2","size":"small","variant":"contained","pageX":267.3999938964844,"pageY":198.78750610351562},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
+	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["OT5A-qEC2u"],"linkedNodes":{}},"OT5A-qEC2u":{"type":{"resolvedName":"Textfield"},"isCanvas":false,"props":{"text":"hej carl"},"displayName":"Textfield","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
 
 	const resize = () => {
 		document.getElementById("canvasElement").style.width = '200px'
@@ -50,7 +53,10 @@ export default function App() {
 			</header>
 			<Editor
 				resolver={{
-					Button
+					Button,
+					Slider,
+					Switch,
+					Textfield
 				}}
 				indicator={false}
 			>
@@ -61,7 +67,7 @@ export default function App() {
 				>
 					<div className='left'>
 						<Toolbox />
-						<MaterialButton
+						{/* <MaterialButton
 							variant='outlined'
 							onClick={resize}
 							style={{
@@ -70,9 +76,10 @@ export default function App() {
 						>
 							Resize
 						</MaterialButton>
-						<SaveButton />
+						<SaveButton /> */}
 					</div>
 					<div className='middle'>
+						<Toolbar />
 						<Frame /*data={jsonstring}*/>
 							<Element
 								is='div'
@@ -91,8 +98,7 @@ export default function App() {
 								}}
 								className='canvasElement'
 								canvas
-							>
-							</Element>
+							/>
 						</Frame>
 					</div>
 					<div className='right'>

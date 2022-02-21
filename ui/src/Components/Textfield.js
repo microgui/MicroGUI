@@ -1,8 +1,9 @@
-import { Button as MaterialButton } from '@mui/material'
-import { useNode } from '@craftjs/core'
+import ContentEditable from 'react-contenteditable';
+import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 
-export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) => {
+export const Textfield = ({ fontSize, textAlign, fontWeight, color,
+    shadow, text, margin, pageX, pageY, ...props }) => {
     const [isDragging, setIsDragging] = useState(false);
     const [offset, setOffset] = useState({
         x: 0,
@@ -15,11 +16,11 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
 
     const {
         connectors: { connect, drag },
-        actions
+        actions,
     } = useNode();
 
     return (
-        <MaterialButton
+        <ContentEditable
             // ref={(ref) => connect(drag(ref))}
             style={{
                 margin: '5px',
@@ -56,12 +57,12 @@ export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) =
                     props.pageY = coordinates.y;
                 });
             }}
-            size={size}
-            variant={variant}
-            color={color}
+            innerRef={connect}
+            html={text}
+            // disabled={!enabled}
+            onChange={ (e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) } }
+            tagName="h2"
             {...props}
-        >
-            {text}
-        </MaterialButton>
+        />
     );
 };
