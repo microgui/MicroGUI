@@ -21,7 +21,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
 
     return (
         <ContentEditable
-            // ref={(ref) => connect(drag(ref))}
+            //ref={connect}
             style={{
                 margin: '5px',
                 position: "absolute",

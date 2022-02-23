@@ -1,4 +1,5 @@
 import { useEditor } from '@craftjs/core'
+import { useState, useEffect } from 'react'
 import { Button as MaterialButton } from '@mui/material'
 
 import { Button } from './Button'
@@ -8,6 +9,22 @@ import { Textfield } from './Textfield'
 
 export const Toolbox = () => {
     const { connectors } = useEditor();
+    
+    const [coordinates, setCoordinates] = useState({
+        x: 600,
+        y: 300
+    });
+    /* 
+    onmouseup = function(e){
+        setCoordinates( {
+            x: e.clientX,
+            y: e.clientY
+        })
+    }
+
+    useEffect(() => {
+        console.log(coordinates);
+    },[coordinates]); */
 
     return (
         <div>
@@ -19,8 +36,8 @@ export const Toolbox = () => {
                             size="small" 
                             variant="outlined" 
                             onClick={() => {console.log('Im button1!')}} 
-                            // pageX={0}
-                            // pageY={0}
+                            pageX={coordinates.x}
+                            pageY={coordinates.y}
                         />
                     )
                 }

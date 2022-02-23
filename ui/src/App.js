@@ -11,14 +11,14 @@ import { Button } from './Components/Button'
 import { Slider } from './Components/Slider'
 import { Switch } from './Components/Switch'
 import { Textfield } from './Components/Textfield'
+import { RenderNode } from './Components/RenderNode'
 
 /**
  * Core of the web app.
  * @returns The web app.
  */
 export default function App() {
-	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["OT5A-qEC2u"],"linkedNodes":{}},"OT5A-qEC2u":{"type":{"resolvedName":"Textfield"},"isCanvas":false,"props":{"text":"hej carl"},"displayName":"Textfield","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
-
+	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["ufJdeTeulY","_PUPDzLI8i"],"linkedNodes":{}},"ufJdeTeulY":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me","size":"small","variant":"outlined","pageX":414,"pageY":122},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"_PUPDzLI8i":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me","size":"small","variant":"outlined","pageX":733,"pageY":278},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
 	const resize = () => {
 		document.getElementById("canvasElement").style.width = '200px'
 		document.getElementById("canvasElement").style.height = '200px'
@@ -59,6 +59,7 @@ export default function App() {
 					Textfield
 				}}
 				indicator={false}
+				onRender={RenderNode}
 			>
 				<Stack
 					className='row'
@@ -80,10 +81,10 @@ export default function App() {
 					</div>
 					<div className='middle'>
 						<Toolbar />
-						<Frame /*data={jsonstring}*/>
+						<Frame data={jsonstring}>
 							<Element
-								is='div'
 								id='canvasElement'
+								is='div'
 								// style={{
 								// 	background-color: '#f5f5f5',
 								// 	border: '1px solid #ccc',
