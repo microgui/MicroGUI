@@ -6,6 +6,11 @@ import './RenderNode.css'
 import DeleteIcon from '@mui/icons-material/Delete'
 import OpenWithIcon from '@mui/icons-material/OpenWith'
 
+/**
+ * Creats a menu that gets displayed whenever the user
+ * hovers over, or selects, an object.
+ * @returns A menu on hover or on select for all objects.
+ */
 export const RenderNode = ({ render }) => {
     const { id } = useNode();
     const { actions, query, isActive } = useEditor((_, query) => ({
@@ -40,6 +45,10 @@ export const RenderNode = ({ render }) => {
         }
     }, [dom, isActive, isHover]);
 
+    /**
+     * Helper function to get the position of the 
+     * hovered/selected object.
+     */
     const getPos = useCallback((dom) => {
         const { top, left, bottom } = dom
             ? dom.getBoundingClientRect()

@@ -3,6 +3,10 @@ import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 import Draggable from 'react-draggable';
 
+/**
+ * Creates a switch object that can be toggled.
+ * @returns The 'switch' object.
+ */
 export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) => {
   
     const [coordinates, setCoordinates] = useState({

@@ -2,6 +2,10 @@ import ContentEditable from 'react-contenteditable';
 import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 
+/**
+ * Creates a textfield that can be edited.
+ * @returns The 'Textfield' object
+ */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     shadow, text, margin, pageX, pageY, ...props }) => {
     const [isDragging, setIsDragging] = useState(false);

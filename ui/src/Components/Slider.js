@@ -3,6 +3,10 @@ import { useNode } from '@craftjs/core';
 import { useState } from 'react'
 import Draggable from 'react-draggable';
 
+/**
+ * Creates a slider object. 
+ * @returns The 'slider' object
+ */
 export const Slider = ({ size, color, pageX, pageY,
     defaultValue, aria_label, valueLabelDisplay, ...props }) => {
     const [coordinates, setCoordinates] = useState({

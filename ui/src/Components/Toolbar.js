@@ -8,6 +8,11 @@ import RedoIcon from '@mui/icons-material/Redo'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
 
+/**
+ * Creates a toolbar for various tools related to the 
+ * canvas, such as redo etc.
+ * @returns The 'Toolbar' component
+ */
 export const Toolbar = () => {
     const { actions, query } = useEditor();
 
@@ -41,12 +46,15 @@ export const Toolbar = () => {
                     }
                     disableElevation
                 >
-                    <PlayCircleOutlineIcon style={{padding:'2px'}}/> Simulate
+                    <PlayCircleOutlineIcon style={{padding:'2px'}}/> Preview
                 </MaterialButton>  
                 <MaterialButton 
                     size='small'
                     variant='contained'
                     color='success'
+                    /* 'query.serialize' serializes the state of the canvas
+                     into a JSON string. This can be used to recreate the
+                     state of the canvas. */
                     onClick={() => {
 			    		console.log(query.serialize())
 			    	}}

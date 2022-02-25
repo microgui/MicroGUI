@@ -18,27 +18,13 @@ import { RenderNode } from './Components/RenderNode'
  * @returns The web app.
  */
 export default function App() {
+
 	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["ufJdeTeulY","_PUPDzLI8i"],"linkedNodes":{}},"ufJdeTeulY":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me","size":"small","variant":"outlined","pageX":414,"pageY":122},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"_PUPDzLI8i":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Click me","size":"small","variant":"outlined","pageX":733,"pageY":278},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
+	/*
 	const resize = () => {
 		document.getElementById("canvasElement").style.width = '200px'
 		document.getElementById("canvasElement").style.height = '200px'
-	}
-
-	const SaveButton = () => {
-		const { query } = useEditor()
-		return (
-			<MaterialButton
-				size="small"
-				variant="outlined"
-				color="secondary"
-				onClick={() => {
-					console.log(query.serialize())
-				}}
-			>
-				Serialize JSON
-			</MaterialButton>
-		)
-	}
+	} */
 
 	/** Render all components. */
 	return (
@@ -81,21 +67,13 @@ export default function App() {
 					</div>
 					<div className='middle'>
 						<Toolbar />
-						<Frame data={jsonstring}>
+						<Frame /*data={jsonstring}*/>
 							<Element
 								id='canvasElement'
 								is='div'
-								// style={{
-								// 	background-color: '#f5f5f5',
-								// 	border: '1px solid #ccc',
-								// 	border-radius: '4px',
-								// }}
-								style={{
-									// margin: '0 auto', 
+								style={{ 
 									width: '400px',
 									height: '400px',
-									// border: '1px solid #ccc',
-									// height: '100%'
 								}}
 								className='canvasElement'
 								canvas
@@ -118,35 +96,3 @@ export default function App() {
 		</div >
 	);
 }
-
-
-
-
-
-{/* <div className='App'>
-	<h1>MicroGUI</h1>
-	<div className='row'>
-		<div className='column side'>
-
-		</div>
-		<div className='column middle'>
-
-		</div>
-		<div className='column side'>
-			<h1>Text</h1>
-		</div>
-	</div>
-</div> */}
-
-{/* <Stack spacing={2}>
-	<h1>MicroGUI</h1>
-	<Stack
-		direction='row'
-		spacing={4}
-	>
-		<h1>Left</h1>
-		<h1>Middle</h1>
-		<h1>Right</h1>
-	</Stack>
-	<h1>Footer</h1>
-</Stack> */}

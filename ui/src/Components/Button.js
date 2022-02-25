@@ -3,6 +3,12 @@ import { useNode } from '@craftjs/core'
 import { useState, useEffect } from 'react'
 import Draggable from 'react-draggable';
 
+/**
+ * 
+ * 
+ *  
+ */
+
 export const Button = ({ size, variant, color, text, pageX, pageY, ...props }) => {
 
     const [coordinates, setCoordinates] = useState({

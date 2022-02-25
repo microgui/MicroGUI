@@ -7,24 +7,22 @@ import { Slider } from './Slider'
 import { Switch } from './Switch'
 import { Textfield } from './Textfield'
 
+/**
+ * Creates a toolbox containing all usable objects.
+ * @returns The 'Toolbox' component
+ */
 export const Toolbox = () => {
     const { connectors } = useEditor();
-    
+
+    /**
+     * Decides where components should spawn on the page
+     * TO DO: - Make it relative to the canvas, not the whole page
+     *        - Make is so the the component spawns where the mouse is held
+     */
     const [coordinates, setCoordinates] = useState({
         x: 600,
         y: 300
     });
-    /* 
-    onmouseup = function(e){
-        setCoordinates( {
-            x: e.clientX,
-            y: e.clientY
-        })
-    }
-
-    useEffect(() => {
-        console.log(coordinates);
-    },[coordinates]); */
 
     return (
         <div>
