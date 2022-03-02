@@ -1,8 +1,6 @@
-import './Toolbar.css'
-
 import { useEditor } from '@craftjs/core'
 import { Button as MaterialButton } from '@mui/material';
-
+import { styled } from '@mui/material/styles';
 import UndoIcon from '@mui/icons-material/Undo'
 import RedoIcon from '@mui/icons-material/Redo'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'

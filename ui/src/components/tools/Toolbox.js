@@ -2,10 +2,10 @@ import { useEditor } from '@craftjs/core'
 import { useState, useEffect } from 'react'
 import { Button as MaterialButton } from '@mui/material'
 
-import { Button } from './Button'
-import { Slider } from './Slider'
-import { Switch } from './Switch'
-import { Textfield } from './Textfield'
+import { Button } from '../user/Button'
+import { Slider } from '../user/Slider'
+import { Switch } from '../user/Switch'
+import { Textfield } from '../user/Textfield'
 
 /**
  * Creates a toolbox containing all usable objects.
@@ -33,7 +33,7 @@ export const Toolbox = () => {
                             text="Click me" 
                             size="small" 
                             variant="outlined" 
-                            onClick={() => {console.log('Im button1!')}} 
+                            // onClick={() => {console.log('Im button1!')}} 
                             pageX={coordinates.x}
                             pageY={coordinates.y}
                         />

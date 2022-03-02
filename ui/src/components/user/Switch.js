@@ -1,50 +1,64 @@
 import { Switch as MaterialSwitch } from '@mui/material';
 import { useNode } from '@craftjs/core';
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Draggable from 'react-draggable';
+
+import { Tooltip } from '../tools/Tooltip'
 
 /**
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
 export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) => {
-  
+
     const [coordinates, setCoordinates] = useState({
         x: pageX,
         y: pageY
     });
 
     const {
-        connectors: { connect, drag },
+        id,
+        name,
+        connectors: { connect },
         actions
-    } = useNode();
+    } = useNode((node) => ({
+        name: node.data.custom.displayName || node.data.displayName,
+    }));
 
     const handleStop = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
+        const rect = e.target.getBoundingClientRect();
         actions.setProp((props) => {
             props.pageX = rect.left;
             props.pageY = rect.top;
         });
     }
 
+    const nodeRef = useRef()
+
     return (
         <Draggable
             onStop={handleStop}
+            nodeRef={nodeRef}
         >
-            <MaterialSwitch
-                ref = {connect}
+            <div
                 style={{
-                    // margin: '5px',
                     position: "absolute",
                     top: coordinates.y,
-                    left: coordinates.x,
+                    left: coordinates.x
                 }}
-                size={size}
-                // color={color}
-                // defaultChecked={true}
-                // disabled
-                {...props}
-            />
+                ref={nodeRef}
+            >
+                <Tooltip
+                    name={name}
+                    id={id}
+                >
+                    <MaterialSwitch
+                        ref={connect}
+                        size={size}
+                        {...props}
+                    />
+                </Tooltip>
+            </div>
         </Draggable>
     );
 };
