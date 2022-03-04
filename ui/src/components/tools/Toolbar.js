@@ -16,20 +16,20 @@ export const Toolbar = () => {
 
     return (
         <div className='toolbar'>
-            <div className='undoRedoButtons' style={{padding:'5px'}}>
+            <div className='undoRedoButtons' style={{padding:'5px', marginBottom: '-10px'}}>
                 <UndoIcon 
                     style={{color:'grey', margin:'3px', 
-                        maxWidth: '25px', maxHeight: '25px', 
+                        maxWidth: '40px', maxHeight: '40px', 
                         minWidth: '25px', minHeight: '25px',
-                        paddingTop: '5px', cursor: 'pointer'}
+                        cursor: 'pointer'}
                     }
                     onClick={() => actions.history.undo()}
                 />
                 <RedoIcon 
                     style={{color:'grey', margin:'3px', 
-                        maxWidth: '25px', maxHeight: '25px', 
+                        maxWidth: '40px', maxHeight: '40px', 
                         minWidth: '25px', minHeight: '25px',
-                        paddingTop: '5px', cursor: 'pointer'}
+                        cursor: 'pointer'}
                     }
                     onClick={() => actions.history.redo()}
                 />
@@ -39,7 +39,7 @@ export const Toolbar = () => {
                     size='small'
                     variant='contained'
                     color='info'
-                    style={{maxWidth: '95px', maxHeight: '25px', 
+                    style={{maxWidth: '115px', maxHeight: '35px', 
                         minWidth: '95px', minHeight: '25px'}
                     }
                     disableElevation
@@ -57,7 +57,7 @@ export const Toolbar = () => {
 			    		console.log(query.serialize())
 			    	}}
                     style={{margin:'5px', maxWidth: '70px', 
-                        maxHeight: '25px', minWidth: '70px', 
+                        maxHeight: '35px', minWidth: '80px', 
                         minHeight: '25px'}
                     }
                     disableElevation

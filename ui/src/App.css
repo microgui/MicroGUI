@@ -94,6 +94,7 @@ body {
 .canvasElement {
   /* background-image: linear-gradient(white .1em, transparent .1em), linear-gradient(90deg, white .1em, transparent .1em);
   background-size: 2em 2em; */
+  position: relative;
   background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
   background-position: 0 0;
   background-size: 10px 10px;
@@ -124,7 +125,8 @@ body {
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  width: 300px;
+  width: 350px;
+  height: 50px;
   border: 1px solid #E3E6E9;
   border-radius: 8px;
 }

@@ -20,8 +20,8 @@ export const Toolbox = () => {
      *        - Make is so the the component spawns where the mouse is held
      */
     const [coordinates, setCoordinates] = useState({
-        x: 600,
-        y: 300
+        x: 0,
+        y: 0
     });
 
     return (
