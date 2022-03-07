@@ -1,0 +1,21 @@
+.renderNodeDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 7px;
+    color: white;
+    background-color: rgb(76, 76, 226);
+    height: 30px;
+    margin-top: -29px;
+    width: 120px;
+    position: absolute;
+    z-index: 9999;
+}
+
+.renderNodeMoveButton, .renderNodeDeleteButton {
+    background: none;
+    border: none;
+    color: white;
+    padding: 0;
+}
