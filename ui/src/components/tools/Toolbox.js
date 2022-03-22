@@ -1,11 +1,16 @@
 import { useEditor } from '@craftjs/core'
 import { useState, useEffect } from 'react'
-import { Button as MaterialButton } from '@mui/material'
+import { Grid, IconButton, Tooltip, Divider } from '@mui/material'
 
 import { Button } from '../user/Button'
 import { Slider } from '../user/Slider'
 import { Switch } from '../user/Switch'
 import { Textfield } from '../user/Textfield'
+
+import TextFieldsIcon from '@mui/icons-material/TextFields'
+import ToggleOnIcon from '@mui/icons-material/ToggleOn'
+import Crop75Icon from '@mui/icons-material/Crop75'
+import TuneIcon from '@mui/icons-material/Tune'
 
 /**
  * Creates a toolbox containing all usable objects.
@@ -25,70 +30,107 @@ export const Toolbox = () => {
     });
 
     return (
-        <div>
-            <MaterialButton
-                ref={(ref) =>
-                    connectors.create(ref, 
-                        <Button 
-                            text="Click me" 
-                            size="small" 
-                            variant="outlined" 
-                            // onClick={() => {console.log('Im button1!')}} 
-                            pageX={coordinates.x}
-                            pageY={coordinates.y}
-                        />
-                    )
-                }
-                variant="contained"
-                data-cy="toolbox-button"
+        <div
+            className='toolbox'
+        >
+            <Grid
+                container
+                spacing={1}
             >
-                Button
-            </MaterialButton>
-            <MaterialButton
-                ref={(ref) =>
-                    connectors.create(ref, 
-                        <Switch 
-                            size="small"
-                            // defaultChecked={false}
-                        />
-                    )
-                }
-                variant="contained"
-                data-cy="toolbox-button"
-            >
-                Switch
-            </MaterialButton>
-            <MaterialButton
-                ref={(ref) =>
-                    connectors.create(ref, 
-                        <Slider 
-                            size="small" 
-                            defaultValue={0} 
-                            aria-label="Default" 
-                            valueLabelDisplay="auto"
-                        />
-                    )
-                }
-                variant="contained"
-                data-cy="toolbox-button"
-            >
-                Slider
-            </MaterialButton>
-            <MaterialButton
-                ref={(ref) =>
-                    connectors.create(ref, 
-                        <Textfield 
-                            text='wut'
-                            // pageX={0}
-                            // pageY={0}
-                        />
-                    )
-                }
-                variant="contained"
-                data-cy="toolbox-button"
-            >
-                Text
-            </MaterialButton>
+                <Grid
+                    item
+                    xs={6}
+                >
+                    <Tooltip
+                        title='Button'
+                    >
+                        <IconButton
+                            ref={(ref) =>
+                                connectors.create(ref,
+                                    <Button
+                                        text="Click me"
+                                        size="small"
+                                        variant="outlined"
+                                        pageX={coordinates.x}
+                                        pageY={coordinates.y}
+                                    />
+                                )
+                            }
+                            aria-label='button'
+                        >
+                            <Crop75Icon />
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+                <Grid
+                    item
+                    xs={6}
+                >
+                    <Tooltip
+                        title='Switch'
+                    >
+                        <IconButton
+                            ref={(ref) =>
+                                connectors.create(ref,
+                                    <Switch
+                                        size="small"
+                                    />
+                                )
+                            }
+                            aria-label='switch'
+                        >
+                            <ToggleOnIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+                <Grid
+                    item
+                    xs={6}
+                >
+                    <Tooltip
+                        title='Slider'
+                    >
+                        <IconButton
+                            ref={(ref) =>
+                                connectors.create(ref,
+                                    <Slider
+                                        size="small"
+                                        defaultValue={0}
+                                        aria-label="Default"
+                                        valueLabelDisplay="auto"
+                                    />
+                                )
+                            }
+                            aria-label='slider'
+                        >
+                            <TuneIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+                <Grid
+                    item
+                    xs={6}
+                >
+                    <Tooltip
+                        title='Textfield'
+                    >
+                        <IconButton
+                            ref={(ref) =>
+                                connectors.create(ref,
+                                    <Textfield
+                                        text='wut'
+                                    // pageX={0}
+                                    // pageY={0}
+                                    />
+                                )
+                            }
+                            aria-label='textfield'
+                        >
+                            <TextFieldsIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Grid>
+            </Grid>
         </div>
-    );
-};
+    )
+}
