@@ -75,6 +75,7 @@ export default function App() {
 									height: '400px',
 								}}
 								className='canvasElement'
+								data-testid='canvasElement'
 								canvas
 							/>
 						</Frame>
