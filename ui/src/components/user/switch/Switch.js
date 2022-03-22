@@ -1,16 +1,16 @@
-import { Slider as MaterialSlider } from '@mui/material';
+import { Switch as MaterialSwitch } from '@mui/material';
 import { useNode } from '@craftjs/core';
 import { useState, useRef } from 'react'
 import Draggable from 'react-draggable';
 
-import { Tooltip } from '../tools/Tooltip'
+import { Tooltip } from '../../tools/Tooltip'
 
 /**
- * Creates a slider object. 
- * @returns The 'slider' object
+ * Creates a switch object that can be toggled.
+ * @returns The 'switch' object.
  */
-export const Slider = ({ size, color, pageX, pageY,
-    defaultValue, aria_label, valueLabelDisplay, ...props }) => {
+export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) => {
+
     const [coordinates, setCoordinates] = useState({
         x: pageX,
         y: pageY
@@ -26,10 +26,14 @@ export const Slider = ({ size, color, pageX, pageY,
     }));
 
     const handleStop = (e) => {
+        const canvas = document.getElementById('canvasElement').getBoundingClientRect();
         const rect = e.target.getBoundingClientRect();
+        const relativePos = {}    
+        relativePos.left = rect.left - canvas.left
+        relativePos.top = rect.top - canvas.top
         actions.setProp((props) => {
-            props.pageX = rect.left;
-            props.pageY = rect.top;
+            props.pageX = relativePos.left;
+            props.pageY = relativePos.top;
         });
     }
 
@@ -52,18 +56,13 @@ export const Slider = ({ size, color, pageX, pageY,
                     name={name}
                     id={id}
                 >
-                    <MaterialSlider
-                        ref={connect}
-                        style={{
-                            width: '100px'
-                        }}
-                        size={size}
-                        color={color}
-                        defaultValue={defaultValue}
-                        aria-label={aria_label}
-                        valueLabelDisplay={valueLabelDisplay}
-                        {...props}
-                    />
+                    <div>
+                        <MaterialSwitch
+                            ref={connect}
+                            size={size}
+                            {...props}
+                        />
+                    </div>
                 </Tooltip>
             </div>
         </Draggable>

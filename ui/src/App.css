@@ -73,37 +73,15 @@ footer {
   width: 25%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-right: 30px;
 }
 
-
-/* // Colors
-$bg-color: hsl(256,33,10);
-$dot-color: hsl(256,33,70);
-
-// Dimensions
-$dot-size: 1px;
-$dot-space: 22px;
-
-body {
-	background:
-		linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-		linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-		$dot-color;
-	background-size: $dot-space $dot-space;
-} */
 .canvasElement {
-  /* background-image: linear-gradient(white .1em, transparent .1em), linear-gradient(90deg, white .1em, transparent .1em);
-  background-size: 2em 2em; */
   position: relative;
   background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
   background-position: 0 0;
   background-size: 10px 10px;
-}
-
-.toolbar {
-  margin: 10px;
-  height: 35px;
 }
 
 /*.component-selected {
@@ -122,6 +100,8 @@ body {
 }*/
 
 .toolbar {
+  margin: 10px;
+  height: 35px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -141,4 +121,25 @@ body {
   height: 500px;
   border: 1px solid #E3E6E9;
   border-radius: 8px;
+}
+
+.editbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  width: 250px;
+  height: 500px;
+  border: 1px solid #E3E6E9;
+  border-radius: 8px;
+}
+
+.editHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #E3E6E9;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
 }

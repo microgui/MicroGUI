@@ -1,17 +1,13 @@
-import ContentEditable from 'react-contenteditable';
-import { useNode } from '@craftjs/core';
+import { Button as MaterialButton } from '@mui/material'
+import { useNode } from '@craftjs/core'
 import { useState, useRef } from 'react'
-
 import Draggable from 'react-draggable';
 
-import { Tooltip } from '../tools/Tooltip'
+import { Tooltip } from '../../tools/Tooltip'
+import { ButtonSettings } from './ButtonSettings';
 
-/**
- * Creates a textfield that can be edited.
- * @returns The 'Textfield' object
- */
-export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    shadow, text, margin, pageX, pageY, width, height, ...props }) => {
+export const Button = ({ size, variant, color, text, pageX, pageY, width, height, ...props }) => {
+
     const [coordinates, setCoordinates] = useState({
         x: pageX,
         y: pageY
@@ -24,6 +20,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
         actions
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
+        selected: node.events.selected,
     }));
 
     const handleStart = (e) => {
@@ -35,7 +32,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     }
 
     const handleStop = (e) => {
-        const rect = e.target.getBoundingClientRect()
+        const rect = e.target.getBoundingClientRect();
         actions.setProp((props) => {
             props.pageX = rect.left;
             props.pageY = rect.top;
@@ -64,8 +61,9 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
         <Draggable
             //onStart={handleStart}
             onStop={handleStop}
+            handle="#dragButton"
             nodeRef={nodeRef}
-            //bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
+            //bounds={{ left: -200, top: 0, bottom: getRect().height - height, right: getRect().width - width - 200 }}
         >
             <div
                 style={{
@@ -79,18 +77,24 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                     name={name}
                     id={id}
                 >
-                    <div>
-                        <ContentEditable
-                            innerRef={connect}
-                            html={text}
-                            onChange={(e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) }}
-                            tagName="h2"
-                            id="editableText"
-                            {...props}
-                        />
-                    </div>
+                    <MaterialButton
+                        id="dragButton"
+                        ref={connect}
+                        size={size}
+                        variant={variant}
+                        color={color}
+                        {...props}
+                    >
+                        {text}
+                    </MaterialButton>
                 </Tooltip>
             </div>
-        </Draggable >
+        </Draggable>
     );
 };
+
+Button.craft = {
+    related: {
+        toolbar:ButtonSettings
+    }
+}

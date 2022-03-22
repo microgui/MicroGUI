@@ -7,10 +7,11 @@ import logo from './logo.png'
 
 import { Toolbox } from './components/tools/Toolbox'
 import { Toolbar } from './components/tools/Toolbar'
-import { Button } from './components/user/Button'
-import { Slider } from './components/user/Slider'
-import { Switch } from './components/user/Switch'
-import { Textfield } from './components/user/Textfield'
+import { Button } from './components/user/button/Button'
+import { Slider } from './components/user/slider/Slider'
+import { Switch } from './components/user/switch/Switch'
+import { Textfield } from './components/user/textfield/Textfield'
+import { Editbox } from './components/tools/editbox/Editbox'
 
 /**
  * Core of the web app.
@@ -18,7 +19,7 @@ import { Textfield } from './components/user/Textfield'
  */
 export default function App() {
 
-	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["jcRciRLgBf","0XdSx3IDAN"],"linkedNodes":{}},"jcRciRLgBf":{"type":{"resolvedName":"Switch"},"isCanvas":false,"props":{"size":"small","pageX":1,"pageY":371.2000274658203},"displayName":"Switch","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"0XdSx3IDAN":{"type":{"resolvedName":"Switch"},"isCanvas":false,"props":{"size":"small","pageX":-1,"pageY":2.1875},"displayName":"Switch","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
+	const jsonstring = '{"ROOT":{"type":"div","isCanvas":true,"props":{"id":"canvasElement","style":{"width":"400px","height":"400px"},"className":"canvasElement","data-testid":"canvasElement"},"displayName":"div","custom":{},"hidden":false,"nodes":["fMAL78_Mwe","zZdhXn8OzW"],"linkedNodes":{}},"fMAL78_Mwe":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Herro","size":"small","variant":"outlined","pageX":639,"pageY":180.15000915527344},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}},"zZdhXn8OzW":{"type":{"resolvedName":"Button"},"isCanvas":false,"props":{"text":"Testing","size":"small","variant":"outlined","pageX":756,"pageY":262.1499938964844},"displayName":"Button","custom":{},"parent":"ROOT","hidden":false,"nodes":[],"linkedNodes":{}}}'
 	/*
 	const resize = () => {
 		document.getElementById("canvasElement").style.width = '200px'
@@ -81,7 +82,7 @@ export default function App() {
 						</Frame>
 					</div>
 					<div className='right'>
-						<h1>Settings</h1>
+						<Editbox />
 					</div>
 				</Stack >
 			</Editor>
