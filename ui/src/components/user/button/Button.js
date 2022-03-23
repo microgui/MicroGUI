@@ -6,7 +6,7 @@ import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings';
 
-export const Button = ({ size, variant, color, text, pageX, pageY, width, height, ...props }) => {
+export const Button = ({ size, variant, background, color, text, pageX, pageY, width, height, ...props }) => {
 
     const [coordinates, setCoordinates] = useState({
         x: pageX,
@@ -82,7 +82,13 @@ export const Button = ({ size, variant, color, text, pageX, pageY, width, height
                         ref={connect}
                         size={size}
                         variant={variant}
-                        color={color}
+                        sx={{
+                            backgroundColor: 
+                                variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent', 
+                            color: `rgba(${Object.values(color)})`,
+                            borderColor:
+                                variant === 'outlined' ? `rgba(${Object.values(background)})` : 'transparent'
+                        }}
                         {...props}
                     >
                         {text}
@@ -95,6 +101,6 @@ export const Button = ({ size, variant, color, text, pageX, pageY, width, height
 
 Button.craft = {
     related: {
-        toolbar:ButtonSettings
+        toolbar: ButtonSettings
     }
 }

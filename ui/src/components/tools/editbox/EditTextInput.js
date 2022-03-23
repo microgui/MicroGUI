@@ -21,7 +21,7 @@ export const EditTextInput = ({
 
   return (
     <div
-      style={{ width: '100%', position: 'relative' }}
+      style={{ width: '100%', position: 'relative', }}
       onClick={() => {
         setActive(true);
       }}
@@ -32,6 +32,7 @@ export const EditTextInput = ({
             zIndex: 99999,
             top: 'calc(100% + 10px)',
             left: '-5%',
+            position: 'absolute'
           }}
         >
           <div
@@ -40,7 +41,15 @@ export const EditTextInput = ({
               e.stopPropagation();
               setActive(false);
             }}
-          ></div>
+            style={{
+              cursor: 'pointer',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+              position: 'fixed'
+            }}
+          />
           <ChromePicker
             color={value}
             onChange={(color) => {
@@ -69,8 +78,7 @@ export const EditTextInput = ({
             <InputAdornment
               position="start"
               style={{
-                position: 'absolute',
-                marginTop: '2px',
+                marginTop: '20px',
                 marginRight: '8px',
               }}
             >
@@ -78,6 +86,10 @@ export const EditTextInput = ({
                 style={{
                   left: '15px',
                   background: internalValue,
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  display: 'inline-block'
                 }}
               />
             </InputAdornment>

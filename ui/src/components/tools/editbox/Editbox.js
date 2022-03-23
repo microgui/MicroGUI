@@ -4,16 +4,15 @@ import { useEditor } from '@craftjs/core'
 import React from 'react'
 
 export const Editbox = () => {
-
     const { active, related } = useEditor((state, query) => {
-        // TODO: handle multiple selected elements
         const currentlySelectedNodeId = query.getEvent('selected').first();
         return {
             active: currentlySelectedNodeId,
             related:
                 currentlySelectedNodeId && state.nodes[currentlySelectedNodeId].related,
-        };
-    });
+        }
+    })
+    
     return (
         <div className="editbox">
             <div className="editHeader">
@@ -21,7 +20,6 @@ export const Editbox = () => {
                     direction='row'
                     alignItems='center'
                     spacing={1}
-
                 >
                     <EditIcon style={{ color: 'grey' }} />
                     <h2 style={{ color: 'grey' }}>Edit</h2>
@@ -29,7 +27,7 @@ export const Editbox = () => {
             </div>
             {active && related.toolbar && React.createElement(related.toolbar)}
             {!active && (
-                <h3>Drag a component to the canvas area and click on it to start editing.</h3>
+                <h3 style={{marginTop: '20px', fontWeight: 'normal'}}>Drag a component to the canvas area and click on it to start editing.</h3>
             )}
         </div>
     )

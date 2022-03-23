@@ -1,15 +1,17 @@
 import { Slider as MaterialSlider } from '@mui/material';
+import { alpha } from '@mui/material/styles'
 import { useNode } from '@craftjs/core';
 import { useState, useRef } from 'react'
 import Draggable from 'react-draggable';
 
 import { Tooltip } from '../../tools/Tooltip'
+import { SliderSettings } from './SliderSettings';
 
 /**
  * Creates a slider object. 
  * @returns The 'slider' object
  */
-export const Slider = ({ size, color, pageX, pageY,
+export const Slider = ({ size, width, color, pageX, pageY,
     defaultValue, aria_label, valueLabelDisplay, ...props }) => {
     const [coordinates, setCoordinates] = useState({
         x: pageX,
@@ -54,11 +56,11 @@ export const Slider = ({ size, color, pageX, pageY,
                 >
                     <MaterialSlider
                         ref={connect}
-                        style={{
-                            width: '100px'
-                        }}
                         size={size}
-                        color={color}
+                        sx={{
+                            color: `rgba(${Object.values(color)})`,
+                            width: `${width}px`
+                        }}
                         defaultValue={defaultValue}
                         aria-label={aria_label}
                         valueLabelDisplay={valueLabelDisplay}
@@ -67,5 +69,11 @@ export const Slider = ({ size, color, pageX, pageY,
                 </Tooltip>
             </div>
         </Draggable>
-    );
-};
+    )
+}
+
+Slider.craft = {
+    related: {
+        toolbar: SliderSettings
+    }
+}
