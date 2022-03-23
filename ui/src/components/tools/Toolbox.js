@@ -1,6 +1,6 @@
 import { useEditor } from '@craftjs/core'
-import { useState, useEffect } from 'react'
-import { Grid, IconButton, Tooltip, Divider } from '@mui/material'
+import { useState } from 'react'
+import { Grid, IconButton, Tooltip } from '@mui/material'
 
 import { Button } from '../user/button/Button'
 import { Slider } from '../user/slider/Slider'
@@ -48,11 +48,13 @@ export const Toolbox = () => {
                             ref={(ref) =>
                                 connectors.create(ref,
                                     <Button
-                                        text="Click me"
-                                        size="small"
-                                        variant="outlined"
+                                        text='Button'
+                                        size='small'
+                                        variant='contained'
                                         pageX={coordinates.x}
                                         pageY={coordinates.y}
+                                        background={{ r: 63, g: 81, b: 181, a: 1 }}
+                                        color={{ r: 255, g: 255, b: 255, a: 1 }}
                                     />
                                 )
                             }
@@ -73,7 +75,8 @@ export const Toolbox = () => {
                             ref={(ref) =>
                                 connectors.create(ref,
                                     <Switch
-                                        size="small"
+                                        size='small'
+                                        color={{ r: 63, g: 81, b: 181, a: 1 }}
                                     />
                                 )
                             }
@@ -94,10 +97,11 @@ export const Toolbox = () => {
                             ref={(ref) =>
                                 connectors.create(ref,
                                     <Slider
-                                        size="small"
+                                        size='small'
+                                        width={100}
                                         defaultValue={0}
-                                        aria-label="Default"
-                                        valueLabelDisplay="auto"
+                                        color={{ r: 63, g: 81, b: 181, a: 1 }}
+                                        valueLabelDisplay='auto'
                                     />
                                 )
                             }
@@ -118,7 +122,11 @@ export const Toolbox = () => {
                             ref={(ref) =>
                                 connectors.create(ref,
                                     <Textfield
-                                        text='wut'
+                                        text='Text'
+                                        fontSize={15}
+                                        textAlign='left'
+                                        fontWeight='500'
+                                        color={{ r: 0, g: 0, b: 0, a: 1 }}
                                     // pageX={0}
                                     // pageY={0}
                                     />

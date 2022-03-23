@@ -3,15 +3,15 @@ import { useNode } from '@craftjs/core';
 import { useState, useRef } from 'react'
 
 import Draggable from 'react-draggable';
-
 import { Tooltip } from '../../tools/Tooltip'
+import { TextfieldSettings } from './TextfieldSettings';
 
 /**
  * Creates a textfield that can be edited.
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    shadow, text, margin, pageX, pageY, width, height, ...props }) => {
+    text, pageX, pageY, width, height, ...props }) => {
     const [coordinates, setCoordinates] = useState({
         x: pageX,
         y: pageY
@@ -43,7 +43,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     }
 
     const getRect = () => {
-        const element = document.getElementById("canvasElement")
+        const element = document.getElementById('canvasElement')
         if (!element) {
             return {
                 bottom: 0,
@@ -69,7 +69,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
         >
             <div
                 style={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: coordinates.y,
                     left: coordinates.x
                 }}
@@ -84,13 +84,26 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                             innerRef={connect}
                             html={text}
                             onChange={(e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) }}
-                            tagName="h2"
-                            id="editableText"
+                            tagName='h2'
+                            id='editableText'
+                            style={{
+                                width: '100%',
+                                color: `rgba(${Object.values(color)})`,
+                                fontSize: `${fontSize}px`,
+                                fontWeight: fontWeight,
+                                textAlign: textAlign,
+                            }}
                             {...props}
                         />
                     </div>
                 </Tooltip>
             </div>
         </Draggable >
-    );
-};
+    )
+}
+
+Textfield.craft = {
+    related: {
+        toolbar: TextfieldSettings
+    }
+}
