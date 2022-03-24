@@ -6,7 +6,7 @@ import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings';
 
-export const Button = ({ size, variant, background, color, text, pageX, pageY, width, height, ...props }) => {
+export const Button = ({custom, onClick, size, variant, background, color, text, pageX, pageY, width, height, ...props }) => {
 
     const [coordinates, setCoordinates] = useState({
         x: pageX,
@@ -20,10 +20,10 @@ export const Button = ({ size, variant, background, color, text, pageX, pageY, w
         actions
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
-        selected: node.events.selected,
     }));
 
     const handleStart = (e) => {
+
         const rect = e.currentTarget.getBoundingClientRect();
         actions.setProp((props) => {
             props.width = rect.width;
@@ -32,10 +32,14 @@ export const Button = ({ size, variant, background, color, text, pageX, pageY, w
     }
 
     const handleStop = (e) => {
+        const canvas = document.getElementById('canvasElement').getBoundingClientRect();
         const rect = e.target.getBoundingClientRect();
+        const relativePos = {}    
+        relativePos.left = rect.left - canvas.left
+        relativePos.top = rect.top - canvas.top
         actions.setProp((props) => {
-            props.pageX = rect.left;
-            props.pageY = rect.top;
+            props.pageX = relativePos.left;
+            props.pageY = relativePos.top;
         });
     }
 
@@ -82,6 +86,7 @@ export const Button = ({ size, variant, background, color, text, pageX, pageY, w
                         ref={connect}
                         size={size}
                         variant={variant}
+                        onClick={onClick}
                         sx={{
                             backgroundColor: 
                                 variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent', 
@@ -102,5 +107,5 @@ export const Button = ({ size, variant, background, color, text, pageX, pageY, w
 Button.craft = {
     related: {
         toolbar: ButtonSettings
-    }
+    },
 }

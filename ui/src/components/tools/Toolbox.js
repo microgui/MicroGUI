@@ -1,4 +1,4 @@
-import { useEditor } from '@craftjs/core'
+import { useEditor, Element } from '@craftjs/core'
 import { useState } from 'react'
 import { Grid, IconButton, Tooltip } from '@mui/material'
 
@@ -29,6 +29,10 @@ export const Toolbox = () => {
         y: 0
     });
 
+    function bestFuncEvr() {
+        console.log("hejjj")
+    }
+
     return (
         <div
             className='toolbox'
@@ -47,14 +51,16 @@ export const Toolbox = () => {
                         <IconButton
                             ref={(ref) =>
                                 connectors.create(ref,
-                                    <Button
+                                    <Element is={Button}
                                         text='Button'
                                         size='small'
+                                        onClick={bestFuncEvr}
                                         variant='contained'
                                         pageX={coordinates.x}
                                         pageY={coordinates.y}
                                         background={{ r: 63, g: 81, b: 181, a: 1 }}
                                         color={{ r: 255, g: 255, b: 255, a: 1 }}
+                                        funcname = {bestFuncEvr.name}
                                     />
                                 )
                             }
@@ -76,6 +82,7 @@ export const Toolbox = () => {
                                 connectors.create(ref,
                                     <Switch
                                         size='small'
+                                        
                                         color={{ r: 63, g: 81, b: 181, a: 1 }}
                                     />
                                 )

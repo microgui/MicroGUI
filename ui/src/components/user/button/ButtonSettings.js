@@ -98,6 +98,20 @@ export const ButtonSettings = () => {
                     label='Text' 
                 />
             </EditSection>
+            <EditSection
+                title='Event'
+                props={['funcname']}
+                summary={({ funcname }) => {
+                    return funcname
+                }}
+            >
+                <EditItem
+                    propKey='funcname'
+                    type='text'
+                    label='onClick'
+                    full={true}
+                />
+            </EditSection>
         </React.Fragment>
     )
 }

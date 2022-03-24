@@ -28,10 +28,14 @@ export const Slider = ({ size, width, color, pageX, pageY,
     }));
 
     const handleStop = (e) => {
+        const canvas = document.getElementById('canvasElement').getBoundingClientRect();
         const rect = e.target.getBoundingClientRect();
+        const relativePos = {}    
+        relativePos.left = rect.left - canvas.left
+        relativePos.top = rect.top - canvas.top
         actions.setProp((props) => {
-            props.pageX = rect.left;
-            props.pageY = rect.top;
+            props.pageX = relativePos.left;
+            props.pageY = relativePos.top;
         });
     }
 
