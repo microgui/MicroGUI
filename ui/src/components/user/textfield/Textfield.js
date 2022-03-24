@@ -66,10 +66,10 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
 
     return (
         <Draggable
-            //onStart={handleStart}
+            onStart={handleStart}
             onStop={handleStop}
             nodeRef={nodeRef}
-            //bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
+            bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
         >
             <div
                 style={{

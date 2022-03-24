@@ -11,7 +11,7 @@ import { SwitchSettings } from './SwitchSettings'
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
-export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) => {
+export const Switch = ({ height, width, size, color, pageX, pageY, defaultChecked, ...props }) => {
 
     const [coordinates, setCoordinates] = useState({
         x: pageX,
@@ -27,6 +27,15 @@ export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) 
         name: node.data.custom.displayName || node.data.displayName,
     }));
 
+    const handleStart = (e) => {
+
+        const rect = e.currentTarget.getBoundingClientRect();
+        actions.setProp((props) => {
+            props.width = rect.width;
+            props.height = rect.height;
+        });
+    }
+
     const handleStop = (e) => {
         const canvas = document.getElementById('canvasElement').getBoundingClientRect();
         const rect = e.target.getBoundingClientRect();
@@ -39,12 +48,30 @@ export const Switch = ({ size, color, pageX, pageY, defaultChecked, ...props }) 
         });
     }
 
+    const getRect = () => {
+        const element = document.getElementById("canvasElement")
+        if (!element) {
+            return {
+                bottom: 0,
+                height: 0,
+                left: 0,
+                right: 0,
+                top: 0,
+                width: 0,
+            }
+        }
+        const rect = element.getBoundingClientRect()
+        return rect
+    }
+
     const nodeRef = useRef()
 
     return (
         <Draggable
+            onStart={handleStart}
             onStop={handleStop}
             nodeRef={nodeRef}
+            bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
         >
             <div
                 style={{

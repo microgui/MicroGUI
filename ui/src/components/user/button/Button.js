@@ -8,6 +8,8 @@ import { ButtonSettings } from './ButtonSettings';
 
 export const Button = ({custom, onClick, size, variant, background, color, text, pageX, pageY, width, height, ...props }) => {
 
+    console.log(pageX, pageY)
+
     const [coordinates, setCoordinates] = useState({
         x: pageX,
         y: pageY
@@ -63,11 +65,10 @@ export const Button = ({custom, onClick, size, variant, background, color, text,
 
     return (
         <Draggable
-            //onStart={handleStart}
+            onStart={handleStart}
             onStop={handleStop}
-            handle="#dragButton"
             nodeRef={nodeRef}
-            //bounds={{ left: -200, top: 0, bottom: getRect().height - height, right: getRect().width - width - 200 }}
+            bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
         >
             <div
                 style={{
@@ -82,7 +83,6 @@ export const Button = ({custom, onClick, size, variant, background, color, text,
                     id={id}
                 >
                     <MaterialButton
-                        id="dragButton"
                         ref={connect}
                         size={size}
                         variant={variant}

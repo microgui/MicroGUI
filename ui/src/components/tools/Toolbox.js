@@ -17,7 +17,7 @@ import TuneIcon from '@mui/icons-material/Tune'
  * @returns The 'Toolbox' component
  */
 export const Toolbox = () => {
-    const { connectors } = useEditor();
+    const { connectors, query } = useEditor();
 
     /**
      * Decides where components should spawn on the page
@@ -32,6 +32,15 @@ export const Toolbox = () => {
     function bestFuncEvr() {
         console.log("hejjj")
     }
+
+    /*
+    ondragend = function(e){
+        console.log("mouse location:", e.clientX, e.clientY)
+        setCoordinates({
+            x: e.clientX,
+            y: e.clientY
+        })
+    } */
 
     return (
         <div
@@ -49,7 +58,7 @@ export const Toolbox = () => {
                         title='Button'
                     >
                         <IconButton
-                            ref={(ref) =>
+                            ref={(ref) => {
                                 connectors.create(ref,
                                     <Element is={Button}
                                         text='Button'
@@ -63,7 +72,7 @@ export const Toolbox = () => {
                                         funcname = {bestFuncEvr.name}
                                     />
                                 )
-                            }
+                            }}
                             aria-label='button'
                         >
                             <Crop75Icon />
