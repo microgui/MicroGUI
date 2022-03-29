@@ -1,0 +1,25 @@
+.simulatorDiv {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.simulatorBorder {
+    width: 402px;
+    height: 402px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.blinkingText {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { color: red }
+}

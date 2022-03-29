@@ -6,6 +6,10 @@ import RedoIcon from '@mui/icons-material/Redo'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
 
+import { Link } from 'react-router-dom'
+
+import { useState } from 'react'
+
 /**
  * Creates a toolbar for various tools related to the 
  * canvas, such as redo etc.
@@ -14,7 +18,7 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt'
 export const Toolbar = () => {
     const { actions, enabled, query } = useEditor((state) => ({
         enabled: state.options.enabled
-    }));
+    }))
 
     return (
         <div className='toolbar'>
@@ -61,23 +65,30 @@ export const Toolbar = () => {
                 </Tooltip>
             </div>
             <div className='simulateJsonButtons' style={{ padding: '5px' }}>
-                <MaterialButton
-                    size='small'
-                    variant='contained'
-                    color='info'
-                    style={{
-                        maxWidth: '115px', maxHeight: '35px',
-                        minWidth: '95px', minHeight: '25px'
-                    }
-                    }
-                    disableElevation
-                    onClick={() => {
-                        actions.setOptions((options) => (options.enabled = !enabled))
-                    }}
+                <Link
+                    to='/simulator'
+                    target='_blank'
+                    rel='noreferrer'
+                    style={{ textDecoration: 'none' }}
                 >
-                    <PlayCircleOutlineIcon style={{ padding: '2px' }} /> 
-                    {enabled ? 'Preview' : 'Edit'}
-                </MaterialButton>
+                    <MaterialButton
+                        size='small'
+                        variant='contained'
+                        color='info'
+                        style={{
+                            maxWidth: '115px', maxHeight: '35px',
+                            minWidth: '95px', minHeight: '25px'
+                        }
+                        }
+                        disableElevation
+                        onClick={() => {
+                            localStorage.setItem('data', query.serialize())
+                        }}
+                    >
+                        <PlayCircleOutlineIcon style={{ padding: '2px' }} />
+                        Simulate
+                    </MaterialButton>
+                </Link>
                 <MaterialButton
                     size='small'
                     variant='contained'
@@ -96,7 +107,7 @@ export const Toolbar = () => {
                     }
                     disableElevation
                 >
-                    <SaveAltIcon style={{ padding: '2px' }} /> 
+                    <SaveAltIcon style={{ padding: '2px' }} />
                     JSON
                 </MaterialButton>
             </div>
