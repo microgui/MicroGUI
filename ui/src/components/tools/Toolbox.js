@@ -17,14 +17,14 @@ import TuneIcon from '@mui/icons-material/Tune'
  * @returns The 'Toolbox' component
  */
 export const Toolbox = () => {
-    const { connectors, query } = useEditor();
+    const { connectors } = useEditor();
 
     /**
      * Decides where components should spawn on the page
      * TO DO: - Make it relative to the canvas, not the whole page
      *        - Make is so the the component spawns where the mouse is held
      */
-    const [coordinates, setCoordinates] = useState({
+    const [coordinates] = useState({
         x: 0,
         y: 0
     });
@@ -33,43 +33,30 @@ export const Toolbox = () => {
         console.log("hejjj")
     }
 
-    /*
-    ondragend = function(e){
-        console.log("mouse location:", e.clientX, e.clientY)
-        setCoordinates({
-            x: e.clientX,
-            y: e.clientY
-        })
-    } */
+    // const getPos = () => {
+    //     ondragend = function (e) {
+    //         console.log("mouse location:", e.clientX, e.clientY)
+    //     }
+    //     return {
+    //         x: coordinates.x,
+    //         y: coordinates.y
+    //     }
+    // }
 
     return (
-        <div
-            className='toolbox'
-        >
-            <Grid
-                container
-                spacing={1}
-            >
-                <Grid
-                    item
-                    xs={6}
-                >
-                    <Tooltip
-                        title='Button'
-                    >
+        <div className='toolbox'>
+            <Grid container spacing={1}>
+                <Grid item xs={6}>
+                    <Tooltip title='Button'>
                         <IconButton
                             ref={(ref) => {
                                 connectors.create(ref,
-                                    <Element is={Button}
-                                        text='Button'
-                                        size='small'
+                                    <Element
+                                        is={Button}
                                         onClick={bestFuncEvr}
-                                        variant='contained'
                                         pageX={coordinates.x}
                                         pageY={coordinates.y}
-                                        background={{ r: 63, g: 81, b: 181, a: 1 }}
-                                        color={{ r: 255, g: 255, b: 255, a: 1 }}
-                                        funcname = {bestFuncEvr.name}
+                                        funcname={bestFuncEvr.name}
                                     />
                                 )
                             }}
@@ -79,21 +66,12 @@ export const Toolbox = () => {
                         </IconButton>
                     </Tooltip>
                 </Grid>
-                <Grid
-                    item
-                    xs={6}
-                >
-                    <Tooltip
-                        title='Switch'
-                    >
+                <Grid item xs={6}>
+                    <Tooltip title='Switch'>
                         <IconButton
                             ref={(ref) =>
                                 connectors.create(ref,
-                                    <Switch
-                                        size='small'
-                                        
-                                        color={{ r: 63, g: 81, b: 181, a: 1 }}
-                                    />
+                                    <Element is={Switch} />
                                 )
                             }
                             aria-label='switch'
@@ -102,23 +80,12 @@ export const Toolbox = () => {
                         </IconButton>
                     </Tooltip>
                 </Grid>
-                <Grid
-                    item
-                    xs={6}
-                >
-                    <Tooltip
-                        title='Slider'
-                    >
+                <Grid item xs={6}>
+                    <Tooltip title='Slider'>
                         <IconButton
                             ref={(ref) =>
                                 connectors.create(ref,
-                                    <Slider
-                                        size='small'
-                                        width={100}
-                                        defaultValue={0}
-                                        color={{ r: 63, g: 81, b: 181, a: 1 }}
-                                        valueLabelDisplay='auto'
-                                    />
+                                    <Element is={Slider} />
                                 )
                             }
                             aria-label='slider'
@@ -127,25 +94,12 @@ export const Toolbox = () => {
                         </IconButton>
                     </Tooltip>
                 </Grid>
-                <Grid
-                    item
-                    xs={6}
-                >
-                    <Tooltip
-                        title='Textfield'
-                    >
+                <Grid item xs={6}>
+                    <Tooltip title='Textfield'>
                         <IconButton
                             ref={(ref) =>
                                 connectors.create(ref,
-                                    <Textfield
-                                        text='Text'
-                                        fontSize={15}
-                                        textAlign='left'
-                                        fontWeight='500'
-                                        color={{ r: 0, g: 0, b: 0, a: 1 }}
-                                    // pageX={0}
-                                    // pageY={0}
-                                    />
+                                    <Element is={Textfield} />
                                 )
                             }
                             aria-label='textfield'

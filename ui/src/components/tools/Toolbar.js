@@ -12,7 +12,9 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt'
  * @returns The 'Toolbar' component
  */
 export const Toolbar = () => {
-    const { actions, query } = useEditor();
+    const { actions, enabled, query } = useEditor((state) => ({
+        enabled: state.options.enabled
+    }));
 
     return (
         <div className='toolbar'>
@@ -69,8 +71,12 @@ export const Toolbar = () => {
                     }
                     }
                     disableElevation
+                    onClick={() => {
+                        actions.setOptions((options) => (options.enabled = !enabled))
+                    }}
                 >
-                    <PlayCircleOutlineIcon style={{ padding: '2px' }} /> Preview
+                    <PlayCircleOutlineIcon style={{ padding: '2px' }} /> 
+                    {enabled ? 'Preview' : 'Edit'}
                 </MaterialButton>
                 <MaterialButton
                     size='small'
@@ -90,7 +96,8 @@ export const Toolbar = () => {
                     }
                     disableElevation
                 >
-                    <SaveAltIcon style={{ padding: '2px' }} /> JSON
+                    <SaveAltIcon style={{ padding: '2px' }} /> 
+                    JSON
                 </MaterialButton>
             </div>
         </div>

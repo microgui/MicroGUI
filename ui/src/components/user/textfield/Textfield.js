@@ -1,10 +1,12 @@
 import ContentEditable from 'react-contenteditable';
-import { useNode } from '@craftjs/core';
+import { useNode, useEditor } from '@craftjs/core';
 import { useState, useRef } from 'react'
 
 import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { TextfieldSettings } from './TextfieldSettings';
+
+import { handleStart, handleStop, getBounds } from '../Utilities'
 
 /**
  * Creates a textfield that can be edited.
@@ -12,10 +14,14 @@ import { TextfieldSettings } from './TextfieldSettings';
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     text, pageX, pageY, width, height, ...props }) => {
-    const [coordinates, setCoordinates] = useState({
+    const [coordinates] = useState({
         x: pageX,
         y: pageY
-    });
+    })
+
+    const { enabled } = useEditor((state) => ({
+        enabled: state.options.enabled
+    }))
 
     const {
         id,
@@ -24,52 +30,17 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
         actions
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
-    }));
-
-    const handleStart = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        actions.setProp((props) => {
-            props.width = rect.width;
-            props.height = rect.height;
-        });
-    }
-
-    const handleStop = (e) => {
-        const canvas = document.getElementById('canvasElement').getBoundingClientRect();
-        const rect = e.target.getBoundingClientRect();
-        const relativePos = {}    
-        relativePos.left = rect.left - canvas.left
-        relativePos.top = rect.top - canvas.top
-        actions.setProp((props) => {
-            props.pageX = relativePos.left;
-            props.pageY = relativePos.top;
-        });
-    }
-
-    const getRect = () => {
-        const element = document.getElementById('canvasElement')
-        if (!element) {
-            return {
-                bottom: 0,
-                height: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                width: 0,
-            }
-        }
-        const rect = element.getBoundingClientRect()
-        return rect
-    }
+    }))
 
     const nodeRef = useRef()
 
     return (
         <Draggable
-            onStart={handleStart}
-            onStop={handleStop}
+            disabled={!enabled}
+            onStart={(e) => handleStart(e, actions)}
+            onStop={(e) => handleStop(e, actions)}
             nodeRef={nodeRef}
-            bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
+            bounds={getBounds(height, width)}
         >
             <div
                 style={{
@@ -87,6 +58,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                         <ContentEditable
                             innerRef={connect}
                             html={text}
+                            disabled={!enabled}
                             onChange={(e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) }}
                             tagName='h2'
                             id='editableText'
@@ -107,6 +79,14 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
 }
 
 Textfield.craft = {
+    displayName: 'Textfield',
+    props: {
+        text: 'Text',
+        fontSize: 15,
+        textAlign: 'left',
+        fontWeight: '500',
+        color: { r: 0, g: 0, b: 0, a: 1 }
+    },
     related: {
         toolbar: TextfieldSettings
     }

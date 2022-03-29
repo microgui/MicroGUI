@@ -1,22 +1,29 @@
 import { Switch as MaterialSwitch } from '@mui/material'
 import { alpha } from '@mui/material/styles'
-import { useNode } from '@craftjs/core'
+import { useNode, useEditor } from '@craftjs/core'
 import { useState, useRef } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
 import { SwitchSettings } from './SwitchSettings'
 
+import { handleStart, handleStop, getBounds } from '../Utilities'
+
 /**
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
-export const Switch = ({ height, width, size, color, pageX, pageY, defaultChecked, ...props }) => {
+export const Switch = ({ height, width, size, color, pageX, pageY,
+    defaultChecked, ...props }) => {
 
-    const [coordinates, setCoordinates] = useState({
+    const [coordinates] = useState({
         x: pageX,
         y: pageY
-    });
+    })
+
+    const { enabled } = useEditor((state) => ({
+        enabled: state.options.enabled
+    }))
 
     const {
         id,
@@ -25,53 +32,17 @@ export const Switch = ({ height, width, size, color, pageX, pageY, defaultChecke
         actions
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
-    }));
-
-    const handleStart = (e) => {
-
-        const rect = e.currentTarget.getBoundingClientRect();
-        actions.setProp((props) => {
-            props.width = rect.width;
-            props.height = rect.height;
-        });
-    }
-
-    const handleStop = (e) => {
-        const canvas = document.getElementById('canvasElement').getBoundingClientRect();
-        const rect = e.target.getBoundingClientRect();
-        const relativePos = {}    
-        relativePos.left = rect.left - canvas.left
-        relativePos.top = rect.top - canvas.top
-        actions.setProp((props) => {
-            props.pageX = relativePos.left;
-            props.pageY = relativePos.top;
-        });
-    }
-
-    const getRect = () => {
-        const element = document.getElementById("canvasElement")
-        if (!element) {
-            return {
-                bottom: 0,
-                height: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                width: 0,
-            }
-        }
-        const rect = element.getBoundingClientRect()
-        return rect
-    }
+    }))
 
     const nodeRef = useRef()
 
     return (
         <Draggable
-            onStart={handleStart}
-            onStop={handleStop}
+            disabled={!enabled}
+            onStart={(e) => handleStart(e, actions)}
+            onStop={(e) => handleStop(e, actions)}
             nodeRef={nodeRef}
-            bounds={{ left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }}
+            bounds={getBounds(height, width)}
         >
             <div
                 style={{
@@ -93,12 +64,12 @@ export const Switch = ({ height, width, size, color, pageX, pageY, defaultChecke
                                 '& .MuiSwitch-switchBase.Mui-checked': {
                                     color: `rgba(${Object.values(color)})`,
                                     '&:hover': {
-                                      backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15),
+                                        backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15),
                                     },
-                                  },
-                                  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
                                     backgroundColor: `rgba(${Object.values(color)})`,
-                                  },
+                                },
                             }}
                             {...props}
                         />
@@ -110,6 +81,11 @@ export const Switch = ({ height, width, size, color, pageX, pageY, defaultChecke
 }
 
 Switch.craft = {
+    displayName: 'Switch',
+    props: {
+        size: 'small',                                
+        color: { r: 63, g: 81, b: 181, a: 1 }
+    },
     related: {
         toolbar: SwitchSettings
     }
