@@ -5,7 +5,9 @@ import { useEditor } from '@craftjs/core'
 import { useRef } from 'react'
 
 export const Tooltip = styled(({ className, name, id, ...props }) => {
-    const { actions } = useEditor()
+    const { actions, enabled } = useEditor((state) => ({
+        enabled: state.options.enabled
+    }))
 
     const areaRef = useRef(null)
 
@@ -23,6 +25,7 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
                     }
                 }
             }}
+            disableHoverListener={!enabled}
             disableTouchListener
             title={<>
                 {name}

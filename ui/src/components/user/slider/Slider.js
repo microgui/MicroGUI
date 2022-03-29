@@ -1,20 +1,27 @@
-import { Slider as MaterialSlider } from '@mui/material';
-import { useNode } from '@craftjs/core';
+import { Slider as MaterialSlider } from '@mui/material'
+import { useNode, useEditor } from '@craftjs/core'
 import { useState, useRef } from 'react'
-import Draggable from 'react-draggable';
+import Draggable from 'react-draggable'
 
-import { Tooltip } from '../tools/Tooltip'
+import { Tooltip } from '../../tools/Tooltip'
+import { SliderSettings } from './SliderSettings'
+
+import { handleStart, handleStop, getBounds } from '../Utilities'
 
 /**
  * Creates a slider object. 
  * @returns The 'slider' object
  */
-export const Slider = ({ size, color, pageX, pageY,
+export const Slider = ({ size, width, height, color, pageX, pageY,
     defaultValue, aria_label, valueLabelDisplay, ...props }) => {
-    const [coordinates, setCoordinates] = useState({
+    const [coordinates] = useState({
         x: pageX,
         y: pageY
-    });
+    })
+
+    const { enabled } = useEditor((state) => ({
+        enabled: state.options.enabled
+    }))
 
     const {
         id,
@@ -23,22 +30,17 @@ export const Slider = ({ size, color, pageX, pageY,
         actions
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
-    }));
-
-    const handleStop = (e) => {
-        const rect = e.target.getBoundingClientRect();
-        actions.setProp((props) => {
-            props.pageX = rect.left;
-            props.pageY = rect.top;
-        });
-    }
+    }))
 
     const nodeRef = useRef()
 
     return (
         <Draggable
-            onStop={handleStop}
+            disabled={!enabled}
+            onStart={(e) => handleStart(e, actions)}
+            onStop={(e) => handleStop(e, actions)}
             nodeRef={nodeRef}
+            bounds={getBounds(height, width)}
         >
             <div
                 style={{
@@ -54,11 +56,11 @@ export const Slider = ({ size, color, pageX, pageY,
                 >
                     <MaterialSlider
                         ref={connect}
-                        style={{
-                            width: '100px'
-                        }}
                         size={size}
-                        color={color}
+                        sx={{
+                            color: `rgba(${Object.values(color)})`,
+                            width: `${width}px`
+                        }}
                         defaultValue={defaultValue}
                         aria-label={aria_label}
                         valueLabelDisplay={valueLabelDisplay}
@@ -67,5 +69,19 @@ export const Slider = ({ size, color, pageX, pageY,
                 </Tooltip>
             </div>
         </Draggable>
-    );
-};
+    )
+}
+
+Slider.craft = {
+    displayName: 'Slider',
+    props: {
+        size: 'small',
+        width: 100,
+        defaultValue: 0,
+        color: { r: 63, g: 81, b: 181, a: 1 },
+        valueLabelDisplay: 'auto'
+    },
+    related: {
+        toolbar: SliderSettings
+    }
+}
