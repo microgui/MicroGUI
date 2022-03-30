@@ -1,6 +1,6 @@
 import { EditSection } from '../../tools/editbox/EditSection'
 import { EditItem } from '../../tools/editbox/EditItem'
-import { FormControlLabel, Radio, Typography, Divider } from '@mui/material'
+import { FormControlLabel, Radio, Typography } from '@mui/material'
 import React from 'react'
 import { capitalize } from '../Utilities'
 

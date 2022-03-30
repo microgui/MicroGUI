@@ -71,7 +71,7 @@ footer {
   padding-right: 30px;
 }
 
-.canvasElement {
+#canvasElement {
   position: relative;
   background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
   background-position: 0 0;
@@ -123,6 +123,6 @@ footer {
   padding-bottom: 5px;
 }
 
-h5 {
+h4, h5 {
   font-weight: normal;
 }

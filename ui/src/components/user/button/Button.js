@@ -1,4 +1,5 @@
 import { Button as MaterialButton } from '@mui/material'
+import { alpha } from '@mui/material/styles'
 import { useNode, useEditor } from '@craftjs/core'
 import { useState, useRef } from 'react'
 import Draggable from 'react-draggable'
@@ -61,7 +62,10 @@ export const Button = ({ custom, onClick, size, variant, background, color,
                                 variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent', 
                             color: `rgba(${Object.values(color)})`,
                             borderColor:
-                                variant === 'outlined' ? `rgba(${Object.values(background)})` : 'transparent'
+                                variant === 'outlined' ? `rgba(${Object.values(background)})` : 'transparent',
+                            "&:hover": {
+                                backgroundColor: variant === 'contained' ? alpha(`rgba(${Object.values(background)})`, 0.9) : null
+                            }
                         }}
                         {...props}
                     >
@@ -84,5 +88,5 @@ Button.craft = {
     },
     related: {
         toolbar: ButtonSettings
-    },
+    }
 }

@@ -27,6 +27,7 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
             }}
             disableHoverListener={!enabled}
             disableTouchListener
+            disableFocusListener
             title={<>
                 {name}
                 <button
