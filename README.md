@@ -18,11 +18,9 @@
   <p align="center">
     An open-source tool for creating embedded GUIs!
     <br />
-    <a href="https://github.com/CarlClasson/MicroGUI"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/CarlClasson/MicroGUI/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/CarlClasson/MicroGUI">View Demo</a>
-    ·
     <a href="https://github.com/CarlClasson/MicroGUI/issues">Report Bug</a>
     ·
     <a href="https://github.com/CarlClasson/MicroGUI/issues">Request Feature</a>
@@ -59,19 +57,18 @@
 ## About The Project
 
 <a href="https://github.com/CarlClasson/MicroGUI">
-    <img src="images/canvas.png" alt="Logo" width="564" height="613">
+    <img src="images/home.png" width="500">
   </a>
 
-info
+Use the MicroGUI web-application to create simple GUIs using ready-and-available components! Components include buttons, switches, sliders and textfields (more to come!). Drag any component onto the canvas area and start moving it around freely, or edit its appearance. You can choose to "simulate" the current state of the canvas area, which removes the ability to move and edit components. You can also save the state of the canvas area by copying to clipboard or downloading a file.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 * [React.js](https://reactjs.org/)
 * [MUI](https://mui.com)
+* [Craft.js](https://github.com/prevwong/craft.js)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -139,8 +136,6 @@ Carl Classon - carlcla@student.chalmers.se
 
 William Husar - husar@student.chalmers.se
 
-Project Link: [https://github.com/CarlClasson/MicroGUI](https://github.com/CarlClasson/MicroGUI)
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
@@ -148,7 +143,8 @@ Project Link: [https://github.com/CarlClasson/MicroGUI](https://github.com/CarlC
 
 Helpful resources
 
-* [React DnD](https://react-dnd.github.io/react-dnd/about)
+* [react-draggable](https://github.com/react-grid-layout/react-draggable)
+* [craft.js example](https://craft.js.org)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
