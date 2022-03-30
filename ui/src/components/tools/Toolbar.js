@@ -6,13 +6,19 @@ import {
     Dialog,
     DialogTitle,
     DialogContent,
-    Grid
+    DialogContentText,
+    DialogActions,
+    TextField,
+    Grid,
+    Divider
 } from '@mui/material'
 
 import UndoIcon from '@mui/icons-material/Undo'
 import RedoIcon from '@mui/icons-material/Redo'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
+import CloseIcon from '@mui/icons-material/Close';
+
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { saveAs } from 'file-saver'
@@ -27,17 +33,33 @@ export const Toolbar = () => {
         enabled: state.options.enabled
     }))
 
-    const [open, setOpen] = useState(false)
-    const handleOpen = () => {
-        setOpen(true)
+    const [copied, setCopied] = useState(false)
+    const [openOuter, setOpenOuter] = useState(false)
+    const [openInner, setOpenInner] = useState(false)
+    const [formText, setFormText] = useState('')
+    const [error, setError] = useState(false)
+
+    const handleOpenOuter = () => {
+        setOpenOuter(true)
+    }
+    const handleOpenInner = () => {
+        setOpenInner(true)
     }
     const handleClose = () => {
-        setOpen(false)
+        setOpenOuter(false)
+        setOpenInner(false)
+        setCopied(false)
+        setFormText('')
+        setError(false)
     }
 
-    const saveFile = (data) => {
-        const file = new File([data], "test.json", {type:'text/json;charset=utf-8'})
-        saveAs(file)
+    const saveFile = (data, name) => {
+        if (formText !== '') {
+            const file = new File([JSON.stringify(JSON.parse(data), null, 4)], `${name}.json`, { type: 'text/json;charset=utf-8' })
+            saveAs(file)
+            handleClose()
+        }
+        if (formText === '') setError(true)
     }
 
     return (
@@ -109,59 +131,107 @@ export const Toolbar = () => {
                         Simulate
                     </MaterialButton>
                 </Link>
-                
-                    <MaterialButton
-                        size='small'
-                        variant='contained'
-                        color='success'
-                        /* 'query.serialize' serializes the state of the canvas
-                         into a JSON string. This can be used to recreate the
-                         state of the canvas. */
-                        onClick={() => {
-                            console.log(query.serialize())
-                            handleOpen()
-                        }}
-                        style={{
-                            margin: '5px', maxWidth: '70px',
-                            maxHeight: '35px', minWidth: '80px',
-                            minHeight: '25px'
-                        }
-                        }
-                        disableElevation
-                    >
-                        <SaveAltIcon style={{ padding: '2px' }} />
-                        JSON
-                    </MaterialButton>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>
-                            Hey you!
-                        </DialogTitle>
-                        <DialogContent>
-                            <Grid container>
-                                <Grid item xs={6}>
-                                    <h3>Copy to clipboard</h3>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <h3>Save as .JSON file</h3>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <MaterialButton 
-                                        variant='outlined' 
-                                        onClick={() => {navigator.clipboard.writeText(query.serialize())}}
-                                    > Copy
-                                    </MaterialButton>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <MaterialButton 
-                                        variant='outlined'
-                                        onClick={() => {saveFile(query.serialize())}}
-                                    >Save
-                                    </MaterialButton>
-                                </Grid>  
+
+                <MaterialButton
+                    size='small'
+                    variant='contained'
+                    color='success'
+                    /* 'query.serialize' serializes the state of the canvas
+                     into a JSON string. This can be used to recreate the
+                     state of the canvas. */
+                    onClick={() => {
+                        console.log(query.serialize())
+                        handleOpenOuter()
+                    }}
+                    style={{
+                        margin: '5px', maxWidth: '70px',
+                        maxHeight: '35px', minWidth: '80px',
+                        minHeight: '25px'
+                    }
+                    }
+                    disableElevation
+                >
+                    <SaveAltIcon style={{ padding: '2px' }} />
+                    Save
+                </MaterialButton>
+                <Dialog open={openOuter} onClose={handleClose} fullWidth={true} maxWidth='xs' >
+                    <DialogTitle>
+                        Save data
+                        <IconButton
+                            aria-label="close"
+                            onClick={handleClose}
+                            sx={{
+                                position: 'absolute',
+                                right: 8,
+                                top: 8,
+                                color: 'grey'
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <Divider />
+                    </DialogTitle>
+                    <DialogContent>
+                        <Grid container spacing={1} align='center'>
+                            <Grid item xs={6}>
+                                <h4>Copy to clipboard</h4>
                             </Grid>
-                        </DialogContent>
-                    </Dialog>
-                
+                            <Grid item xs={6}>
+                                <h4>Save as .json file</h4>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <MaterialButton
+                                    variant='outlined'
+                                    disabled={copied}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(query.serialize())
+                                        setCopied(true)
+                                    }}
+                                > {copied ? 'Copied' : 'Copy'}
+                                </MaterialButton>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <MaterialButton
+                                    variant='outlined'
+                                    onClick={() => handleOpenInner()}
+                                > Save
+                                </MaterialButton>
+                            </Grid>
+                        </Grid>
+                    </DialogContent>
+                </Dialog>
+                <Dialog open={openInner} onClose={handleClose} fullWidth={true} maxWidth='xs' >
+                    <DialogTitle>
+                        Save file
+                        <Divider />
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please enter a file name here. It will be saved as .json
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="File name"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            onChange={(e) => {
+                                setError(false)
+                                setFormText(e.target.value)
+                            }}
+                            error={error}
+                            helperText={error ? "Name can't be empty" : null}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <MaterialButton onClick={handleClose}>Cancel</MaterialButton>
+                        <MaterialButton onClick={() => saveFile(query.serialize(), formText)}
+                        > Save
+                        </MaterialButton>
+                    </DialogActions>
+                </Dialog>
             </div>
         </div>
     )
