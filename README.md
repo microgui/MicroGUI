@@ -56,7 +56,7 @@
 ## About The Project
 <div align='center'>
 <a href="https://github.com/CarlClasson/MicroGUI">
-  <img src="images/demo.gif" width="500">
+  <img src="images/demo.gif" width="600">
 </a>
 </div>
 
