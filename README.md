@@ -21,9 +21,9 @@
     <a href="https://github.com/CarlClasson/MicroGUI/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/CarlClasson/MicroGUI/issues">Report Bug</a>
+    <a href="https://github.com/CarlClasson/MicroGUI/issues/new?labels=bug">Report Bug</a>
     ·
-    <a href="https://github.com/CarlClasson/MicroGUI/issues">Request Feature</a>
+    <a href="https://github.com/CarlClasson/MicroGUI/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -34,7 +34,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#architecture">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -45,7 +45,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -55,16 +54,17 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+<div align='center'>
 <a href="https://github.com/CarlClasson/MicroGUI">
-    <img src="images/home.png" width="500">
-  </a>
+  <img src="images/demo.gif" width="500">
+</a>
+</div>
 
-Use the MicroGUI web-application to create simple GUIs using ready-and-available components! Components include buttons, switches, sliders and textfields (more to come!). Drag any component onto the canvas area and start moving it around freely, or edit its appearance. You can choose to "simulate" the current state of the canvas area, which removes the ability to move and edit components. You can also save the state of the canvas area by copying to clipboard or downloading a file.
+Use the MicroGUI web application to create simple GUIs using ready-made components! Components include buttons, switches, sliders and textfields (more to come!).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Built With
+### Architecture
 
 * [React.js](https://reactjs.org/)
 * [MUI](https://mui.com)
@@ -75,9 +75,9 @@ Use the MicroGUI web-application to create simple GUIs using ready-and-available
 <!-- GETTING STARTED -->
 ## Getting Started
 
-...
-
 ### Prerequisites
+
+Download [Node.js](https://nodejs.org/en/download/).
 
 Get the latest NPM version.
 * npm
@@ -91,20 +91,27 @@ Get the latest NPM version.
    ```sh
    git clone https://github.com/CarlClasson/MicroGUI.git
    ```
-1. Change directory to _ui_
+2. Change directory to _ui_
    ```sh
    cd your_repo_location/ui
    ```
-2. Install NPM packages
+3. Install NPM packages
    ```sh
    npm install
    ```
-3. Run the app
+4. Run the app
    ```sh
    npm run build
    ```
+5. Open the app\
+   Go to ```localhost:3000``` in the browser
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- USAGE -->
+## Usage
+
+Drag any component onto the canvas area and start moving it around freely, or edit its appearance. You can choose to "simulate" the current state of the canvas area, which removes the ability to move and edit components. You can also save the state of the canvas area by copying to clipboard or downloading a file.
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -145,6 +152,8 @@ Helpful resources
 
 * [react-draggable](https://github.com/react-grid-layout/react-draggable)
 * [craft.js example](https://craft.js.org)
+
+A big thanks to [@othneildrew](https://github.com/othneildrew) for the [README template](https://github.com/othneildrew/Best-README-Template).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
