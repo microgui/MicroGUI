@@ -6,7 +6,7 @@ import { Editor, Frame, Element } from '@craftjs/core';
 import logo from '../logo.png'
 
 import { Toolbox } from '../components/tools/Toolbox'
-import { Toolbar } from '../components/tools/Toolbar'
+import { Toolbar } from '../components/tools/toolbar/Toolbar'
 import { Button } from '../components/user/button/Button'
 import { Slider } from '../components/user/slider/Slider'
 import { Switch } from '../components/user/switch/Switch'
