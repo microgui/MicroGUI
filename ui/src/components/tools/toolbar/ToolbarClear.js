@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEditor } from '@craftjs/core'
+import { useEditor, useNode } from '@craftjs/core'
 import {
     Button as MaterialButton,
     IconButton,
@@ -25,6 +25,10 @@ export const ToolbarClear = () => {
         for (let key in nodes) {
             if (key !== 'ROOT') {
                 actions.delete(key);
+            } else {
+                actions.setProp(key, (props) => {
+                    props.background = null
+                })
             }
         }
         setOpen(false)

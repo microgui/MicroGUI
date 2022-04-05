@@ -12,7 +12,7 @@ export const Editbox = () => {
                 currentlySelectedNodeId && state.nodes[currentlySelectedNodeId].related,
         }
     })
-    
+
     return (
         <div className="editbox">
             <div className="editHeader">
@@ -27,7 +27,7 @@ export const Editbox = () => {
             </div>
             {active && related.toolbar && React.createElement(related.toolbar)}
             {!active && (
-                <h3 style={{marginTop: '20px', fontWeight: 'normal'}}>Drag a component to the canvas area and click on it to start editing.</h3>
+                <h3 style={{ marginTop: '20px', fontWeight: 'normal' }}>Drag a component to the canvas area and click on it to start editing.</h3>
             )}
         </div>
     )
