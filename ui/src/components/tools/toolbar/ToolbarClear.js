@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEditor, useNode } from '@craftjs/core'
+import { useEditor } from '@craftjs/core'
 import {
     Button as MaterialButton,
     IconButton,
