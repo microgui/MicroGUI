@@ -1,6 +1,6 @@
 import { Slider as MaterialSlider } from '@mui/material'
 import { useNode, useEditor } from '@craftjs/core'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
@@ -13,7 +13,8 @@ import { handleStart, handleStop, getBounds } from '../Utilities'
  * @returns The 'slider' object
  */
 export const Slider = ({ size, width, height, color, pageX, pageY,
-    defaultValue, aria_label, valueLabelDisplay, ...props }) => {
+    defaultValue, aria_label, valueLabelDisplay, propId, 
+    connectedNode, ...props }) => {
     const [coordinates] = useState({
         x: pageX,
         y: pageY
@@ -23,16 +24,30 @@ export const Slider = ({ size, width, height, color, pageX, pageY,
         enabled: state.options.enabled
     }))
 
+    const editorActions = useEditor().actions
+
     const {
         id,
         name,
         connectors: { connect },
         actions
     } = useNode((node) => ({
-        name: node.data.custom.displayName || node.data.displayName,
+        name: node.data.custom.displayName || node.data.displayName
     }))
 
+    useEffect(() => {
+        actions.setProp((props) => {
+            props.propId = id
+        })
+    }, [actions, id])
+
     const nodeRef = useRef()
+
+    const updateText = (value) => {
+        editorActions.setProp(connectedNode, (props) => {
+            props.text = value
+        })
+    }
 
     return (
         <Draggable
@@ -62,6 +77,9 @@ export const Slider = ({ size, width, height, color, pageX, pageY,
                             width: `${width}px`
                         }}
                         defaultValue={defaultValue}
+                        onChange={(e, val) => {
+                            updateText(val.toString())
+                        }}
                         aria-label={aria_label}
                         valueLabelDisplay={valueLabelDisplay}
                         {...props}

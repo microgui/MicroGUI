@@ -1,23 +1,19 @@
-import { useNode } from '@craftjs/core';
-import { Grid, Slider, RadioGroup } from '@mui/material';
+import { useNode } from '@craftjs/core'
+import { Grid, Slider, RadioGroup, Button } from '@mui/material'
 
-import { EditTextInput } from './EditTextInput';
+import { EditTextInput } from './EditTextInput'
 
-export const EditItem = ({
-    full = false,
-    propKey,
-    type,
-    onChange,
-    index,
-    ...props
-}) => {
+export const EditItem = ({ full = false, propKey, type, onChange,
+    index, ...props }) => {
+
     const {
         actions: { setProp },
         propValue,
     } = useNode((node) => ({
         propValue: node.data.props[propKey],
-    }));
-    const value = Array.isArray(propValue) ? propValue[index] : propValue;
+    }))
+
+    const value = Array.isArray(propValue) ? propValue[index] : propValue
 
     return (
         <Grid item xs={full ? 12 : 6}>
@@ -76,8 +72,23 @@ export const EditItem = ({
                             {props.children}
                         </RadioGroup>
                     </>
-                ) : null}
+                ) : type === 'button' ? (
+                    <>
+                        {props.label ? (
+                            <h4>{props.label}</h4>
+                        ) : null}
+                        <Button
+                            disabled={props.disabled}
+                            onClick={props.onClick}
+                            variant='contained'
+                            size='small'
+                        >
+                            {props.children}
+                        </Button>
+                    </>
+                ) : null
+                }
             </div>
         </Grid>
-    );
-};
+    )
+}

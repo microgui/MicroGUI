@@ -1,6 +1,6 @@
 import ContentEditable from 'react-contenteditable';
 import { useNode, useEditor } from '@craftjs/core';
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
@@ -13,7 +13,7 @@ import { handleStart, handleStop, getBounds } from '../Utilities'
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, width, height, ...props }) => {
+    text, pageX, pageY, width, height, propId, ...props }) => {
     const [coordinates] = useState({
         x: pageX,
         y: pageY
@@ -31,6 +31,12 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     } = useNode((node) => ({
         name: node.data.custom.displayName || node.data.displayName,
     }))
+
+    useEffect(() => {
+        actions.setProp((props) => {
+            props.propId = id
+        })
+    }, [actions, id])
 
     const nodeRef = useRef()
 
@@ -59,7 +65,9 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                             innerRef={connect}
                             html={text}
                             disabled={!enabled}
-                            onChange={(e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) }}
+                            onChange={(e) => { 
+                                actions.setProp((prop) => (prop.text = e.target.value), 500)
+                            }}
                             tagName='h2'
                             id='editableText'
                             style={{
