@@ -1,7 +1,7 @@
 import { Button as MaterialButton } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { useNode, useEditor } from '@craftjs/core'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
@@ -11,11 +11,6 @@ import { handleStart, handleStop, getBounds } from '../Utilities'
 
 export const Button = ({ custom, onClick, size, variant, background, color, 
     text, pageX, pageY, width, height, ...props }) => {
-
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -39,13 +34,10 @@ export const Button = ({ custom, onClick, size, variant, background, color,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds={getBounds(height, width)}
+            position={{x:pageX, y:pageY}}
         >
             <div
-                style={{
-                    position: "absolute",
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{position: 'absolute'}}
                 ref={nodeRef}
             >
                 <Tooltip

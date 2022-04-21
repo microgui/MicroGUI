@@ -16,7 +16,6 @@ export function handleStop(actions, node) {
     const relativePos = {}
     relativePos.left = rect.left - canvas.left
     relativePos.top = rect.top - canvas.top
-    console.log(relativePos)
     actions.setProp((props) => {
         props.pageX = relativePos.left;
         props.pageY = relativePos.top;

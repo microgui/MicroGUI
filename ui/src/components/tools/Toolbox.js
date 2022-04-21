@@ -33,16 +33,6 @@ export const Toolbox = () => {
         //console.log("hejjj")
     }
 
-    // const getPos = () => {
-    //     ondragend = function (e) {
-    //         console.log("mouse location:", e.clientX, e.clientY)
-    //     }
-    //     return {
-    //         x: coordinates.x,
-    //         y: coordinates.y
-    //     }
-    // }
-
     return (
         <div className='toolbox'>
             <Grid container spacing={1}>

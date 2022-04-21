@@ -22,6 +22,10 @@ import { ToolbarLoad } from './ToolbarLoad'
  * @returns The 'Toolbar' component
  */
 export const Toolbar = () => {
+    const { canUndo, canRedo } = useEditor((state, query) => ({
+        canUndo: query.history.canUndo(),
+        canRedo: query.history.canRedo()
+    }))
     const { actions, query } = useEditor()
 
     return (
@@ -30,45 +34,49 @@ export const Toolbar = () => {
                 <Tooltip
                     title='Undo'
                 >
-                    <IconButton
-                        onClick={() => {
-                            try {
-                                actions.history.undo()
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }}
+                    <span
+                        style={{cursor: canUndo ? 'pointer' : 'not-allowed'}}
                     >
-                        <UndoIcon
-                            style={{
-                                color: 'grey',
-                                cursor: 'pointer'
+                        <IconButton
+                            disabled={!canUndo}
+                            onClick={() => {
+                                try {
+                                    actions.history.undo()
+                                } catch (error) {
+                                    console.log(error)
+                                }
                             }}
-                        />
-                    </IconButton>
+                        >
+                            <UndoIcon
+                                sx={{color: 'grey'}}
+                            />
+                        </IconButton>
+                    </span>
                 </Tooltip>
                 <Tooltip
                     title='Redo'
                 >
-                    <IconButton
-                        onClick={() => {
-                            try {
-                                actions.history.redo()
-                            } catch (error) {
-                                console.log(error)
-                            }
-                        }}
+                    <span
+                        style={{cursor: canRedo ? 'pointer' : 'not-allowed'}}
                     >
-                        <RedoIcon
-                            style={{
-                                color: 'grey',
-                                cursor: 'pointer'
+                        <IconButton
+                            disabled={!canRedo}
+                            onClick={() => {
+                                try {
+                                    actions.history.redo()
+                                } catch (error) {
+                                    console.log(error)
+                                }
                             }}
-                        />
-                    </IconButton>
+                        >
+                            <RedoIcon
+                                sx={{color: 'grey'}}
+                            />
+                        </IconButton>
+                    </span>
                 </Tooltip>
-                <ToolbarClear/>
-            </Stack>           
+                <ToolbarClear />
+            </Stack>
             <Stack direction='row' spacing={0.7} sx={{ paddingRight: '10px' }}>
                 <Link
                     to='/simulator'
@@ -89,8 +97,8 @@ export const Toolbar = () => {
                         Simulate
                     </MaterialButton>
                 </Link>
-                <ToolbarSave/>
-                <ToolbarLoad/>
+                <ToolbarSave />
+                <ToolbarLoad />
             </Stack>
         </div>
     )

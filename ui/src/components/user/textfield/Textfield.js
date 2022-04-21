@@ -1,6 +1,6 @@
 import ContentEditable from 'react-contenteditable';
 import { useNode, useEditor } from '@craftjs/core';
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 
 import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
@@ -14,10 +14,6 @@ import { handleStart, handleStop, getBounds } from '../Utilities'
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     text, pageX, pageY, width, height, propId, ...props }) => {
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -47,13 +43,10 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds={getBounds(height, width)}
+            position={{x:pageX, y:pageY}}
         >
             <div
-                style={{
-                    position: 'absolute',
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{position: 'absolute'}}
                 ref={nodeRef}
             >
                 <Tooltip

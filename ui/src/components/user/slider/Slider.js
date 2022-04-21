@@ -1,6 +1,6 @@
 import { Slider as MaterialSlider } from '@mui/material'
 import { useNode, useEditor } from '@craftjs/core'
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
@@ -15,10 +15,6 @@ import { handleStart, handleStop, getBounds } from '../Utilities'
 export const Slider = ({ size, width, height, color, pageX, pageY,
     defaultValue, aria_label, valueLabelDisplay, propId, 
     connectedNode, ...props }) => {
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -56,13 +52,10 @@ export const Slider = ({ size, width, height, color, pageX, pageY,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds={getBounds(height, width)}
+            position={{x:pageX, y:pageY}}
         >
             <div
-                style={{
-                    position: "absolute",
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{position: 'absolute'}}
                 ref={nodeRef}
             >
                 <Tooltip
