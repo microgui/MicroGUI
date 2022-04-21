@@ -30,7 +30,7 @@ export const Toolbox = () => {
     });
 
     function bestFuncEvr() {
-        console.log("hejjj")
+        //console.log("hejjj")
     }
 
     // const getPos = () => {

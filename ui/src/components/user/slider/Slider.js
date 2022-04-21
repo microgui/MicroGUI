@@ -52,8 +52,8 @@ export const Slider = ({ size, width, height, color, pageX, pageY,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={(e) => handleStart(e, actions)}
-            onStop={(e) => handleStop(e, actions)}
+            onStart={() => handleStart(actions, nodeRef)}
+            onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds={getBounds(height, width)}
         >
