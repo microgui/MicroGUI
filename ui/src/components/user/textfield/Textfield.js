@@ -6,14 +6,14 @@ import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { TextfieldSettings } from './TextfieldSettings';
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop } from '../Utilities'
 
 /**
  * Creates a textfield that can be edited.
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, width, height, propId, ...props }) => {
+    text, pageX, pageY, propId, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -39,14 +39,13 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={() => handleStart(actions, nodeRef)}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
-            position={{x:pageX, y:pageY}}
+            bounds='parent'
+            position={{ x: pageX, y: pageY }}
         >
             <div
-                style={{position: 'absolute'}}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -58,7 +57,7 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                             innerRef={connect}
                             html={text}
                             disabled={!enabled}
-                            onChange={(e) => { 
+                            onChange={(e) => {
                                 actions.setProp((prop) => (prop.text = e.target.value), 500)
                             }}
                             tagName='h2'

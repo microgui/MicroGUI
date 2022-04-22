@@ -6,14 +6,14 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { SliderSettings } from './SliderSettings'
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop } from '../Utilities'
 
 /**
  * Creates a slider object. 
  * @returns The 'slider' object
  */
-export const Slider = ({ size, width, height, color, pageX, pageY,
-    defaultValue, aria_label, valueLabelDisplay, propId, 
+export const Slider = ({ size, width, color, pageX, pageY,
+    defaultValue, aria_label, valueLabelDisplay, propId,
     connectedNode, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -48,14 +48,13 @@ export const Slider = ({ size, width, height, color, pageX, pageY,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={() => handleStart(actions, nodeRef)}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
-            position={{x:pageX, y:pageY}}
+            bounds='parent'
+            position={{ x: pageX, y: pageY }}
         >
             <div
-                style={{position: 'absolute'}}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip

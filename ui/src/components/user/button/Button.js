@@ -7,10 +7,10 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings'
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop } from '../Utilities'
 
-export const Button = ({ custom, onClick, size, variant, background, color, 
-    text, pageX, pageY, width, height, ...props }) => {
+export const Button = ({ custom, onClick, size, variant, background, color,
+    text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -25,19 +25,20 @@ export const Button = ({ custom, onClick, size, variant, background, color,
         name: node.data.custom.displayName || node.data.displayName,
     }))
 
+    console.log(pageX, pageY)
+
     const nodeRef = useRef()
 
     return (
         <Draggable
             disabled={!enabled}
-            onStart={() => handleStart(actions, nodeRef)}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
-            position={{x:pageX, y:pageY}}
+            bounds='parent'
+            position={{ x: pageX, y: pageY }}
         >
             <div
-                style={{position: 'absolute'}}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -50,8 +51,8 @@ export const Button = ({ custom, onClick, size, variant, background, color,
                         variant={variant}
                         onClick={onClick}
                         sx={{
-                            backgroundColor: 
-                                variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent', 
+                            backgroundColor:
+                                variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent',
                             color: `rgba(${Object.values(color)})`,
                             borderColor:
                                 variant === 'outlined' ? `rgba(${Object.values(background)})` : 'transparent',

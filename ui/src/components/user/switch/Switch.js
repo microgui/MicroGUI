@@ -7,13 +7,13 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { SwitchSettings } from './SwitchSettings'
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop } from '../Utilities'
 
 /**
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
-export const Switch = ({ height, width, size, color, pageX, pageY,
+export const Switch = ({ size, color, pageX, pageY,
     defaultChecked, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -34,14 +34,13 @@ export const Switch = ({ height, width, size, color, pageX, pageY,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={() => handleStart(actions, nodeRef)}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
-            position={{x:pageX, y:pageY}}
+            bounds='parent'
+            position={{ x: pageX, y: pageY }}
         >
             <div
-                style={{position: 'absolute'}}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -75,7 +74,7 @@ export const Switch = ({ height, width, size, color, pageX, pageY,
 Switch.craft = {
     displayName: 'Switch',
     props: {
-        size: 'small',                                
+        size: 'small',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },
     related: {
