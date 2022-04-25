@@ -59,7 +59,7 @@ export const SliderSettings = () => {
             >
                 <EditItem 
                     propKey='width' 
-                    type='number' 
+                    type='sliderInput' 
                     error={true}
                 />
             </EditSection>

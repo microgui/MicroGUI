@@ -16,12 +16,9 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
 export const ToolbarClear = () => {
 
-    const { canUndo, canRedo } = useEditor((state, query) => ({
-        canUndo: query.history.canUndo(),
-        canRedo: query.history.canRedo()
+    const { canUndo, actions, query } = useEditor((state, query) => ({
+        canUndo: query.history.canUndo()
     }))
-
-    const { actions, query } = useEditor()
 
     const [open, setOpen] = useState(false)
 
@@ -44,13 +41,13 @@ export const ToolbarClear = () => {
                 title='Clear all'
             >
                 <span
-                    style={{cursor: (canUndo || canRedo) ? 'pointer' : 'not-allowed'}}   
+                    style={{cursor: canUndo ? 'pointer' : 'not-allowed'}}   
                 >
                     <IconButton
                         onClick={() => {
                             setOpen(true)
                         }}
-                        disabled={!(canUndo || canRedo)}
+                        disabled={!canUndo}
                     >
                         <HighlightOffIcon
                             sx={{color: 'grey'}}

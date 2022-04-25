@@ -1,5 +1,5 @@
 import { useNode } from '@craftjs/core'
-import { Grid, Slider, RadioGroup, Button } from '@mui/material'
+import { Grid, Slider, RadioGroup, Button, Alert, AlertTitle } from '@mui/material'
 
 import { EditTextInput } from './EditTextInput'
 
@@ -86,7 +86,29 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                             {props.children}
                         </Button>
                     </>
-                ) : null
+                ) : type === 'sliderInput' ? (
+                    <EditTextInput
+                        {...props}
+                        type={type}
+                        value={value}
+                        onChange={(value) => {
+                            setProp((props) => {
+                                if (Array.isArray(propValue)) {
+                                    props[propKey][index] = onChange ? onChange(value) : value;
+                                } else {
+                                    if(isNaN(parseInt(value))){
+                                        alert('You should only write numbers, duh!')
+                                    }
+                                    else if(value <= 300 && value >= 20){
+                                        props[propKey] = value;
+                                    } else {
+                                        alert('The slider can be no longer than 300px, and no shorter than 20px.')    
+                                    }
+                                }
+                            }, 500);
+                        }}
+                    />
+                ): null
                 }
             </div>
         </Grid>
