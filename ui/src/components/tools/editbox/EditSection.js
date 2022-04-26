@@ -44,7 +44,13 @@ export const EditSection = ({ title, props, summary, children }) => {
                                 )}
                             </h5>
                         </Grid>
-                    ) : null}
+                    ) :
+                        <Grid item xs={8}>
+                            <h5 style={{ color: 'grey', textAlign: 'right' }}>
+                                {summary}
+                            </h5>
+                        </Grid>
+                    }
                 </Grid>
             </AccordionSummary>
             <AccordionDetails >

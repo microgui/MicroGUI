@@ -1,23 +1,19 @@
 import ContentEditable from 'react-contenteditable';
 import { useNode, useEditor } from '@craftjs/core';
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 
 import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { TextfieldSettings } from './TextfieldSettings';
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
 /**
  * Creates a textfield that can be edited.
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, width, height, ...props }) => {
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
+    text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -37,17 +33,16 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={(e) => handleStart(e, actions)}
-            onStop={(e) => handleStop(e, actions)}
+            onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
+            bounds='parent'
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
-                style={{
-                    position: 'absolute',
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -59,7 +54,9 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                             innerRef={connect}
                             html={text}
                             disabled={!enabled}
-                            onChange={(e) => { actions.setProp((prop) => (prop.text = e.target.value), 500) }}
+                            onChange={(e) => {
+                                actions.setProp((prop) => (prop.text = e.target.value), 500)
+                            }}
                             tagName='h2'
                             id='editableText'
                             style={{

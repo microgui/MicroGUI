@@ -1,12 +1,34 @@
+import React, { useState } from 'react'
+import { useNode } from '@craftjs/core'
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
 import { FormControlLabel, Radio, Typography } from "@mui/material"
-import React from 'react'
 import { capitalize } from '../Utilities'
 
 export const SliderSettings = () => {
+    const [copied, setCopied] = useState(false)
+
+    const { id } = useNode()
+
+    const copyId = () => {
+        setCopied(true)
+        navigator.clipboard.writeText(id)
+    }
+
     return (
         <React.Fragment>
+            <EditSection
+                title='Id'
+                summary={id}
+            >
+                <EditItem
+                    type='button'
+                    onClick={copyId}
+                    disabled={copied}
+                >
+                    {copied ? 'Copied' : 'Copy'}
+                </EditItem>
+            </EditSection>
             <EditSection
                 title='Size'
                 props={['size']}
@@ -29,7 +51,11 @@ export const SliderSettings = () => {
                     return width
                 }}
             >
-                <EditItem propKey='width' type='text' />
+                <EditItem 
+                    propKey='width' 
+                    type='sliderInput' 
+                    error={true}
+                />
             </EditSection>
             <EditSection
                 title='Color'
@@ -59,6 +85,15 @@ export const SliderSettings = () => {
                     propKey='color'
                     type='color'
                 />
+            </EditSection>
+            <EditSection
+                title='Connected'
+                props={['connectedNode']}
+                summary={({ connectedNode }) => {
+                    return connectedNode
+                }}
+            >
+                <EditItem propKey='connectedNode' type='text' full={true} />
             </EditSection>
         </React.Fragment>
     )

@@ -1,25 +1,20 @@
 import { Switch as MaterialSwitch } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { useNode, useEditor } from '@craftjs/core'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
 import { SwitchSettings } from './SwitchSettings'
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
 /**
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
-export const Switch = ({ height, width, size, color, pageX, pageY,
+export const Switch = ({ size, color, pageX, pageY,
     defaultChecked, ...props }) => {
-
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -39,17 +34,16 @@ export const Switch = ({ height, width, size, color, pageX, pageY,
     return (
         <Draggable
             disabled={!enabled}
-            onStart={(e) => handleStart(e, actions)}
-            onStop={(e) => handleStop(e, actions)}
+            onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
+            bounds='parent'
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
-                style={{
-                    position: "absolute",
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -83,7 +77,7 @@ export const Switch = ({ height, width, size, color, pageX, pageY,
 Switch.craft = {
     displayName: 'Switch',
     props: {
-        size: 'small',                                
+        size: 'small',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },
     related: {

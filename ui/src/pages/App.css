@@ -4,125 +4,122 @@
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 header {
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #E3E6E9;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #E3E6E9;
 }
 
 footer {
-  height: 10vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid #E3E6E9;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #E3E6E9;
 }
 
 .logoTest {
-  height: 48px;
-  width: 48px;
-  border-radius: 10px;
+    height: 48px;
+    width: 48px;
+    border-radius: 10px;
 }
 
 .topText {
-  padding-left: 10px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  font-style: normal;
+    padding-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: normal;
 }
 
 .row {
-  height: 80vh;
-  background-color: #F2F2F2;
+    height: 80vh;
+    background-color: #F2F2F2;
 }
 
 .left {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding-left: 10px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 10px;
 }
 
 .middle {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
 .right {
-  width: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 30px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 30px;
 }
 
 #canvasElement {
-  position: relative;
-  background-image: radial-gradient(#e2e2e2 20%, #fff 20%);
-  background-position: 0 0;
-  background-size: 10px 10px;
+    position: relative;
 }
 
 .toolbar {
-  margin: 10px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  width: 350px;
-  height: 50px;
-  border: 1px solid #E3E6E9;
-  border-radius: 8px;
+    margin: 10px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border: 1px solid #E3E6E9;
+    border-radius: 8px;
 }
 
 .toolbox {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  background-color: white;
-  width: 100px;
-  height: 500px;
-  border: 1px solid #E3E6E9;
-  border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: white;
+    width: 100px;
+    height: 500px;
+    border: 1px solid #E3E6E9;
+    border-radius: 8px;
 }
 
 .editbox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  background-color: white;
-  width: 250px;
-  height: 500px;
-  border: 1px solid #E3E6E9;
-  border-radius: 8px;
-  overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: white;
+    width: 250px;
+    height: 500px;
+    border: 1px solid #E3E6E9;
+    border-radius: 8px;
+    overflow-y: scroll;
 }
 
 .editHeader {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #E3E6E9;
-  padding-bottom: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #E3E6E9;
+    padding-bottom: 5px;
 }
 
 h4, h5 {
-  font-weight: normal;
+    font-weight: normal;
 }

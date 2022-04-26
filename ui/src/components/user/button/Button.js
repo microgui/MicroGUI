@@ -1,21 +1,16 @@
 import { Button as MaterialButton } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import { useNode, useEditor } from '@craftjs/core'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings'
 
-import { handleStart, handleStop, getBounds } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
-export const Button = ({ custom, onClick, size, variant, background, color, 
-    text, pageX, pageY, width, height, ...props }) => {
-
-    const [coordinates] = useState({
-        x: pageX,
-        y: pageY
-    })
+export const Button = ({ custom, onClick, size, variant, background, color,
+    text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -32,20 +27,21 @@ export const Button = ({ custom, onClick, size, variant, background, color,
 
     const nodeRef = useRef()
 
+    //console.log(pageX, pageY)
+
     return (
         <Draggable
             disabled={!enabled}
-            onStart={(e) => handleStart(e, actions)}
-            onStop={(e) => handleStop(e, actions)}
+            onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
-            bounds={getBounds(height, width)}
+            bounds='parent'
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
-                style={{
-                    position: "absolute",
-                    top: coordinates.y,
-                    left: coordinates.x
-                }}
+                style={{ position: 'absolute' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -58,8 +54,8 @@ export const Button = ({ custom, onClick, size, variant, background, color,
                         variant={variant}
                         onClick={onClick}
                         sx={{
-                            backgroundColor: 
-                                variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent', 
+                            backgroundColor:
+                                variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent',
                             color: `rgba(${Object.values(color)})`,
                             borderColor:
                                 variant === 'outlined' ? `rgba(${Object.values(background)})` : 'transparent',

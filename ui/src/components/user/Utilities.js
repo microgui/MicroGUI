@@ -2,17 +2,9 @@ export function capitalize(str) {
     return str[0].toUpperCase() + str.substr(1, str.length);
 }
 
-export function handleStart(e, actions) {
-    const rect = e.target.getBoundingClientRect()
-    actions.setProp((props) => {
-        props.width = rect.width
-        props.height = rect.height
-    })
-}
-
-export function handleStop(e, actions) {
+export function handleStop(actions, node) {
     const canvas = document.getElementById('canvasElement').getBoundingClientRect();
-    const rect = e.target.getBoundingClientRect();
+    const rect = node.current.getBoundingClientRect()
     const relativePos = {}
     relativePos.left = rect.left - canvas.left
     relativePos.top = rect.top - canvas.top
@@ -22,22 +14,22 @@ export function handleStop(e, actions) {
     })
 }
 
-export function getBounds(height, width) {
-    const getRect = () => {
-        const element = document.getElementById("canvasElement")
-        if (!element) {
-            return {
-                bottom: 0,
-                height: 0,
-                left: 0,
-                right: 0,
-                top: 0,
-                width: 0,
-            }
-        }
-        const rect = element.getBoundingClientRect()
-        return rect
+export function getX(pageX, node) {
+    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
+    if (pageX < 0) return 0
+    if (node.current) {
+        const element = node.current.getBoundingClientRect()
+        if (pageX + element.width > canvas.width) return canvas.width - element.width
     }
+    return pageX
+}
 
-    return { left: 0, top: 0, bottom: getRect().height - height, right: getRect().width - width }
+export function getY(pageY, node) {
+    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
+    if (pageY < 0) return 0
+    if (node.current) {
+        const element = node.current.getBoundingClientRect()
+        if (pageY + element.height > canvas.height) return canvas.height - element.height
+    }
+    return pageY
 }
