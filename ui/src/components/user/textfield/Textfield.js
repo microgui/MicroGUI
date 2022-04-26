@@ -1,19 +1,19 @@
 import ContentEditable from 'react-contenteditable';
 import { useNode, useEditor } from '@craftjs/core';
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 import Draggable from 'react-draggable';
 import { Tooltip } from '../../tools/Tooltip'
 import { TextfieldSettings } from './TextfieldSettings';
 
-import { handleStop } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
 /**
  * Creates a textfield that can be edited.
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, propId, ...props }) => {
+    text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -28,12 +28,6 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
         name: node.data.custom.displayName || node.data.displayName,
     }))
 
-    useEffect(() => {
-        actions.setProp((props) => {
-            props.propId = id
-        })
-    }, [actions, id])
-
     const nodeRef = useRef()
 
     return (
@@ -42,7 +36,10 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
-            position={{ x: pageX, y: pageY }}
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
                 style={{ position: 'absolute' }}

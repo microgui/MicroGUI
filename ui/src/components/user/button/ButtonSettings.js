@@ -1,12 +1,34 @@
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
 import { FormControlLabel, Radio, Typography } from "@mui/material"
-import React from 'react'
+import React, { useState } from 'react'
+import { useNode } from '@craftjs/core'
 import { capitalize } from '../Utilities'
 
 export const ButtonSettings = () => {
+    const [copied, setCopied] = useState(false)
+
+    const { id } = useNode()
+
+    const copyId = () => {
+        setCopied(true)
+        navigator.clipboard.writeText(id)
+    }
+    
     return (
         <React.Fragment>
+            <EditSection
+                title='Id'
+                summary={id}
+            >
+                <EditItem
+                    type='button'
+                    onClick={copyId}
+                    disabled={copied}
+                >
+                    {copied ? 'Copied' : 'Copy'}
+                </EditItem>
+            </EditSection>
             <EditSection
                 title='Text'
                 props={['text']}

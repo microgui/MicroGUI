@@ -7,7 +7,7 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { SwitchSettings } from './SwitchSettings'
 
-import { handleStop } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
 /**
  * Creates a switch object that can be toggled.
@@ -37,7 +37,10 @@ export const Switch = ({ size, color, pageX, pageY,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
-            position={{ x: pageX, y: pageY }}
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
                 style={{ position: 'absolute' }}

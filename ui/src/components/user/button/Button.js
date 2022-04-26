@@ -7,7 +7,7 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings'
 
-import { handleStop } from '../Utilities'
+import { handleStop, getX, getY } from '../Utilities'
 
 export const Button = ({ custom, onClick, size, variant, background, color,
     text, pageX, pageY, ...props }) => {
@@ -25,9 +25,9 @@ export const Button = ({ custom, onClick, size, variant, background, color,
         name: node.data.custom.displayName || node.data.displayName,
     }))
 
-    console.log(pageX, pageY)
-
     const nodeRef = useRef()
+
+    //console.log(pageX, pageY)
 
     return (
         <Draggable
@@ -35,7 +35,10 @@ export const Button = ({ custom, onClick, size, variant, background, color,
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
-            position={{ x: pageX, y: pageY }}
+            position={{
+                x: getX(pageX, nodeRef),
+                y: getY(pageY, nodeRef)
+            }}
         >
             <div
                 style={{ position: 'absolute' }}

@@ -1,5 +1,5 @@
 import { useNode } from '@craftjs/core'
-import { Grid, Slider, RadioGroup, Button, Alert, AlertTitle } from '@mui/material'
+import { Grid, Slider, RadioGroup, Button } from '@mui/material'
 
 import { EditTextInput } from './EditTextInput'
 

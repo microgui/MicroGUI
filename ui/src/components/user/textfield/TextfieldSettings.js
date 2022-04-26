@@ -23,10 +23,7 @@ export const TextfieldSettings = () => {
         <React.Fragment>
             <EditSection
                 title='Id'
-                props={['propId']}
-                summary={({ propId }) => {
-                    return propId
-                }}
+                summary={id}
             >
                 <EditItem
                     type='button'

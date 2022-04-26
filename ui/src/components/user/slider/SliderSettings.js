@@ -7,9 +7,6 @@ import { capitalize } from '../Utilities'
 
 export const SliderSettings = () => {
     const [copied, setCopied] = useState(false)
-    const [value, setValue] = useState(0)
-    const min = 10
-    const max = 200
 
     const { id } = useNode()
 
@@ -22,10 +19,7 @@ export const SliderSettings = () => {
         <React.Fragment>
             <EditSection
                 title='Id'
-                props={['propId']}
-                summary={({ propId }) => {
-                    return propId
-                }}
+                summary={id}
             >
                 <EditItem
                     type='button'

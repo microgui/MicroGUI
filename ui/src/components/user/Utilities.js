@@ -13,3 +13,23 @@ export function handleStop(actions, node) {
         props.pageY = relativePos.top;
     })
 }
+
+export function getX(pageX, node) {
+    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
+    if (pageX < 0) return 0
+    if (node.current) {
+        const element = node.current.getBoundingClientRect()
+        if (pageX + element.width > canvas.width) return canvas.width - element.width
+    }
+    return pageX
+}
+
+export function getY(pageY, node) {
+    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
+    if (pageY < 0) return 0
+    if (node.current) {
+        const element = node.current.getBoundingClientRect()
+        if (pageY + element.height > canvas.height) return canvas.height - element.height
+    }
+    return pageY
+}
