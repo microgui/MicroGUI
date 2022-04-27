@@ -1,5 +1,4 @@
 import { Checkbox as MaterialCheckbox } from '@mui/material'
-import { alpha } from '@mui/material/styles'
 import Draggable from 'react-draggable'
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'

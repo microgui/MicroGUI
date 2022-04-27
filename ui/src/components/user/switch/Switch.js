@@ -1,5 +1,4 @@
 import { Switch as MaterialSwitch } from '@mui/material'
-import { alpha } from '@mui/material/styles'
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
 import Draggable from 'react-draggable'

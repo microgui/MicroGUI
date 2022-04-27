@@ -1,10 +1,14 @@
 import { useNode } from '@craftjs/core'
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
-import React from 'react'
+import React, { useState } from 'react'
+import { Tooltip } from '@mui/material'
+import ClearIcon from '@mui/icons-material/Clear';
 
 export const CanvasAreaSettings = () => {
     const { actions } = useNode()
+
+    const [isImage, setIsImage] = useState(false)
 
     const loadFile = (file) => {
         var reader = new FileReader()
@@ -74,11 +78,41 @@ export const CanvasAreaSettings = () => {
                     )
                 }}
             >
-                < input
-                    type='file'
-                    onChange={(e) => loadFile(e.target.files[0])}
-                    className='custom-file-input'
-                />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '100%'
+                    }}
+                >
+                    < input
+                        type='file'
+                        onChange={(e) => {
+                            loadFile(e.target.files[0])
+                            setIsImage(true)
+                        }}
+                        id='custom-file-input'
+                    />
+                    { isImage ?
+                        <Tooltip
+                            title='Remove image'
+                        >
+                            <ClearIcon
+                                sx={{ marginTop: '20px' }}
+                                onClick={() => {
+                                    document.getElementById('custom-file-input').value = null
+                                    actions.setProp((props) => {
+                                        props.image = null
+                                    })
+                                    setIsImage(false)
+                                }}
+                            />
+                        </Tooltip> 
+                        : null
+                    }
+                </div>
             </EditSection>
         </React.Fragment>
     )

@@ -124,12 +124,12 @@ h4, h5 {
     font-weight: normal;
 }
 
-.custom-file-input {
+#custom-file-input {
     padding-top: 20px;
     padding-left: 10px;
 }
 
-.custom-file-input::-webkit-file-upload-button {
+#custom-file-input::-webkit-file-upload-button {
     border-radius: 5px;
     border: 1px solid rgba(80, 80, 80, 0.5);
     height: 25px;

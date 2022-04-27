@@ -30,6 +30,7 @@ export const ToolbarClear = () => {
             } else {
                 actions.setProp(key, (props) => {
                     props.background = null
+                    props.image = null
                 })
             }
         }
