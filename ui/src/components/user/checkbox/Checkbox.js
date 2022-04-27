@@ -1,19 +1,14 @@
-import { Switch as MaterialSwitch } from '@mui/material'
+import { Checkbox as MaterialCheckbox } from '@mui/material'
 import { alpha } from '@mui/material/styles'
+import Draggable from 'react-draggable'
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
-import Draggable from 'react-draggable'
 
 import { Tooltip } from '../../tools/Tooltip'
-import { SwitchSettings } from './SwitchSettings'
-
 import { handleStop, getX, getY } from '../Utilities'
+import { CheckboxSettings } from './CheckboxSettings'
 
-/**
- * Creates a switch object that can be toggled.
- * @returns The 'switch' object.
- */
-export const Switch = ({ size, color, pageX, pageY,
+export const Checkbox = ({ size, color, pageX, pageY,
     defaultChecked, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -51,17 +46,16 @@ export const Switch = ({ size, color, pageX, pageY,
                     id={id}
                 >
                     <div>
-                        <MaterialSwitch
+                        <MaterialCheckbox
                             ref={connect}
                             size={size}
                             disableRipple={true}
                             sx={{
-                                '& .MuiSwitch-switchBase.Mui-checked': {
-                                    color: `rgba(${Object.values(color)})`
+                                color: `rgba(${Object.values(color)})`,
+                                "& .MuiSvgIcon-root": {
+                                    fill: `rgba(${Object.values(color)})`
                                 },
-                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                    backgroundColor: `rgba(${Object.values(color)})`
-                                }
+                                padding: 0
                             }}
                             {...props}
                         />
@@ -72,13 +66,13 @@ export const Switch = ({ size, color, pageX, pageY,
     )
 }
 
-Switch.craft = {
-    displayName: 'Switch',
+Checkbox.craft = {
+    displayName: 'Checkbox',
     props: {
         size: 'small',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },
     related: {
-        toolbar: SwitchSettings
+        toolbar: CheckboxSettings
     }
 }

@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd'
 
 import { CanvasAreaSettings } from './CanvasAreaSettings'
 
-export const CanvasArea = ({ background, width, height, children }) => {
+export const CanvasArea = ({ background, image, width, height, children }) => {
 
     const [, dropTarget] = useDrop({
         accept: "component",
@@ -31,9 +31,8 @@ export const CanvasArea = ({ background, width, height, children }) => {
                     width: parseInt(width),
                     height: parseInt(height),
                     backgroundColor: background ? `rgba(${Object.values(background)})` : null,
-                    backgroundImage: background ? null : 'radial-gradient(#e2e2e2 20%, #fff 20%)',
-                    backgroundPosition: background ? null : '0 0',
-                    backgroundSize: background ? null : '10px 10px',
+                    backgroundImage: image ? `url(${image})` : (background ? null : 'radial-gradient(#e2e2e2 20%, #fff 20%)'),
+                    backgroundSize: image ? `${width}px ${height}px` : (background ? null: '10px 10px')
                 }}
             >
                 {children}

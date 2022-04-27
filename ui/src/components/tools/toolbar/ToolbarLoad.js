@@ -31,6 +31,7 @@ export const ToolbarLoad = () => {
         reader.readAsText(file, 'UTF-8')
         handleClose()
     }
+    
     const loadText = (text) => {
         actions.deserialize(text)
         handleClose()

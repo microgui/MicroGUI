@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
 import { capitalize } from '../Utilities'
 
-export const SwitchSettings = () => {
+export const CheckboxSettings = () => {
     const [copied, setCopied] = useState(false)
 
     const { id } = useNode()
@@ -54,6 +54,10 @@ export const SwitchSettings = () => {
                                 style={{
                                     background:
                                         color && `rgba(${Object.values(color)})`,
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    textAlign: 'center',
+                                    alignItems: 'center',
                                     borderRadius: '50%',
                                     height: '20px',
                                     width: '20px'

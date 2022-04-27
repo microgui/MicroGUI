@@ -6,11 +6,13 @@ import { Button } from '../user/button/Button'
 import { Slider } from '../user/slider/Slider'
 import { Switch } from '../user/switch/Switch'
 import { Textfield } from '../user/textfield/Textfield'
+import { Checkbox } from '../user/checkbox/Checkbox'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
 import Crop75Icon from '@mui/icons-material/Crop75'
 import TuneIcon from '@mui/icons-material/Tune'
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import { useDrag } from 'react-dnd'
 
@@ -26,21 +28,24 @@ export const Toolbox = () => {
         Button,
         Switch,
         Slider,
-        Textfield
+        Textfield,
+        Checkbox
     ]
 
     const count = {
         Button: 1,
         Switch: 1,
         Slider: 1,
-        Textfield: 1
+        Textfield: 1,
+        Checkbox: 1
     }
 
     const icons = {
         Button: <Crop75Icon />,
         Switch: <ToggleOnIcon />,
         Slider: <TuneIcon />,
-        Textfield: <TextFieldsIcon />
+        Textfield: <TextFieldsIcon />,
+        Checkbox: <CheckBoxIcon />   
     }
 
     const itemList = []
