@@ -13,7 +13,7 @@ import { Switch } from '../components/user/switch/Switch'
 import { Textfield } from '../components/user/textfield/Textfield'
 import { Editbox } from '../components/tools/editbox/Editbox'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
-import { Checkbox } from '../components/user/checkbox/Checkbox';
+import { Checkbox } from '../components/user/checkbox/Checkbox'
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 

@@ -54,16 +54,14 @@ export const Switch = ({ size, color, pageX, pageY,
                         <MaterialSwitch
                             ref={connect}
                             size={size}
+                            disableRipple={true}
                             sx={{
                                 '& .MuiSwitch-switchBase.Mui-checked': {
-                                    color: `rgba(${Object.values(color)})`,
-                                    '&:hover': {
-                                        backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15),
-                                    },
+                                    color: `rgba(${Object.values(color)})`
                                 },
                                 '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-                                    backgroundColor: `rgba(${Object.values(color)})`,
-                                },
+                                    backgroundColor: `rgba(${Object.values(color)})`
+                                }
                             }}
                             {...props}
                         />

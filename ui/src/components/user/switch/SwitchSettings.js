@@ -54,10 +54,6 @@ export const SwitchSettings = () => {
                                 style={{
                                     background:
                                         color && `rgba(${Object.values(color)})`,
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
-                                    textAlign: 'center',
-                                    alignItems: 'center',
                                     borderRadius: '50%',
                                     height: '20px',
                                     width: '20px'

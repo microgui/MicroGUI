@@ -49,21 +49,14 @@ export const Checkbox = ({ size, color, pageX, pageY,
                         <MaterialCheckbox
                             ref={connect}
                             size={size}
-                            // sx from hell...
+                            disableRipple={true}
                             sx={{
                                 color: `rgba(${Object.values(color)})`,
-                                "&:hover": {
-                                    backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15)
-                                  },
                                 "& .MuiSvgIcon-root": {
-                                    fill: `rgba(${Object.values(color)})`,
-                                    "&:hover": {
-                                      backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15)
-                                    },
-                                '& .MuiCheckbox-indeterminate':   {
-                                    backgroundColor: alpha(`rgba(${Object.values(color)})`, 0.15)    
+                                    fill: `rgba(${Object.values(color)})`
                                 },
-                            }}}
+                                padding: 0
+                            }}
                             {...props}
                         />
                     </div>
@@ -72,7 +65,6 @@ export const Checkbox = ({ size, color, pageX, pageY,
         </Draggable>
     )
 }
-
 
 Checkbox.craft = {
     displayName: 'Checkbox',

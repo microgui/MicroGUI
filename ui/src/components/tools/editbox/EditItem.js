@@ -17,7 +17,7 @@ export const EditItem = ({ full = false, propKey, type, onChange,
 
     return (
         <Grid item xs={full ? 12 : 6}>
-            <div>
+            <div style={{ paddingTop: '10px' }}>
                 {['text', 'color', 'bg', 'number'].includes(type) ? (
                     <EditTextInput
                         {...props}
@@ -73,7 +73,7 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                         </RadioGroup>
                     </>
                 ) : type === 'button' ? (
-                    <>
+                    <div style={{marginLeft: '-40px'}}>
                         {props.label ? (
                             <h4>{props.label}</h4>
                         ) : null}
@@ -85,7 +85,7 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                         >
                             {props.children}
                         </Button>
-                    </>
+                    </div>
                 ) : type === 'sliderInput' ? (
                     <EditTextInput
                         {...props}
@@ -96,19 +96,19 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                                 if (Array.isArray(propValue)) {
                                     props[propKey][index] = onChange ? onChange(value) : value;
                                 } else {
-                                    if(isNaN(parseInt(value))){
+                                    if (isNaN(parseInt(value))) {
                                         alert('You should only write numbers, duh!')
                                     }
-                                    else if(value <= 300 && value >= 20){
+                                    else if (value <= 300 && value >= 20) {
                                         props[propKey] = value;
                                     } else {
-                                        alert('The slider can be no longer than 300px, and no shorter than 20px.')    
+                                        alert('The slider can be no longer than 300px, and no shorter than 20px.')
                                     }
                                 }
                             }, 500);
                         }}
                     />
-                ): null
+                ) : null
                 }
             </div>
         </Grid>

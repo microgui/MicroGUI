@@ -51,7 +51,7 @@ export const Slider = ({ size, width, color, pageX, pageY,
             }}
         >
             <div
-                style={{ position: 'absolute' }}
+                style={{ position: 'absolute', paddingLeft: '10px', paddingRight: '10px' }}
                 ref={nodeRef}
             >
                 <Tooltip
@@ -61,9 +61,19 @@ export const Slider = ({ size, width, color, pageX, pageY,
                     <MaterialSlider
                         ref={connect}
                         size={size}
+                        
                         sx={{
                             color: `rgba(${Object.values(color)})`,
-                            width: `${width}px`
+                            width: `${width}px`,
+                            "& .MuiSlider-thumb.Mui-focusVisible" : {
+                                boxShadow: 'none'
+                            },
+                            "& .MuiSlider-thumb:hover" : {
+                                boxShadow: 'none'
+                            },
+                            "& .MuiSlider-thumb.Mui-active" : {
+                                boxShadow: 'none'
+                            }
                         }}
                         defaultValue={defaultValue}
                         onChange={(e, val) => {
