@@ -13,6 +13,7 @@ import { Switch } from '../components/user/switch/Switch'
 import { Textfield } from '../components/user/textfield/Textfield'
 import { Editbox } from '../components/tools/editbox/Editbox'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
+import { Checkbox } from '../components/user/checkbox/Checkbox';
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 
@@ -40,7 +41,8 @@ export default function Home() {
 					Button,
 					Slider,
 					Switch,
-					Textfield
+					Textfield,
+					Checkbox
 				}}
 				indicator={false}
 			>
@@ -69,7 +71,7 @@ export default function Home() {
 			<footer className='footer'>
 				<p>© MicroGUI 2022 |&nbsp;</p>
 				<a
-					href='https://github.com/CarlClasson/MicroGUI'
+					href='https://github.com/microgui/MicroGUI'
 					target='_blank'
 					rel='noreferrer'
 					style={{ 

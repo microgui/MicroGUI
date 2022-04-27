@@ -3,6 +3,7 @@ import { Box } from '@mui/material'
 import { useDrop } from 'react-dnd'
 
 import { CanvasAreaSettings } from './CanvasAreaSettings'
+import image from '../../../jarjar.png'
 
 export const CanvasArea = ({ background, width, height, children }) => {
 
@@ -32,6 +33,7 @@ export const CanvasArea = ({ background, width, height, children }) => {
                     height: parseInt(height),
                     backgroundColor: background ? `rgba(${Object.values(background)})` : null,
                     backgroundImage: background ? null : 'radial-gradient(#e2e2e2 20%, #fff 20%)',
+                    //backgroundImage: "url(" + image + ")",
                     backgroundPosition: background ? null : '0 0',
                     backgroundSize: background ? null : '10px 10px',
                 }}
