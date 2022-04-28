@@ -10,6 +10,8 @@ export const SliderSettings = () => {
 
     const { id } = useNode()
 
+    const [connected, setConnected] = useState(false)
+
     const copyId = () => {
         setCopied(true)
         navigator.clipboard.writeText(id)
@@ -83,13 +85,15 @@ export const SliderSettings = () => {
                 />
             </EditSection>
             <EditSection
-                title='Connected'
+                title={connected ? 'Connected' : 'Connect'}
                 props={['connectedNode']}
                 summary={({ connectedNode }) => {
+                    if (connectedNode) setConnected(true) 
+                    else setConnected(false)
                     return connectedNode
                 }}
             >
-                <EditItem propKey='connectedNode' type='text' full={true} />
+                <EditItem propKey='connectedNode' type='text' full={true} label='Id' />
             </EditSection>
         </React.Fragment>
     )

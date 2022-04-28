@@ -37,6 +37,9 @@ export const Slider = ({ size, width, color, pageX, pageY,
         editorActions.setProp(connectedNode, (props) => {
             props.text = value
         })
+        actions.setProp((props) => {
+            props.valueLabelDisplay = 'off'
+        }) 
     }
 
     return (
@@ -76,8 +79,8 @@ export const Slider = ({ size, width, color, pageX, pageY,
                             }
                         }}
                         defaultValue={defaultValue}
-                        onChange={(e, val) => {
-                            updateText(val.toString())
+                        onChange={(_, val) => {
+                            if(connectedNode) updateText(val.toString())
                         }}
                         aria-label={aria_label}
                         valueLabelDisplay={valueLabelDisplay}

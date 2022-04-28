@@ -27,8 +27,6 @@ export const Button = ({ custom, onClick, size, variant, background, color,
 
     const nodeRef = useRef()
 
-    //console.log(pageX, pageY)
-
     return (
         <Draggable
             disabled={!enabled}

@@ -3,8 +3,7 @@ import { Grid, Slider, RadioGroup, Button } from '@mui/material'
 
 import { EditTextInput } from './EditTextInput'
 
-export const EditItem = ({ full = false, propKey, type, onChange,
-    index, ...props }) => {
+export const EditItem = ({ full = false, propKey, type, ...props }) => {
 
     const {
         actions: { setProp },
@@ -13,8 +12,6 @@ export const EditItem = ({ full = false, propKey, type, onChange,
         propValue: node.data.props[propKey],
     }))
 
-    const value = Array.isArray(propValue) ? propValue[index] : propValue
-
     return (
         <Grid item xs={full ? 12 : 6}>
             <div style={{ paddingTop: '10px' }}>
@@ -22,15 +19,11 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                     <EditTextInput
                         {...props}
                         type={type}
-                        value={value}
+                        value={propValue}
                         onChange={(value) => {
                             setProp((props) => {
-                                if (Array.isArray(propValue)) {
-                                    props[propKey][index] = onChange ? onChange(value) : value;
-                                } else {
-                                    props[propKey] = onChange ? onChange(value) : value;
-                                }
-                            }, 500);
+                                props[propKey] = value;
+                            }, 500)
                         }}
                     />
                 ) : type === 'slider' ? (
@@ -39,20 +32,12 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                             <h4>{props.label}</h4>
                         ) : null}
                         <Slider
-                            value={parseInt(value) || 0}
-                            onChange={
-                                ((_, value) => {
-                                    setProp((props) => {
-                                        if (Array.isArray(propValue)) {
-                                            props[propKey][index] = onChange
-                                                ? onChange(value)
-                                                : value;
-                                        } else {
-                                            props[propKey] = onChange ? onChange(value) : value;
-                                        }
-                                    }, 1000);
-                                })
-                            }
+                            value={parseInt(propValue) || 0}
+                            onChange={((_, value) => {
+                                setProp((props) => {
+                                    props[propKey] = value
+                                }, 1000)
+                            })}
                         />
                     </>
                 ) : type === 'radio' ? (
@@ -61,19 +46,18 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                             <h4>{props.label}</h4>
                         ) : null}
                         <RadioGroup
-                            value={value || 0}
-                            onChange={(e) => {
-                                const value = e.target.value;
+                            value={propValue || 0}
+                            onChange={(_, value) => {
                                 setProp((props) => {
-                                    props[propKey] = onChange ? onChange(value) : value;
-                                });
+                                    props[propKey] = value
+                                })
                             }}
                         >
                             {props.children}
                         </RadioGroup>
                     </>
                 ) : type === 'button' ? (
-                    <div style={{marginLeft: '-40px'}}>
+                    <div style={{ marginLeft: '-40px' }}>
                         {props.label ? (
                             <h4>{props.label}</h4>
                         ) : null}
@@ -90,22 +74,18 @@ export const EditItem = ({ full = false, propKey, type, onChange,
                     <EditTextInput
                         {...props}
                         type={type}
-                        value={value}
+                        value={propValue}
                         onChange={(value) => {
                             setProp((props) => {
-                                if (Array.isArray(propValue)) {
-                                    props[propKey][index] = onChange ? onChange(value) : value;
-                                } else {
-                                    if (isNaN(parseInt(value))) {
-                                        alert('You should only write numbers, duh!')
-                                    }
-                                    else if (value <= 300 && value >= 20) {
-                                        props[propKey] = value;
-                                    } else {
-                                        alert('The slider can be no longer than 300px, and no shorter than 20px.')
-                                    }
+                                if (isNaN(parseInt(value))) {
+                                    alert('You should only write numbers, duh!')
                                 }
-                            }, 500);
+                                else if (value <= 300 && value >= 20) {
+                                    props[propKey] = value
+                                } else {
+                                    alert('The slider can be no longer than 300px, and no shorter than 20px.')
+                                }
+                            }, 500)
                         }}
                     />
                 ) : null

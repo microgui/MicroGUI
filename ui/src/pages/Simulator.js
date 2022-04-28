@@ -1,6 +1,6 @@
 import './Simulator.css'
 
-import { Editor, Frame } from '@craftjs/core'
+import { Editor as CraftEditor, Frame } from '@craftjs/core'
 
 import { Button } from '../components/user/button/Button'
 import { Slider } from '../components/user/slider/Slider'
@@ -17,7 +17,7 @@ export default function Simulator() {
         <div className='simulatorDiv' >
             <h1 className='blinkingText'>Simulator mode</h1>
             <div className='simulatorBorder' >
-                <Editor
+                <CraftEditor
                     enabled={false}
                     resolver={{
                         CanvasArea,
@@ -30,7 +30,7 @@ export default function Simulator() {
                     indicator={false}
                 >
                     <Frame data={localStorage.getItem('data')} />
-                </Editor>
+                </CraftEditor>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 import './App.css'
 
 import { Stack } from '@mui/material';
-import { Editor, Frame, Element } from '@craftjs/core';
+import { Editor as CraftEditor, Frame, Element } from '@craftjs/core';
 
 import logo from '../logo.png'
 
@@ -21,7 +21,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
  * Core of the web app.
  * @returns The web app.
  */
-export default function Home() {
+export default function Editor() {
 
 	/** Render all components. */
 	return (
@@ -34,7 +34,7 @@ export default function Home() {
 				/>
 				<h1 className='topText'>MicroGUI</h1>
 			</header>
-			<Editor
+			<CraftEditor
 				enabled={true}
 				resolver={{
 					CanvasArea,
@@ -67,7 +67,7 @@ export default function Home() {
 						<Editbox />
 					</div>
 				</Stack >
-			</Editor>
+			</CraftEditor>
 			<footer className='footer'>
 				<p>© MicroGUI 2022 |&nbsp;</p>
 				<a

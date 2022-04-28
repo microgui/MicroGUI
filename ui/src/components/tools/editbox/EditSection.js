@@ -12,7 +12,7 @@ export const EditSection = ({ title, props, summary, children }) => {
         nodeProps: props && props.reduce((res, key) => {
             res[key] = node.data.props[key] || null
             return res
-        }, {}),
+        }, {})
     }))
 
     return (
