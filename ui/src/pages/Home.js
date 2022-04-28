@@ -74,10 +74,10 @@ export default function Home() {
 					href='https://github.com/microgui/MicroGUI'
 					target='_blank'
 					rel='noreferrer'
-					style={{ 
-						color: 'inherit', 
-						display: 'flex', 
-						alignItems: 'center' 
+					style={{
+						color: 'inherit',
+						display: 'flex',
+						alignItems: 'center'
 					}}
 				>
 					GitHub
