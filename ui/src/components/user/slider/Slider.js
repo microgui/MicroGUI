@@ -64,7 +64,6 @@ export const Slider = ({ size, width, color, pageX, pageY,
                     <MaterialSlider
                         ref={connect}
                         size={size}
-                        
                         sx={{
                             color: `rgba(${Object.values(color)})`,
                             width: `${width}px`,

@@ -28,16 +28,6 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
         <MaterialTooltip
             {...props}
             ref={areaRef}
-            PopperProps={{
-                anchorEl: {
-                    getBoundingClientRect: () => {
-                        return new DOMRect(
-                            areaRef.current.getBoundingClientRect().x,
-                            areaRef.current.getBoundingClientRect().y + 10
-                        )
-                    }
-                }
-            }}
             open={(isHovered || isSelected) && enabled}
             title={<>
                 {name}

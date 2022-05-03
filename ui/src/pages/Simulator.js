@@ -8,6 +8,7 @@ import { Switch } from '../components/user/switch/Switch'
 import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
+import { Divider } from '../components/user/divider/Divider'
 
 import React from 'react'
 
@@ -25,7 +26,8 @@ export default function Simulator() {
                         Slider,
                         Switch,
                         Textfield,
-                        Checkbox
+                        Checkbox,
+                        Divider
                     }}
                     indicator={false}
                 >
