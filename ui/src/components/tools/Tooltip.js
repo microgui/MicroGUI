@@ -1,12 +1,25 @@
 import { Tooltip as MaterialTooltip, tooltipClasses } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useEditor } from '@craftjs/core'
+import { useEditor, useNode } from '@craftjs/core'
 import { useRef } from 'react'
 
+/**
+   A tooltip that can be applied to any component created by a user. 
+   The tooltip shows the name of the selected component, aswell as
+   allowing the user to delete it.
+ */
 export const Tooltip = styled(({ className, name, id, ...props }) => {
     const { actions, enabled } = useEditor((state) => ({
         enabled: state.options.enabled
+    }))
+
+    /* checks if the component related to the tooltip 
+       is hovered or selected, this is used when determining
+       whether the tooltip should be shown or not. */
+    const { isHovered, isSelected } = useNode((node) => ({
+        isHovered: node.events.hovered,
+        isSelected: node.events.selected
     }))
 
     const areaRef = useRef(null)
@@ -25,23 +38,19 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
                     }
                 }
             }}
-            disableHoverListener={!enabled}
-            disableTouchListener
-            disableFocusListener
+            open={(isHovered || isSelected) && enabled}
             title={<>
                 {name}
                 <button
-                    className="renderNodeDeleteButtonnnnn"
                     style={{ cursor: 'pointer', background: 'none', border: 'none' }}
                     onMouseDown={(e) => {
-                        e.stopPropagation();
-                        actions.delete(id);
+                        e.stopPropagation()
+                        actions.delete(id)
                     }}
                 >
                     <DeleteIcon 
-                        className="indicatorIconnnnnn"
                         style={{
-                            color: '#ffffff',
+                            color: 'white',
                         }}
                     />
                 </button>
@@ -53,8 +62,8 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
     )
 })(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: '#1F68E6',
-      color: '#ffffff',
+      backgroundColor: 'grey',
+      color: 'white',
       maxWidth: 220,
       width: 90,
       fontSize: theme.typography.pxToRem(12),
@@ -63,4 +72,4 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
       alignItems: 'center',
       justifyContent: 'space-between'
     },
-}));
+}))

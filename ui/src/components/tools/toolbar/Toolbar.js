@@ -19,10 +19,10 @@ import { ToolbarLoad } from './ToolbarLoad'
 /**
  * Creates a toolbar for various tools related to the 
  * canvas, such as redo etc.
- * @returns The 'Toolbar' component
  */
 export const Toolbar = () => {
-    const { canUndo, canRedo } = useEditor((state, query) => ({
+    // check if undo/redo is possible using craft.js functionality.
+    const { canUndo, canRedo } = useEditor((_, query) => ({
         canUndo: query.history.canUndo(),
         canRedo: query.history.canRedo()
     }))
@@ -38,6 +38,7 @@ export const Toolbar = () => {
                         style={{cursor: canUndo ? 'pointer' : 'not-allowed'}}
                     >
                         <IconButton
+                            // The button is disabled if there is nothing to undo 
                             disabled={!canUndo}
                             onClick={() => {
                                 try {
@@ -60,6 +61,7 @@ export const Toolbar = () => {
                         style={{cursor: canRedo ? 'pointer' : 'not-allowed'}}
                     >
                         <IconButton
+                            // The button is disabled if there is nothing to redo 
                             disabled={!canRedo}
                             onClick={() => {
                                 try {
@@ -75,7 +77,10 @@ export const Toolbar = () => {
                         </IconButton>
                     </span>
                 </Tooltip>
+
+                {/* Renders the clear button of the toolbar */}
                 <ToolbarClear />
+
             </Stack>
             <Stack direction='row' spacing={0.7} sx={{ paddingRight: '10px' }}>
                 <Link
@@ -89,6 +94,9 @@ export const Toolbar = () => {
                         variant='contained'
                         color='info'
                         disableElevation
+                        /* When the user clicks the 'simulate' button the state is serialized
+                           using craft.js functionality and the data is saved in the 
+                           browser's local storage. */
                         onClick={() => {
                             localStorage.setItem('data', query.serialize())
                         }}
@@ -97,6 +105,8 @@ export const Toolbar = () => {
                         Simulate
                     </MaterialButton>
                 </Link>
+                
+                {/* Renders the save/load buttons of the toolbar */}
                 <ToolbarSave />
                 <ToolbarLoad />
             </Stack>

@@ -10,7 +10,10 @@ import ReactDOM from 'react-dom'
 
 export default function App() {
     return (
+        // enables react-dnd functionality
         <DndProvider backend={HTML5Backend} >
+            {/* Routes to the different pages of the app,
+                returns an 'error-page' if the wrong path is provided */}
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Editor />} />

@@ -29,6 +29,7 @@ export default function Simulator() {
                     }}
                     indicator={false}
                 >
+                    {/* get the state of the canvas from the browers local storage */}
                     <Frame data={localStorage.getItem('data')} />
                 </CraftEditor>
             </div>

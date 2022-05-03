@@ -16,14 +16,14 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import { useDrag } from 'react-dnd'
 
-/**
- * Creates a toolbox containing all usable objects.
- * @returns The 'Toolbox' component
+/*
+ * Creates a toolbox containing all usable components.
  */
 export const Toolbox = () => {
 
     const { actions, query } = useEditor()
 
+    // list of the components to be available in the toolbox
     const components = [
         Button,
         Switch,
@@ -32,6 +32,7 @@ export const Toolbox = () => {
         Checkbox
     ]
 
+    // a counter for each component, used when assigning them IDs
     const count = {
         Button: 1,
         Switch: 1,
@@ -40,6 +41,7 @@ export const Toolbox = () => {
         Checkbox: 1
     }
 
+    // list of icons for the different components
     const icons = {
         Button: <Crop75Icon />,
         Switch: <ToggleOnIcon />,
@@ -48,21 +50,28 @@ export const Toolbox = () => {
         Checkbox: <CheckBoxIcon />   
     }
 
-    const itemList = []
+    // list where we store each component to be rendered in the toolbox.
+    const componentList = []
 
-    components.forEach((item, index) => {
+    // iterate over each component
+    components.forEach((component, index) => {
+        // create a node for each one
         const CreateNode = () => {
             const [, dragRef] = useDrag(() => ({
                 type: 'component',
                 options: {
                     dropEffect: 'copy'
                 },
-                end(draggedItem, monitor) {
+                end(_, monitor) {
+                    // Get data from the drop-event that occurs when
+                    // a user drops a component on the canvas
                     const dropResult = monitor.getDropResult()
+                    // Creates a node with attributes of a specific component
+                    // this is done to create a node with custom id and coords.
                     const freshNode = {
-                        id: `${item.name}_${count[item.name]}`,
+                        id: `${component.name}_${count[component.name]}`,
                         data: {
-                            type: item,
+                            type: component,
                             props: {
                                 pageX: dropResult.x - 20,
                                 pageY: dropResult.y - 10
@@ -70,21 +79,22 @@ export const Toolbox = () => {
                         }
                     }
                     const node = query.parseFreshNode(freshNode).toNode()
+                    // add the created node to the canvas.
                     actions.add(node, 'ROOT')
-                    count[item.name] += 1
+                    count[component.name] += 1
                 }
                 
             }))
-
-            itemList.push(
+            // add our components to our list
+            componentList.push(
                 <Grid item xs={6} key={index}>
-                    <Tooltip title={item.name}>
+                    <Tooltip title={component.name}>
                         <IconButton
                             style={{ transform: 'translate(0, 0)' }}
                             ref={dragRef}
-                            aria-label={item.name}
+                            aria-label={component.name}
                         >
-                            {icons[item.name]}
+                            {icons[component.name]}
                         </IconButton>
                     </Tooltip>
                 </Grid>
@@ -92,11 +102,11 @@ export const Toolbox = () => {
         }
         CreateNode()
     })
-
+    // return a grid containing all of our components
     return (
         <div className='toolbox'>
             <Grid container spacing={1}>
-                {itemList}
+                {componentList}
             </Grid>
         </div>
     )

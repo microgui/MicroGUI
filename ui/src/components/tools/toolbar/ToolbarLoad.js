@@ -23,6 +23,8 @@ export const ToolbarLoad = () => {
     const [openInner, setOpenInner] = useState(false)
     const [pasteText, setPasteText] = useState('')
 
+    /* Function to load a file using FileReader.
+       deserializing the file using craft.js functionality. */
     const loadFile = (file) => {
         var reader = new FileReader()
         reader.onload = function (e) {
@@ -32,16 +34,20 @@ export const ToolbarLoad = () => {
         handleClose()
     }
     
+    /* This function deserialize the JSON if a user 
+       paste from clipboard */
     const loadText = (text) => {
         actions.deserialize(text)
         handleClose()
     }
 
+    // Function to close all dialogs
     const handleClose = () => {
         setOpenOuter(false)
         setOpenInner(false)
         setPasteText('')
     }
+
     return (
         <>
             <MaterialButton

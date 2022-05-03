@@ -28,15 +28,23 @@ export const ToolbarSave = () => {
     const [formText, setFormText] = useState('')
     const [error, setError] = useState(false)
 
+    /* Function that saves the file representing the 
+       canvas-state to downloads. The file is saved
+       as a JSON file.*/
     const saveFile = (data, name) => {
         if (formText !== '') {
-            const file = new File([JSON.stringify(JSON.parse(data), null, 4)], `${name}.json`, { type: 'text/json;charset=utf-8' })
+            const file = new File(
+                [JSON.stringify(JSON.parse(data), null, 4)], 
+                `${name}.json`, 
+                { type: 'text/json;charset=utf-8' }
+            )
             saveAs(file)
             handleClose()
         }
         if (formText === '') setError(true)
     }
 
+    // Function to close all dialogs
     const handleClose = () => {
         setOpenOuter(false)
         setOpenInner(false)
@@ -86,6 +94,7 @@ export const ToolbarSave = () => {
                             <MaterialButton
                                 variant='outlined'
                                 disabled={copied}
+                                // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
                                     navigator.clipboard.writeText(query.serialize())
                                     setCopied(true)
@@ -130,6 +139,9 @@ export const ToolbarSave = () => {
                 </DialogContent>
                 <DialogActions>
                     <MaterialButton onClick={handleClose}>Cancel</MaterialButton>
+                    {/* The saveFile function is called to save the serialized state
+                        of the canvas. 'formText' being the user specified name
+                        of the file. */}
                     <MaterialButton onClick={() => saveFile(query.serialize(), formText)}>Save</MaterialButton>
                 </DialogActions>
             </Dialog>

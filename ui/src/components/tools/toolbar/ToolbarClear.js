@@ -16,18 +16,22 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
 export const ToolbarClear = () => {
 
-    const { canUndo, actions, query } = useEditor((state, query) => ({
+    const { canUndo, actions, query } = useEditor((_, query) => ({
         canUndo: query.history.canUndo()
     }))
 
     const [open, setOpen] = useState(false)
 
+    /* Function that clears the canvas by iterating over all
+       nodes currently in the canvas and deleting them one by one */
     const clearCanvas = () => {
         var nodes = query.getSerializedNodes()
         for (let key in nodes) {
+            // making sure to not delete the ROOT(canvas)...
             if (key !== 'ROOT') {
                 actions.delete(key);
             } else {
+                // reset the canvas background/image 
                 actions.setProp(key, (props) => {
                     props.background = null
                     props.image = null
@@ -56,6 +60,7 @@ export const ToolbarClear = () => {
                     </IconButton>
                 </span>
             </Tooltip>
+            {/* Open a dialog to make sure the user wants to clear the canvas */}
             <Dialog open={open} onClose={() => setOpen(false)} fullWidth={true} maxWidth='xs'>
                 <DialogTitle>
                     Warning!

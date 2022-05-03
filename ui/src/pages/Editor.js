@@ -18,12 +18,10 @@ import { Checkbox } from '../components/user/checkbox/Checkbox'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
 /**
- * Core of the web app.
- * @returns The web app.
+ * The homepage of the web app, where the user can create their GUIs.
  */
 export default function Editor() {
 
-	/** Render all components. */
 	return (
 		<div className='App'>
 			<header className='header'>
@@ -36,6 +34,7 @@ export default function Editor() {
 			</header>
 			<CraftEditor
 				enabled={true}
+				// A map of every user component in the editor.
 				resolver={{
 					CanvasArea,
 					Button,
@@ -44,6 +43,7 @@ export default function Editor() {
 					Textfield,
 					Checkbox
 				}}
+				// removes the 'drop-indicator' built into craft.js
 				indicator={false}
 			>
 				<Stack
@@ -56,7 +56,8 @@ export default function Editor() {
 					</div>
 					<div className='middle'>
 						<Toolbar />
-						<Frame /*data={jsonstring}*/>
+						<Frame >
+							{/*The canvas element where the user can drop components*/}
 							<Element
 								is={CanvasArea}
 								canvas
