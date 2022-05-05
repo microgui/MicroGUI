@@ -10,7 +10,7 @@ import { useRef } from 'react'
    allowing the user to delete it.
  */
 export const Tooltip = styled(({ className, name, id, ...props }) => {
-    const { actions, enabled, query } = useEditor((state) => ({
+    const { actions, enabled } = useEditor((state) => ({
         enabled: state.options.enabled
     }))
 

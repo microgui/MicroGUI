@@ -78,10 +78,6 @@ footer {
     padding-right: 30px;
 }
 
-#canvasElement {
-    position: relative;
-}
-
 .toolbar {
     margin: 10px;
     height: 35px;

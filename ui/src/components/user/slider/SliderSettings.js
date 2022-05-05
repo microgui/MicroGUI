@@ -18,7 +18,7 @@ export const SliderSettings = () => {
         const connectedNode = props.connectedNode
         if (connectedNode) setConnected(true) 
         else setConnected(false)
-    })
+    }, [props.connectedNode])
 
     const copyId = () => {
         setCopied(true)
