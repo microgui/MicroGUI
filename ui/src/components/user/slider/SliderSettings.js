@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNode } from '@craftjs/core'
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
@@ -8,9 +8,17 @@ import { capitalize } from '../Utilities'
 export const SliderSettings = () => {
     const [copied, setCopied] = useState(false)
 
-    const { id } = useNode()
+    const { id, props } = useNode((node) => ({
+        props: node.data.props
+    }))
 
     const [connected, setConnected] = useState(false)
+
+    useEffect(() => {
+        const connectedNode = props.connectedNode
+        if (connectedNode) setConnected(true) 
+        else setConnected(false)
+    })
 
     const copyId = () => {
         setCopied(true)
@@ -88,8 +96,6 @@ export const SliderSettings = () => {
                 title={connected ? 'Connected' : 'Connect'}
                 props={['connectedNode']}
                 summary={({ connectedNode }) => {
-                    if (connectedNode) setConnected(true) 
-                    else setConnected(false)
                     return connectedNode
                 }}
             >

@@ -10,7 +10,7 @@ import { useRef } from 'react'
    allowing the user to delete it.
  */
 export const Tooltip = styled(({ className, name, id, ...props }) => {
-    const { actions, enabled } = useEditor((state) => ({
+    const { actions, enabled, query } = useEditor((state) => ({
         enabled: state.options.enabled
     }))
 
@@ -38,7 +38,7 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
                         actions.delete(id)
                     }}
                 >
-                    <DeleteIcon 
+                    <DeleteIcon
                         style={{
                             color: 'white',
                         }}
@@ -52,14 +52,14 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
     )
 })(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: 'grey',
-      color: 'white',
-      maxWidth: 220,
-      width: 90,
-      fontSize: theme.typography.pxToRem(12),
-      border: '1px solid #dadde9',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+        backgroundColor: 'grey',
+        color: 'white',
+        maxWidth: 220,
+        width: 90,
+        fontSize: theme.typography.pxToRem(12),
+        border: '1px solid #dadde9',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
 }))

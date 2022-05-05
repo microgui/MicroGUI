@@ -16,7 +16,7 @@ export const Slider = ({ size, width, color, pageX, pageY,
     defaultValue, aria_label, valueLabelDisplay,
     connectedNode, ...props }) => {
 
-    const { enabled } = useEditor((state) => ({
+    const { enabled, query: { node } } = useEditor((state) => ({
         enabled: state.options.enabled
     }))
 
@@ -34,12 +34,17 @@ export const Slider = ({ size, width, color, pageX, pageY,
     const nodeRef = useRef()
 
     const updateText = (value) => {
-        editorActions.setProp(connectedNode, (props) => {
-            props.text = value
+        if (node(connectedNode).get()) {
+            editorActions.setProp(connectedNode, (props) => {
+                props.text = value
+            })
+            actions.setProp((props) => {
+                props.valueLabelDisplay = 'off'
+            })
+        }
+        else actions.setProp((props) => {
+            props.connectedNode = null
         })
-        actions.setProp((props) => {
-            props.valueLabelDisplay = 'off'
-        }) 
     }
 
     return (
@@ -67,19 +72,19 @@ export const Slider = ({ size, width, color, pageX, pageY,
                         sx={{
                             color: `rgba(${Object.values(color)})`,
                             width: `${width}px`,
-                            "& .MuiSlider-thumb.Mui-focusVisible" : {
+                            "& .MuiSlider-thumb.Mui-focusVisible": {
                                 boxShadow: 'none'
                             },
-                            "& .MuiSlider-thumb:hover" : {
+                            "& .MuiSlider-thumb:hover": {
                                 boxShadow: 'none'
                             },
-                            "& .MuiSlider-thumb.Mui-active" : {
+                            "& .MuiSlider-thumb.Mui-active": {
                                 boxShadow: 'none'
                             }
                         }}
                         value={defaultValue}
                         onChange={(_, val) => {
-                            if(connectedNode) updateText(val.toString())
+                            if (connectedNode) updateText(val.toString())
                             actions.setProp((props) => {
                                 props.defaultValue = val
                             })
