@@ -17,12 +17,13 @@ export default function Simulator() {
     return (
         <div
             style={{
-                width: '100vw',
-                height: '100vh',
+                minWidth: '100vw',
+                minHeight: '100vh',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                padding: '20px'
             }}
         >
             <div
@@ -41,7 +42,7 @@ export default function Simulator() {
                 <h1>Simulating GUI</h1>
             </div>
             <div
-                style={{ border: '1px solid black' }}
+                style={{ border: '1px solid black'}}
             >
                 <CraftEditor
                     enabled={false}
