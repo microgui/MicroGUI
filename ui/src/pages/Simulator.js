@@ -15,9 +15,34 @@ import React from 'react'
 export default function Simulator() {
 
     return (
-        <div className='simulatorDiv' >
-            <h1 className='blinkingText'>Simulator mode</h1>
-            <div className='simulatorBorder' >
+        <div
+            style={{
+                width: '100vw',
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    width: '250px',
+                    paddingBottom: '10px'
+                }}
+            >
+                <div
+                    id='blinkingRed'
+                />
+                <h1>Simulating GUI</h1>
+            </div>
+            <div
+                style={{ border: '1px solid black' }}
+            >
                 <CraftEditor
                     enabled={false}
                     resolver={{
@@ -35,6 +60,6 @@ export default function Simulator() {
                     <Frame data={localStorage.getItem('data')} />
                 </CraftEditor>
             </div>
-        </div>
+        </div >
     )
 }
