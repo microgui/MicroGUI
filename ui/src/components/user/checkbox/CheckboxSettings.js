@@ -30,6 +30,16 @@ export const CheckboxSettings = () => {
                 </EditItem>
             </EditSection>
             <EditSection
+                title='Position'
+                props={['pageX', 'pageY']}
+                summary={({ pageX, pageY }) => {
+                    return `X: ${pageX ? pageX : 0}, Y: ${pageY ? pageY : 0}`
+                }}
+            >
+                <EditItem propKey='pageX' type='position' label='X' />
+                <EditItem propKey='pageY' type='position' label='Y' />
+            </EditSection>
+            <EditSection
                 title='Size'
                 props={['size']}
                 summary={({ size }) => {

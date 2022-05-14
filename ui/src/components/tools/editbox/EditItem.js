@@ -22,7 +22,7 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                         value={propValue}
                         onChange={(value) => {
                             setProp((props) => {
-                                props[propKey] = value;
+                                props[propKey] = value
                             }, 500)
                         }}
                     />
@@ -70,6 +70,17 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                             {props.children}
                         </Button>
                     </div>
+                ) : type === 'position' ? (
+                    <EditTextInput
+                        {...props}
+                        type={type}
+                        value={propValue}
+                        onChange={(value) => {
+                            setProp((props) => {
+                                props[propKey] = parseInt(value)
+                            }, 500)
+                        }}
+                    />
                 ) : type === 'sliderInput' ? (
                     <EditTextInput
                         {...props}
