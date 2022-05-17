@@ -1,29 +1,29 @@
-import { TextField, InputAdornment } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { ChromePicker } from 'react-color';
+import { TextField, InputAdornment } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { SketchPicker } from 'react-color'
 
-export const EditTextInput = ({
-    onChange,
-    value,
-    prefix,
-    label,
-    type,
-    ...props
-}) => {
-    const [internalValue, setInternalValue] = useState(value);
-    const [active, setActive] = useState(false);
+export const EditTextInput = ({ onChange, value, prefix,
+    label, type, ...props }) => {
+    
+    const [internalValue, setInternalValue] = useState(value)
+    const [active, setActive] = useState(false)
+
+    const presetColors = ['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505',
+    '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000',
+    '#4A4A4A', '#9B9B9B', '#FFFFFF']
+   
     useEffect(() => {
-        let val = value;
+        let val = value
         if (type === 'color' || type === 'bg')
             value ? val = `rgba(${Object.values(value)})` : val = `rgba(255,255,255,1)`
-        setInternalValue(val);
-    }, [value, type]);
+        setInternalValue(val)
+    }, [value, type])
 
     return (
         <div
-            style={{ width: '100%', position: 'relative', }}
+            style={{ width: '100%', position: 'relative' }}
             onClick={() => {
-                setActive(true);
+                setActive(true)
             }}
         >
             {(type === 'color' || type === 'bg') && active ? (
@@ -50,11 +50,12 @@ export const EditTextInput = ({
                             position: 'fixed'
                         }}
                     />
-                    <ChromePicker
+                    <SketchPicker 
                         color={internalValue}
                         onChange={(color) => {
                             onChange(color.rgb);
                         }}
+                        presetColors={presetColors}
                     />
                 </div>
             ) : null}
