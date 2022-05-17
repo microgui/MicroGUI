@@ -1,23 +1,45 @@
 import { TextField, InputAdornment } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { SketchPicker } from 'react-color'
+import { SketchPicker, CirclePicker } from 'react-color'
+import { useEditor } from '@craftjs/core'
 
 export const EditTextInput = ({ onChange, value, prefix,
     label, type, ...props }) => {
-    
+    const { query : { getSerializedNodes } } = useEditor()
+
     const [internalValue, setInternalValue] = useState(value)
     const [active, setActive] = useState(false)
 
+    // Presets for SketchPicker
     const presetColors = ['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505',
-    '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000',
-    '#4A4A4A', '#9B9B9B', '#FFFFFF']
-   
+        '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000',
+        '#4A4A4A', '#9B9B9B', '#FFFFFF']
+
+    // Array with recent colors for CirclePicker
+    const [recentColors, setRecentColors] = useState([])
+
     useEffect(() => {
         let val = value
         if (type === 'color' || type === 'bg')
             value ? val = `rgba(${Object.values(value)})` : val = `rgba(255,255,255,1)`
         setInternalValue(val)
-    }, [value, type])
+
+        // Iterate over all components' colors
+        // to set recently used
+        var colors = []
+        const nodes = getSerializedNodes()
+        for (let key in nodes) {
+            if (nodes[key].props.color) {
+                const color = `rgba(${Object.values(nodes[key].props.color)})`
+                if (!colors.includes(color)) colors.push(color)
+            }
+            if (nodes[key].props.background) {
+                const background = `rgba(${Object.values(nodes[key].props.background)})`
+                if (!colors.includes(background)) colors.push(background)
+            }
+        }
+        setRecentColors(colors)
+    }, [value, type, getSerializedNodes])
 
     return (
         <div
@@ -50,13 +72,38 @@ export const EditTextInput = ({ onChange, value, prefix,
                             position: 'fixed'
                         }}
                     />
-                    <SketchPicker 
-                        color={internalValue}
-                        onChange={(color) => {
-                            onChange(color.rgb);
-                        }}
-                        presetColors={presetColors}
-                    />
+                    <div
+
+                    >
+                        <SketchPicker
+                            color={internalValue}
+                            onChange={(color) => {
+                                onChange(color.rgb);
+                            }}
+                            presetColors={presetColors}
+                        />
+                        <div
+                            style={{
+                                marginTop: '1px',
+                                width: '220px',
+                                padding: '10px 10px',
+                                borderRadius: '4px',
+                                backgroundColor: 'rgb(250, 250, 250)',
+                                boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 0px 1px, rgb(0 0 0 / 15%) 0px 8px 16px'
+                            }}
+                        >
+                            <h5 style={{ textAlign: 'left', paddingBottom: '10px' }}>Recently used</h5>
+                            <CirclePicker
+                                width={220}
+                                onChange={(color) => {
+                                    onChange(color.rgb);
+                                }}
+                                circleSize={16}
+                                circleSpacing={10}
+                                colors={recentColors}
+                            />
+                        </div>
+                    </div>
                 </div>
             ) : null}
             <TextField
