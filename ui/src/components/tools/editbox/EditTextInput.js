@@ -109,7 +109,7 @@ export const EditTextInput = ({ onChange, value, prefix,
             <TextField
                 label={label}
                 style={{ margin: 0, width: '100%' }}
-                value={internalValue || ''}
+                value={internalValue}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                         onChange((e.target).value);

@@ -71,24 +71,26 @@ export const Toolbox = () => {
                     // Get data from the drop-event that occurs when
                     // a user drops a component on the canvas
                     const dropResult = monitor.getDropResult()
-                    // Creates a node with attributes of a specific component
-                    // this is done to create a node with custom id and coords.
-                    const freshNode = {
-                        id: `${component.name}_${count[component.name]}`,
-                        data: {
-                            type: component,
-                            props: {
-                                pageX: dropResult.x - 20,
-                                pageY: dropResult.y - 10
+                    if (dropResult) {
+                        // Creates a node with attributes of a specific component
+                        // this is done to create a node with custom id and coords.
+                        const freshNode = {
+                            id: `${component.name}_${count[component.name]}`,
+                            data: {
+                                type: component,
+                                props: {
+                                    pageX: dropResult.x - 20,
+                                    pageY: dropResult.y - 10
+                                }
                             }
                         }
+                        const node = query.parseFreshNode(freshNode).toNode()
+                        // add the created node to the canvas.
+                        actions.add(node, 'ROOT')
+                        count[component.name] += 1
                     }
-                    const node = query.parseFreshNode(freshNode).toNode()
-                    // add the created node to the canvas.
-                    actions.add(node, 'ROOT')
-                    count[component.name] += 1
                 }
-                
+
             }))
             // add our components to our list
             componentList.push(
