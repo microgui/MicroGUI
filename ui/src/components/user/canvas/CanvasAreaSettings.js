@@ -30,8 +30,8 @@ export const CanvasAreaSettings = () => {
                     return `${width}x${height} px`
                 }}
             >
-                <EditItem propKey='width' type='text' label='Width' />
-                <EditItem propKey='height' type='text' label='Height' />
+                <EditItem propKey='width' type='number' label='Width' />
+                <EditItem propKey='height' type='number' label='Height' />
             </EditSection>
             <EditSection
                 title='Background'

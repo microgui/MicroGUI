@@ -5,7 +5,7 @@ import { EditItem } from '../../tools/editbox/EditItem'
 import { FormControlLabel, Radio, Typography } from '@mui/material'
 import { capitalize } from '../Utilities'
 
-const weightDescription = ({ weight }) => {
+const weightDescription = (weight) => {
     return weight === 400 ? 'Regular' : weight === 500 ? 'Medium' : 'Bold'
 }
 
@@ -37,17 +37,27 @@ export const TextfieldSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${pageX ? pageX : 0}, Y: ${pageY ? pageY : 0}`
+                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
-                <EditItem propKey='pageX' type='position' label='X' />
-                <EditItem propKey='pageY' type='position' label='Y' />
+                <EditItem propKey='pageX' type='number' label='X' />
+                <EditItem propKey='pageY' type='number' label='Y' />
+            </EditSection>
+            <EditSection
+                title='Size'
+                props={['width', 'height']}
+                summary={({ width, height }) => {
+                    return `${width}x${height} px`
+                }}
+            >
+                <EditItem propKey='width' type='number' label='Width' />
+                <EditItem propKey='height' type='number' label='Height' />
             </EditSection>
             <EditSection
                 title='Typography'
                 props={['fontSize', 'fontWeight', 'textAlign']}
                 summary={({ fontSize, fontWeight, textAlign }) => {
-                    return `${fontSize || 0}, ${weightDescription(fontWeight)}, ${capitalize(textAlign)}`;
+                    return `${fontSize || 0}, ${capitalize(textAlign)}, ${weightDescription(fontWeight)}`
                 }}
             >
                 <EditItem
@@ -61,10 +71,10 @@ export const TextfieldSettings = () => {
                     <FormControlLabel value='center' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
                     <FormControlLabel value='right' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Right</Typography>} />
                 </EditItem>
-                <EditItem propKey='fontWeight' type='radio' label={<Typography fontSize='0.95rem'>Left</Typography>}>
-                    <FormControlLabel value='400' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Regular</Typography>} />
-                    <FormControlLabel value='500' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Medium</Typography>} />
-                    <FormControlLabel value='700' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Bold</Typography>} />
+                <EditItem propKey='fontWeight' type='radio' label={<Typography fontSize='0.95rem'>Style</Typography>}>
+                    <FormControlLabel value={400} control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Regular</Typography>} />
+                    <FormControlLabel value={500} control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Medium</Typography>} />
+                    <FormControlLabel value={700} control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Bold</Typography>} />
                 </EditItem>
             </EditSection>
             <EditSection

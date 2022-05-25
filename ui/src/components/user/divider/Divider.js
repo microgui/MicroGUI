@@ -58,7 +58,6 @@ export const Divider = ({ length, thickness, variant, color, orientation,
                         }}
                     >
                         <MaterialDivider
-                            variant={variant}
                             orientation={orientation}
                             sx={{
                                 background: `rgba(${Object.values(color)})`,
@@ -80,7 +79,6 @@ Divider.craft = {
     props: {
         length: 100,
         thickness: 1,
-        variant: 'fullWidth',
         orientation: 'horizontal',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },
