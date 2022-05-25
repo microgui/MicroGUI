@@ -16,7 +16,7 @@ export const SliderSettings = () => {
 
     useEffect(() => {
         const connectedNode = props.connectedNode
-        if (connectedNode) setConnected(true) 
+        if (connectedNode) setConnected(true)
         else setConnected(false)
     }, [props.connectedNode])
 
@@ -43,11 +43,11 @@ export const SliderSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${pageX ? pageX : 0}, Y: ${pageY ? pageY : 0}`
+                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
-                <EditItem propKey='pageX' type='position' label='X' />
-                <EditItem propKey='pageY' type='position' label='Y' />
+                <EditItem propKey='pageX' type='number' label='X' />
+                <EditItem propKey='pageY' type='number' label='Y' />
             </EditSection>
             <EditSection
                 title='Size'
@@ -68,14 +68,36 @@ export const SliderSettings = () => {
                 title='Width'
                 props={['width']}
                 summary={({ width }) => {
-                    return width
+                    return `${width}px`
                 }}
             >
-                <EditItem 
-                    propKey='width' 
-                    type='sliderInput' 
-                    error={true}
-                />
+                <EditItem propKey='width' type='sliderWidth' label='px' full={true} />
+            </EditSection>
+            <EditSection
+                title='Value range'
+                props={['min', 'max']}
+                summary={({ min, max }) => {
+                    return `[${Number(min)},${Number(max)}]`
+                }}
+            >
+                <EditItem propKey='min' type='min' label='Min' />
+                <EditItem propKey='max' type='max' label='Max' />
+            </EditSection>
+            <EditSection
+                title='Value label'
+                props={['valueLabelDisplay']}
+                summary={({ valueLabelDisplay }) => {
+                    return capitalize(valueLabelDisplay)
+                }}
+            >
+                <EditItem
+                    propKey='valueLabelDisplay'
+                    type='radio'
+                >
+                    <FormControlLabel value='auto' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Auto</Typography>} />
+                    <FormControlLabel value='off' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Off</Typography>} />
+                    <FormControlLabel value='on' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>On</Typography>} />
+                </EditItem>
             </EditSection>
             <EditSection
                 title='Color'

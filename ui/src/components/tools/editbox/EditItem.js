@@ -1,5 +1,6 @@
 import { useNode } from '@craftjs/core'
 import { Grid, Slider, RadioGroup, Button } from '@mui/material'
+import { useState } from 'react'
 
 import { EditTextInput } from './EditTextInput'
 
@@ -8,14 +9,100 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
     const {
         actions: { setProp },
         propValue,
+        nodeProps
     } = useNode((node) => ({
         propValue: node.data.props[propKey],
+        nodeProps: node.data.props
     }))
+
+    const MinMaxInput = (type) => {
+        const [error, setError] = useState(false)
+
+        return (
+            <EditTextInput
+                {...props}
+                type='number'
+                value={propValue}
+                onChange={(value) => {
+                    value = parseInt(value)
+                    if ((type === 'min' && value < nodeProps.max) || (type === 'max' && value > nodeProps.min)) {
+                        setError(false)
+                        setProp((props) => {
+                            props[propKey] = value
+                        }, 500)
+                    } else {
+                        setError(true)
+                    }
+                }}
+                error={error}
+                helperText={error ?
+                    (type === 'min' ? 'Min value must be lower than Max'
+                        : 'Max value must be higher than Min')
+                    : null
+                }
+            />
+        )
+    }
+
+    const SliderWidth = () => {
+        const [error, setError] = useState(false)
+        const [errorMsg, setErrorMsg] = useState('')
+
+        return (
+            <EditTextInput
+                {...props}
+                type='number'
+                value={propValue}
+                onChange={(value) => {
+                    value = parseInt(value)
+                    if (isNaN(value)) {
+                        setError(true)
+                        setErrorMsg('Only numbers allowed')
+                    } else if (value <= 300 && value >= 20) {
+                        setError(false)
+                        setProp((props) => {
+                            props[propKey] = value
+                        }, 500)
+                    } else {
+                        setError(true)
+                        setErrorMsg('Width should be 20-300 px')
+                    }
+                }}
+                error={error}
+                helperText={error ? errorMsg : null}
+            />
+        )
+    }
+
+    const NumberType = () => {
+        const [error, setError] = useState(false)
+
+        return (
+            <EditTextInput
+                {...props}
+                type={type}
+                value={propValue}
+                onChange={(value) => {
+                    value = parseInt(value)
+                    if (!isNaN(value)) {
+                        setError(false)
+                        setProp((props) => {
+                            props[propKey] = value
+                        }, 500)
+                    } else {
+                        setError(true)
+                    }
+                }}
+                error={error}
+                helperText={error ? 'Insert valid number' : null}
+            />
+        )
+    }
 
     return (
         <Grid item xs={full ? 12 : 6}>
             <div style={{ paddingTop: '10px' }}>
-                {['text', 'color', 'bg', 'number'].includes(type) ? (
+                {['text', 'color', 'bg'].includes(type) ? (
                     <EditTextInput
                         {...props}
                         type={type}
@@ -26,6 +113,8 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                             }, 500)
                         }}
                     />
+                ) : type === 'number' ? (
+                    NumberType()
                 ) : type === 'slider' ? (
                     <>
                         {props.label ? (
@@ -46,8 +135,9 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                             <h4>{props.label}</h4>
                         ) : null}
                         <RadioGroup
-                            value={propValue || 0}
+                            value={propValue}
                             onChange={(_, value) => {
+                                if(!isNaN(value)) value = parseInt(value)
                                 setProp((props) => {
                                     props[propKey] = value
                                 })
@@ -70,35 +160,12 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                             {props.children}
                         </Button>
                     </div>
-                ) : type === 'position' ? (
-                    <EditTextInput
-                        {...props}
-                        type={type}
-                        value={propValue}
-                        onChange={(value) => {
-                            setProp((props) => {
-                                props[propKey] = parseInt(value)
-                            }, 500)
-                        }}
-                    />
-                ) : type === 'sliderInput' ? (
-                    <EditTextInput
-                        {...props}
-                        type={type}
-                        value={propValue}
-                        onChange={(value) => {
-                            setProp((props) => {
-                                if (isNaN(parseInt(value))) {
-                                    alert('You should only write numbers, duh!')
-                                }
-                                else if (value <= 300 && value >= 20) {
-                                    props[propKey] = value
-                                } else {
-                                    alert('The slider can be no longer than 300px, and no shorter than 20px.')
-                                }
-                            }, 500)
-                        }}
-                    />
+                ) : type === 'min' ? (
+                    MinMaxInput(type)
+                ) : type === 'max' ? (
+                    MinMaxInput(type)
+                ) : type === 'sliderWidth' ? (
+                    SliderWidth()
                 ) : null
                 }
             </div>
