@@ -101,7 +101,7 @@ Get the latest NPM version.
    ```
 4. Run the app
    ```sh
-   npm run build
+   npm start
    ```
 5. Open the app\
    Go to ```localhost:3000``` in the browser
