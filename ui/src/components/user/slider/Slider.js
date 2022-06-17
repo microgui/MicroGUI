@@ -2,6 +2,7 @@ import { Slider as MaterialSlider } from '@mui/material'
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
 import Draggable from 'react-draggable'
+import { Resizable } from 'react-resizable'
 
 import { Tooltip } from '../../tools/Tooltip'
 import { SliderSettings } from './SliderSettings'
@@ -12,11 +13,10 @@ import { handleStop, getX, getY } from '../Utilities'
  * Creates a slider object. 
  * @returns The 'slider' object
  */
-export const Slider = ({ size, width, color, pageX, pageY,
-    defaultValue, aria_label, valueLabelDisplay,
-    connectedNode, ...props }) => {
+export const Slider = ({ size, width, min, max, color, pageX, pageY,
+    value, valueLabelDisplay, connectedNode, ...props }) => {
 
-    const { enabled } = useEditor((state) => ({
+    const { enabled, query: { node } } = useEditor((state) => ({
         enabled: state.options.enabled
     }))
 
@@ -34,17 +34,29 @@ export const Slider = ({ size, width, color, pageX, pageY,
     const nodeRef = useRef()
 
     const updateText = (value) => {
-        editorActions.setProp(connectedNode, (props) => {
-            props.text = value
+        if (node(connectedNode).get()) {
+            editorActions.setProp(connectedNode, (props) => {
+                props.text = value
+            })
+            actions.setProp((props) => {
+                props.valueLabelDisplay = 'off'
+            })
+        }
+        else actions.setProp((props) => {
+            props.connectedNode = null
         })
+    }
+
+    const resize = (_, data) => {
         actions.setProp((props) => {
-            props.valueLabelDisplay = 'off'
-        }) 
+            props.width = data.size.width
+        })
     }
 
     return (
         <Draggable
             disabled={!enabled}
+            cancel={".react-resizable-handle"}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
@@ -53,44 +65,52 @@ export const Slider = ({ size, width, color, pageX, pageY,
                 y: getY(pageY, nodeRef)
             }}
         >
-            <div
-                style={{ position: 'absolute', paddingLeft: '10px', paddingRight: '10px' }}
-                ref={nodeRef}
+            <Resizable
+                height={0}
+                width={width}
+                onResize={resize}
+                minConstraints={[20,20]}
+                maxConstraints={[300,300]}
             >
-                <Tooltip
-                    name={name}
-                    id={id}
+                <div
+                    style={{ position: 'absolute', paddingLeft: '10px', paddingRight: '10px' }}
+                    ref={nodeRef}
                 >
-                    <MaterialSlider
-                        ref={connect}
-                        size={size}
-                        
-                        sx={{
-                            color: `rgba(${Object.values(color)})`,
-                            width: `${width}px`,
-                            "& .MuiSlider-thumb.Mui-focusVisible" : {
-                                boxShadow: 'none'
-                            },
-                            "& .MuiSlider-thumb:hover" : {
-                                boxShadow: 'none'
-                            },
-                            "& .MuiSlider-thumb.Mui-active" : {
-                                boxShadow: 'none'
-                            }
-                        }}
-                        value={defaultValue}
-                        onChange={(_, val) => {
-                            if(connectedNode) updateText(val.toString())
-                            actions.setProp((props) => {
-                                props.defaultValue = val
-                            })
-                        }}
-                        aria-label={aria_label}
-                        valueLabelDisplay={valueLabelDisplay}
-                        {...props}
-                    />
-                </Tooltip>
-            </div>
+                    <Tooltip
+                        name={name}
+                        id={id}
+                    >
+                        <MaterialSlider
+                            ref={connect}
+                            size={size}
+                            sx={{
+                                color: `rgba(${Object.values(color)})`,
+                                width: `${width}px`,
+                                "& .MuiSlider-thumb.Mui-focusVisible": {
+                                    boxShadow: 'none'
+                                },
+                                "& .MuiSlider-thumb:hover": {
+                                    boxShadow: 'none'
+                                },
+                                "& .MuiSlider-thumb.Mui-active": {
+                                    boxShadow: 'none'
+                                }
+                            }}
+                            min={min}
+                            max={max}
+                            value={value}
+                            onChange={(_, val) => {
+                                if (connectedNode) updateText(val.toString())
+                                actions.setProp((props) => {
+                                    props.value = val
+                                })
+                            }}
+                            valueLabelDisplay={valueLabelDisplay}
+                            {...props}
+                        />
+                    </Tooltip>
+                </div>
+            </Resizable>
         </Draggable>
     )
 }
@@ -100,7 +120,9 @@ Slider.craft = {
     props: {
         size: 'small',
         width: 100,
-        defaultValue: 0,
+        value: 0,
+        min: 0,
+        max: 100,
         color: { r: 63, g: 81, b: 181, a: 1 },
         valueLabelDisplay: 'auto'
     },

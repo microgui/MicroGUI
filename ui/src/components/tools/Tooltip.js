@@ -28,16 +28,6 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
         <MaterialTooltip
             {...props}
             ref={areaRef}
-            PopperProps={{
-                anchorEl: {
-                    getBoundingClientRect: () => {
-                        return new DOMRect(
-                            areaRef.current.getBoundingClientRect().x,
-                            areaRef.current.getBoundingClientRect().y + 10
-                        )
-                    }
-                }
-            }}
             open={(isHovered || isSelected) && enabled}
             title={<>
                 {name}
@@ -48,7 +38,7 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
                         actions.delete(id)
                     }}
                 >
-                    <DeleteIcon 
+                    <DeleteIcon
                         style={{
                             color: 'white',
                         }}
@@ -62,14 +52,14 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
     )
 })(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: 'grey',
-      color: 'white',
-      maxWidth: 220,
-      width: 90,
-      fontSize: theme.typography.pxToRem(12),
-      border: '1px solid #dadde9',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+        backgroundColor: 'grey',
+        color: 'white',
+        maxWidth: 220,
+        width: 90,
+        fontSize: theme.typography.pxToRem(12),
+        border: '1px solid #dadde9',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
 }))

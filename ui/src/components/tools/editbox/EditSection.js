@@ -28,13 +28,13 @@ export const EditSection = ({ title, props, summary, children }) => {
                     container
                     alignItems='center'
                 >
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                         <h5 style={{ textAlign: 'left' }}>
                             {title}
                         </h5>
                     </Grid>
                     {summary && props ? (
-                        <Grid item xs={8}>
+                        <Grid item xs={6}>
                             <h5 style={{ color: 'grey', textAlign: 'right' }}>
                                 {summary(
                                     props.reduce((acc, key) => {
@@ -45,7 +45,7 @@ export const EditSection = ({ title, props, summary, children }) => {
                             </h5>
                         </Grid>
                     ) :
-                        <Grid item xs={8}>
+                        <Grid item xs={6}>
                             <h5 style={{ color: 'grey', textAlign: 'right' }}>
                                 {summary}
                             </h5>

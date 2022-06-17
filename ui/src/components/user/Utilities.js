@@ -12,13 +12,14 @@ export function handleStop(actions, node) {
     // getting the bounds of the specific node(component)
     const rect = node.current.getBoundingClientRect()
     // store the components position relative to the canvas
-    const relativePos = {}
-    relativePos.left = rect.left - canvas.left
-    relativePos.top = rect.top - canvas.top
+    const relativePos = {
+        left: rect.left - canvas.left,
+        top: rect.top - canvas.top
+    }
     // update the props of the component
     actions.setProp((props) => {
-        props.pageX = relativePos.left;
-        props.pageY = relativePos.top;
+        props.pageX = relativePos.left
+        props.pageY = relativePos.top
     })
 }
 
