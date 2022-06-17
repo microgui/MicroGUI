@@ -139,9 +139,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Carl Classon - carlcla@student.chalmers.se
+Carl Classon - carl.classon@hotmail.com
 
-William Husar - husar@student.chalmers.se
+William Husar - william.husar@hotmail.com
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -151,6 +151,7 @@ William Husar - husar@student.chalmers.se
 Helpful resources
 
 * [react-draggable](https://github.com/react-grid-layout/react-draggable)
+* [react-dnd](https://github.com/react-dnd/react-dnd)
 * [craft.js example](https://craft.js.org)
 
 A big thanks to [@othneildrew](https://github.com/othneildrew) for the [README template](https://github.com/othneildrew/Best-README-Template).
