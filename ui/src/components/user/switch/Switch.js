@@ -12,7 +12,7 @@ import { handleStop, getX, getY } from '../Utilities'
  * Creates a switch object that can be toggled.
  * @returns The 'switch' object.
  */
-export const Switch = ({ size, color, pageX, pageY,
+export const Switch = ({ size, color, pageX, pageY, state,
     defaultChecked, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -62,6 +62,10 @@ export const Switch = ({ size, color, pageX, pageY,
                                     backgroundColor: `rgba(${Object.values(color)})`
                                 }
                             }}
+                            checked={state}
+                            onClick={() => {
+                                actions.setProp((props) => {props.state = !props.state})
+                            }}
                             {...props}
                         />
                     </div>
@@ -74,6 +78,7 @@ export const Switch = ({ size, color, pageX, pageY,
 Switch.craft = {
     displayName: 'Switch',
     props: {
+        state: false,
         size: 'small',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },

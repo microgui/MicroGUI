@@ -7,7 +7,7 @@ import { Tooltip } from '../../tools/Tooltip'
 import { handleStop, getX, getY } from '../Utilities'
 import { CheckboxSettings } from './CheckboxSettings'
 
-export const Checkbox = ({ size, color, pageX, pageY,
+export const Checkbox = ({ size, color, pageX, pageY, state,
     defaultChecked, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -56,6 +56,10 @@ export const Checkbox = ({ size, color, pageX, pageY,
                                 },
                                 padding: 0
                             }}
+                            checked={state}
+                            onClick={() => {
+                                actions.setProp((props) => {props.state = !props.state})
+                            }}
                             {...props}
                         />
                     </div>
@@ -68,6 +72,7 @@ export const Checkbox = ({ size, color, pageX, pageY,
 Checkbox.craft = {
     displayName: 'Checkbox',
     props: {
+        state: false,
         size: 'small',
         color: { r: 63, g: 81, b: 181, a: 1 }
     },
