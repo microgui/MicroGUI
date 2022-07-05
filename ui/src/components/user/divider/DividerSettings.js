@@ -33,7 +33,7 @@ export const DividerSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
+                    return `X: ${Number(pageX).toFixed(0)}, Y: ${Number(pageY).toFixed(0)}`
                 }}
             >
                 <EditItem propKey='pageX' type='number' label='X' />
