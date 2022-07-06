@@ -18,8 +18,8 @@ export function handleStop(actions, node) {
     }
     // update the props of the component
     actions.setProp((props) => {
-        props.pageX = relativePos.left
-        props.pageY = relativePos.top
+        props.pageX = Math.round(relativePos.left)
+        props.pageY = Math.round(relativePos.top)
     })
 }
 
