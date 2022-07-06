@@ -133,6 +133,20 @@ export const SliderSettings = () => {
             >
                 <EditItem propKey='connectedNode' type='text' full={true} label='Id' />
             </EditSection>
+            <EditSection
+                title='Event'
+                props={['event']}
+                summary={({ event }) => {
+                    return event
+                }}
+            >
+                <EditItem
+                    propKey='event'
+                    type='text'
+                    label='Id'
+                    full={true}
+                />
+            </EditSection>
         </React.Fragment>
     )
 }

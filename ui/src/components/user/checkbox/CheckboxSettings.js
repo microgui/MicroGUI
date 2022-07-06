@@ -83,6 +83,20 @@ export const CheckboxSettings = () => {
                     type='color'
                 />
             </EditSection>
+            <EditSection
+                title='Event'
+                props={['event']}
+                summary={({ event }) => {
+                    return event
+                }}
+            >
+                <EditItem
+                    propKey='event'
+                    type='text'
+                    label='Id'
+                    full={true}
+                />
+            </EditSection>
         </React.Fragment>
     )
 }

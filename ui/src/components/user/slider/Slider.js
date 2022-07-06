@@ -13,7 +13,7 @@ import { handleStop, getX, getY } from '../Utilities'
  * Creates a slider object. 
  * @returns The 'slider' object
  */
-export const Slider = ({ size, width, min, max, color, pageX, pageY,
+export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
     value, valueLabelDisplay, connectedNode, ...props }) => {
 
     const { enabled, query: { node } } = useEditor((state) => ({
@@ -124,7 +124,8 @@ Slider.craft = {
         min: 0,
         max: 100,
         color: { r: 63, g: 81, b: 181, a: 1 },
-        valueLabelDisplay: 'auto'
+        valueLabelDisplay: 'auto',
+        event: ''
     },
     related: {
         toolbar: SliderSettings

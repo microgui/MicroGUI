@@ -9,7 +9,7 @@ import { ButtonSettings } from './ButtonSettings'
 
 import { handleStop, getX, getY } from '../Utilities'
 
-export const Button = ({ custom, onClick, size, variant, background, color,
+export const Button = ({ custom, onClick, size, variant, background, color, event,
     text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -78,7 +78,8 @@ Button.craft = {
         size: 'small',
         variant: 'contained',
         background: { r: 63, g: 81, b: 181, a: 1 },
-        color: { r: 255, g: 255, b: 255, a: 1 }
+        color: { r: 255, g: 255, b: 255, a: 1 },
+        event: ''
     },
     related: {
         toolbar: ButtonSettings

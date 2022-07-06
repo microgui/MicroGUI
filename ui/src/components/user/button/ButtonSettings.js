@@ -132,15 +132,15 @@ export const ButtonSettings = () => {
             </EditSection>
             <EditSection
                 title='Event'
-                props={['funcname']}
-                summary={({ funcname }) => {
-                    return funcname
+                props={['event']}
+                summary={({ event }) => {
+                    return event
                 }}
             >
                 <EditItem
-                    propKey='funcname'
+                    propKey='event'
                     type='text'
-                    label='onClick'
+                    label='Id'
                     full={true}
                 />
             </EditSection>
