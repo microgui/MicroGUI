@@ -49,3 +49,28 @@ export function getY(pageY, node) {
     }
     return pageY
 }
+
+export let ws;
+
+export function getWS() {
+    //console.log('get websocket')
+    return ws
+}
+
+export function setWS(webSocket) {
+    //console.log('set websocket')
+    ws = new WebSocket(webSocket);
+}
+
+/* Below unicode filtering may not be needed, was used for debugging but may not have fixed anything */
+var escapable = /[\x00-\x1f\ud800-\udfff\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufff0-\uffff]/g;
+
+export function filterUnicode(quoted){
+
+  escapable.lastIndex = 0;
+  if( !escapable.test(quoted)) return quoted;
+
+  return quoted.replace( escapable, function(a){
+    return '';
+  });
+}

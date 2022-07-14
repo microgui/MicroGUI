@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import './index.css'
 import Editor from './pages/Editor'
 import Simulator from './pages/Simulator'
+import Remote from './pages/Remote'
 import Error from './pages/Error'
 
 import ReactDOM from 'react-dom'
@@ -18,6 +19,7 @@ export default function App() {
                 <Routes>
                     <Route path='/' element={<Editor />} />
                     <Route path='simulator' element={<Simulator />} />
+                    <Route path='remote' element={<Remote />} />
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>

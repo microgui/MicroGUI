@@ -6,7 +6,7 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { SwitchSettings } from './SwitchSettings'
 
-import { handleStop, getX, getY } from '../Utilities'
+import { handleStop, getX, getY, getWS, filterUnicode } from '../Utilities'
 
 /**
  * Creates a switch object that can be toggled.
@@ -62,9 +62,15 @@ export const Switch = ({ size, color, pageX, pageY, state, event,
                                     backgroundColor: `rgba(${Object.values(color)})`
                                 }
                             }}
-                            checked={state}
+                            checked={Boolean(state)}
                             onClick={() => {
                                 actions.setProp((props) => {props.state = !props.state})
+                                
+                                const ws = getWS()
+                                if (ws != null) {
+                                    let message = { "Parent":String(id), "Event":String(event), "Value":!state };
+                                    ws.send(JSON.stringify(filterUnicode(message)))
+                                }
                             }}
                             {...props}
                         />
