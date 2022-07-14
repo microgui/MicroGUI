@@ -7,7 +7,7 @@ import { Resizable } from 'react-resizable'
 import { Tooltip } from '../../tools/Tooltip'
 import { SliderSettings } from './SliderSettings'
 
-import { handleStop, getX, getY, getWS, filterUnicode } from '../Utilities'
+import { handleStop, getX, getY, getWS } from '../Utilities'
 
 /**
  * Creates a slider object. 
@@ -108,7 +108,7 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                                 const ws = getWS()
                                 if (ws != null) {
                                     let message = { "Parent":String(id), "Event":String(event), "Value":value };
-                                    ws.send(JSON.stringify(filterUnicode(message)))
+                                    ws.send(JSON.stringify(message))
                                 }
                             }}
                             valueLabelDisplay={valueLabelDisplay}

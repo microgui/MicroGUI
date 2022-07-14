@@ -4,7 +4,7 @@ import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
 
 import { Tooltip } from '../../tools/Tooltip'
-import { handleStop, getX, getY, getWS, filterUnicode } from '../Utilities'
+import { handleStop, getX, getY, getWS } from '../Utilities'
 import { CheckboxSettings } from './CheckboxSettings'
 
 export const Checkbox = ({ size, color, pageX, pageY, state, event,
@@ -63,7 +63,7 @@ export const Checkbox = ({ size, color, pageX, pageY, state, event,
                                 const ws = getWS()
                                 if (ws != null) {
                                     let message = { "Parent":String(id), "Event":String(event), "Value":!state };
-                                    ws.send(JSON.stringify(filterUnicode(message)))
+                                    ws.send(JSON.stringify(message))
                                 }
                             }}
                             {...props}
