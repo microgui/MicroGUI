@@ -2,6 +2,8 @@ import './Simulator.css'
 
 import { Editor as CraftEditor, Frame, useEditor } from '@craftjs/core'
 
+import { Button as MaterialButton, TextField as MaterialTextfield } from '@mui/material'
+
 import { Button } from '../components/user/button/Button'
 import { Slider } from '../components/user/slider/Slider'
 import { Switch } from '../components/user/switch/Switch'
@@ -12,30 +14,44 @@ import { Divider } from '../components/user/divider/Divider'
 
 import { setWS, ws } from '../components/user/Utilities'
 
-import {useState, useRef} from 'react';
+import { useState } from 'react';
+
+import { Link } from 'react-router-dom'
+import logo from '../logo.png'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 
 export default function Remote() {
     const [document, setDocument] = useState('')
-    const ipRef = useRef(null)
-    let working_doc = '';
+    const [IP, setIP] = useState('')
+    const [error, setError] = useState(false)
+
+    let working_doc = ''
+    let ws_init = false
 
     const RemoteConnect = () => {
         let document_received = false;
 
-        if (ws == null) {
-            setWS("ws://" + ipRef.current.value + "/ws")
+        if (ws == null || !ws_init) {
+            setWS("ws://" + IP + "/ws") 
+
+            ws.addEventListener('error', function (event) {
+                //console.log('WebSocket error: ', event);
+                setError(true)
+            });
 
             ws.onopen = function () {
                 //alert("Connection opened");
                 ws.send("documentRequest")
+                ws_init = true
             };
 
             ws.onclose = function () {
-                alert("Connection closed");
+                //alert("Connection closed");
             };
 
             ws.onmessage = function (event) {
+                console.log(event.data)
                 if (event.data === 'DOCUMENT SENT') {
                     document_received = true;
                     setDocument(JSON.parse(working_doc.replaceAll('\n', '<div>')))
@@ -45,7 +61,6 @@ export default function Remote() {
                 }
             }
         }
-
     }
 
 
@@ -75,13 +90,12 @@ export default function Remote() {
             };
         }
 
-        //console.log(localStorage.getItem('data'))
         return (
             < Frame data={ document } />
         )
     } 
 
-    if (ws) {
+    if (document) {
         return (
             <div
                 style={{
@@ -109,6 +123,7 @@ export default function Remote() {
                     />
                     <h1>Remote GUI</h1>
                 </div>
+                <p>Connected to {IP}</p>
                 <div
                     style={{ border: '1px solid black' }}
                 >
@@ -133,25 +148,80 @@ export default function Remote() {
     }
 
     return (
-        <div
-        style={{
+        <div style={{
             minWidth: '100vw',
             minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            padding: '20px'
+            justifyContent: 'space-between',
         }}>
-        Enter the IP of your display:
             <div style={{
                 display: 'flex',
-                flexDirection: 'row'
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: '10px',
             }}>
-                <input type="text" ref={ipRef} id="ip" name="ip"/>
-                <button onClick={ RemoteConnect }>Connect</button>
+                <Link to='/'>
+                    <img
+                        src={logo}
+                        className='logoTest'
+                    />
+                </Link>
+                <h1 className='topText'>MicroGUI</h1>
             </div>
+            
+            <div>
+                <h2>Enter the IP of your display:</h2>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    paddingTop: '10px',
+                }}>
+                    <div>
+                        <MaterialTextfield 
+                            value={IP} 
+                            type="text" 
+                            sx={{paddingRight:'10px', paddingLeft:'10px'}}
+                            onChange={(event) => {
+                                setIP(event.target.value)
+                                setError(false)
+                            }}
+                            error = {error}
+                            helperText={error ?
+                                'WebSocket connection failed'
+                                : null
+                            }
+                        />
+                    </div>
+                    <div>
+                        <MaterialButton
+                        disabled={!IP}
+                        sx={{height:'56px'}}
+                            onClick={ RemoteConnect } 
+                            variant='contained'
+                        >Connect</MaterialButton>
+                    </div>
+                </div>
+            </div>
+
+            <footer className='footer'>
+				<p>© MicroGUI 2022 |&nbsp;</p>
+				<a
+					href='https://github.com/microgui/MicroGUI'
+					target='_blank'
+					rel='noreferrer'
+					style={{
+						color: 'inherit',
+						display: 'flex',
+						alignItems: 'center'
+					}}
+				>
+					GitHub
+					<GitHubIcon xs='md' sx={{ paddingLeft: '2px' }} />
+				</a>
+			</footer>
+        
         </div>
     )
 }
-
