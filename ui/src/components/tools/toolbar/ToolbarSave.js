@@ -35,8 +35,8 @@ export const ToolbarSave = () => {
     const saveFile = (data, name) => {
         if (formText !== '') {
             const file = new File(
-                [JSON.stringify(JSON.parse(data), null, 4)], 
-                `${name}.json`, 
+                [JSON.stringify(JSON.parse(data), null, 4)],
+                `${name}.json`,
                 { type: 'text/json;charset=utf-8' }
             )
             saveAs(file)
@@ -61,7 +61,7 @@ export const ToolbarSave = () => {
                 size='small'
                 variant='contained'
                 color='success'
-                onClick={() => {setOpenOuter(true)}}
+                onClick={() => { setOpenOuter(true) }}
                 disableElevation
             >
                 <SaveAltIcon style={{ padding: '2px' }} />
@@ -115,7 +115,7 @@ export const ToolbarSave = () => {
                                 disabled={copiedC}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    navigator.clipboard.writeText(query.serialize().replaceAll('\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
+                                    navigator.clipboard.writeText(query.serialize().replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
                                     setCopiedC(true)
                                 }}
                             > {copiedC ? 'Copied' : 'Copy'}

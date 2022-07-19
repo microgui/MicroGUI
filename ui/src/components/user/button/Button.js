@@ -55,7 +55,6 @@ export const Button = ({ custom, onClick, size, variant, background, color, even
                             if (ws != null) {
                                 let message = { "Parent":String(id), "Event":String(event), "Value":1 };
                                 ws.send(JSON.stringify(message))
-                                //ws.send(`{\"Parent\": \"${id}\",\"Event\": \"${event}\",\"Value\": 1}`);
                             }
                         }}
                         sx={{

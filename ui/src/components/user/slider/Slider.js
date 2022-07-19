@@ -13,6 +13,9 @@ import { handleStop, getX, getY, getWS } from '../Utilities'
  * Creates a slider object. 
  * @returns The 'slider' object
  */
+
+let prevValue = 0
+
 export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
     value, valueLabelDisplay, connectedNode, ...props }) => {
 
@@ -104,11 +107,15 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                                 actions.setProp((props) => {
                                     props.value = val
                                 })
-
+                            }}
+                            onChangeCommitted={(_, val) => {
                                 const ws = getWS()
                                 if (ws != null) {
-                                    let message = { "Parent":String(id), "Event":String(event), "Value":value };
-                                    ws.send(JSON.stringify(message))
+                                    if(value != prevValue) {
+                                        let message = { "Parent":String(id), "Event":String(event), "Value":val };
+                                        ws.send(JSON.stringify(message))
+                                    }
+                                    prevValue = val
                                 }
                             }}
                             valueLabelDisplay={valueLabelDisplay}

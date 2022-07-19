@@ -33,7 +33,7 @@ export default function Remote() {
         let document_received = false;
 
         if (ws == null || !ws_init) {
-            setWS("ws://" + IP + "/ws") 
+            setWS("ws://" + IP + "/ws")
 
             ws.addEventListener('error', function (event) {
                 //console.log('WebSocket error: ', event);
@@ -54,10 +54,10 @@ export default function Remote() {
                 console.log(event.data)
                 if (event.data === 'DOCUMENT SENT') {
                     document_received = true;
-                    setDocument(JSON.parse(working_doc.replaceAll('\n', '<div>')))
+                    setDocument(JSON.parse(working_doc))
                 }
                 if (!document_received) {
-                    working_doc += event.data
+                    working_doc += event.data.replaceAll('\\n', '<div>')
                 }
             }
         }
@@ -70,30 +70,23 @@ export default function Remote() {
         if (ws != null) {
             ws.onmessage = function (event) {
                 const eventData = JSON.parse(event.data)
-
                 console.log(eventData)
-                try {
-                    actions.setProp(Object.keys(eventData)[0], (props) => {
-                        try {
-                            props.state = Object.values(eventData)[0]
-                            props.value = Object.values(eventData)[0]
-                            //props.text = Object.values(eventData)[0]
-                        }
-                        catch (error) {
-                            console.log(error)
-                        }
-                    })
-                }
-                catch (error) {
-                    console.log(error)
-                }
+
+                actions.setProp(Object.keys(eventData)[0], (props) => {
+                    props.state = Object.values(eventData)[0]
+                    props.value = Object.values(eventData)[0]
+                    if (eventData["type"] === "Textfield") {
+                        props.text = Object.values(eventData)[0]
+                    }
+                })
+
             };
         }
 
         return (
-            < Frame data={ document } />
+            < Frame data={document} />
         )
-    } 
+    }
 
     if (document) {
         return (
@@ -164,13 +157,14 @@ export default function Remote() {
             }}>
                 <Link to='/'>
                     <img
+                        alt='logo'
                         src={logo}
                         className='logoTest'
                     />
                 </Link>
                 <h1 className='topText'>MicroGUI</h1>
             </div>
-            
+
             <div>
                 <h2>Enter the IP of your display:</h2>
                 <div style={{
@@ -179,15 +173,15 @@ export default function Remote() {
                     paddingTop: '10px',
                 }}>
                     <div>
-                        <MaterialTextfield 
-                            value={IP} 
-                            type="text" 
-                            sx={{paddingRight:'10px', paddingLeft:'10px'}}
+                        <MaterialTextfield
+                            value={IP}
+                            type="text"
+                            sx={{ paddingRight: '10px', paddingLeft: '10px' }}
                             onChange={(event) => {
                                 setIP(event.target.value)
                                 setError(false)
                             }}
-                            error = {error}
+                            error={error}
                             helperText={error ?
                                 'WebSocket connection failed'
                                 : null
@@ -196,9 +190,9 @@ export default function Remote() {
                     </div>
                     <div>
                         <MaterialButton
-                        disabled={!IP}
-                        sx={{height:'56px'}}
-                            onClick={ RemoteConnect } 
+                            disabled={!IP}
+                            sx={{ height: '56px' }}
+                            onClick={RemoteConnect}
                             variant='contained'
                         >Connect</MaterialButton>
                     </div>
@@ -206,22 +200,22 @@ export default function Remote() {
             </div>
 
             <footer className='footer'>
-				<p>© MicroGUI 2022 |&nbsp;</p>
-				<a
-					href='https://github.com/microgui/MicroGUI'
-					target='_blank'
-					rel='noreferrer'
-					style={{
-						color: 'inherit',
-						display: 'flex',
-						alignItems: 'center'
-					}}
-				>
-					GitHub
-					<GitHubIcon xs='md' sx={{ paddingLeft: '2px' }} />
-				</a>
-			</footer>
-        
+                <p>© MicroGUI 2022 |&nbsp;</p>
+                <a
+                    href='https://github.com/microgui/MicroGUI'
+                    target='_blank'
+                    rel='noreferrer'
+                    style={{
+                        color: 'inherit',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}
+                >
+                    GitHub
+                    <GitHubIcon xs='md' sx={{ paddingLeft: '2px' }} />
+                </a>
+            </footer>
+
         </div>
     )
 }
