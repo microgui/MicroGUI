@@ -49,3 +49,15 @@ export function getY(pageY, node) {
     }
     return pageY
 }
+
+export let ws;
+
+export function getWS() {
+    //console.log('get websocket')
+    return ws
+}
+
+export function setWS(webSocket) {
+    //console.log('set websocket')
+    ws = new WebSocket(webSocket);
+}

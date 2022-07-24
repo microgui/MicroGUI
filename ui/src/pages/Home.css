@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.homeHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10vh;
+}
+
+.homeLogo {
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+}
+
+.homeLogoText {
+    padding-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10vh;
+}
+
+.button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 20px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 20vh;
+  height: 20vh;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.button:hover,
+.button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
+  color: rgb(251,238,96);
+  background-color: rgb(0, 0, 10);
+}
+
+.button:hover {
+  transform: translateY(-10px);
+}
+
+.button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}

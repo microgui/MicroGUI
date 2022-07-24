@@ -7,7 +7,7 @@ import Draggable from 'react-draggable'
 import { Tooltip } from '../../tools/Tooltip'
 import { ButtonSettings } from './ButtonSettings'
 
-import { handleStop, getX, getY } from '../Utilities'
+import { handleStop, getX, getY, getWS } from '../Utilities'
 
 export const Button = ({ custom, onClick, size, variant, background, color, event,
     text, pageX, pageY, ...props }) => {
@@ -50,7 +50,13 @@ export const Button = ({ custom, onClick, size, variant, background, color, even
                         ref={connect}
                         size={size}
                         variant={variant}
-                        onClick={onClick}
+                        onClick={() => {
+                            const ws = getWS()
+                            if (ws != null) {
+                                let message = { "Parent":String(id), "Event":String(event), "Value":1 };
+                                ws.send(JSON.stringify(message))
+                            }
+                        }}
                         sx={{
                             backgroundColor:
                                 variant === 'contained' ? `rgba(${Object.values(background)})` : 'transparent',

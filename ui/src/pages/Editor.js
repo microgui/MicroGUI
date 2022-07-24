@@ -3,6 +3,9 @@ import './App.css'
 import { Stack } from '@mui/material';
 import { Editor as CraftEditor, Frame, Element } from '@craftjs/core';
 
+import React from 'react'
+import { Link } from 'react-router-dom'
+
 import logo from '../logo.png'
 
 import { Toolbox } from '../components/tools/Toolbox'
@@ -26,11 +29,14 @@ export default function Editor() {
 	return (
 		<div className='App'>
 			<header className='header'>
-				<img
-					src={logo}
-					alt='logo'
-					className='logoTest'
-				/>
+				<Link to='/'>
+					<img
+						src={logo}
+						alt='logo'
+						className='logoTest'
+					/>
+				</Link>
+				
 				<h1 className='topText'>MicroGUI</h1>
 			</header>
 			<CraftEditor

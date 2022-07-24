@@ -25,7 +25,7 @@ export const ToolbarSave = () => {
     const [openOuter, setOpenOuter] = useState(false)
     const [openInner, setOpenInner] = useState(false)
     const [copied, setCopied] = useState(false)
-    const [copiedC, setCopiedC] = useState(false)
+    const [copiedString, setcopiedString] = useState(false)
     const [formText, setFormText] = useState('')
     const [error, setError] = useState(false)
 
@@ -35,8 +35,8 @@ export const ToolbarSave = () => {
     const saveFile = (data, name) => {
         if (formText !== '') {
             const file = new File(
-                [JSON.stringify(JSON.parse(data), null, 4)], 
-                `${name}.json`, 
+                [JSON.stringify(JSON.parse(data), null, 4)],
+                `${name}.json`,
                 { type: 'text/json;charset=utf-8' }
             )
             saveAs(file)
@@ -50,7 +50,7 @@ export const ToolbarSave = () => {
         setOpenOuter(false)
         setOpenInner(false)
         setCopied(false)
-        setCopiedC(false)
+        setcopiedString(false)
         setError(false)
         setFormText('')
     }
@@ -61,7 +61,7 @@ export const ToolbarSave = () => {
                 size='small'
                 variant='contained'
                 color='success'
-                onClick={() => {setOpenOuter(true)}}
+                onClick={() => { setOpenOuter(true) }}
                 disableElevation
             >
                 <SaveAltIcon style={{ padding: '2px' }} />
@@ -92,7 +92,7 @@ export const ToolbarSave = () => {
                         </Grid>
                         <Grid item xs={4}>
                             <h4>Copy to clipboard</h4>
-                            <h4>(C-format)</h4>
+                            <h4>(String-format)</h4>
                         </Grid>
                         <Grid item xs={4}>
                             <h4>Save as .json file</h4>
@@ -112,13 +112,13 @@ export const ToolbarSave = () => {
                         <Grid item xs={4}>
                             <MaterialButton
                                 variant='outlined'
-                                disabled={copiedC}
+                                disabled={copiedString}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    navigator.clipboard.writeText(query.serialize().replaceAll('\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
-                                    setCopiedC(true)
+                                    navigator.clipboard.writeText(query.serialize().replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
+                                    setcopiedString(true)
                                 }}
-                            > {copiedC ? 'Copied' : 'Copy'}
+                            > {copiedString ? 'Copied' : 'Copy'}
                             </MaterialButton>
                         </Grid>
                         <Grid item xs={4}>
