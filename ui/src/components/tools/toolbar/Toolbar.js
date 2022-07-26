@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom'
 import { ToolbarClear } from './ToolbarClear'
 import { ToolbarSave } from './ToolbarSave'
 import { ToolbarLoad } from './ToolbarLoad'
+import { ToolbarUpload } from './ToolbarUpload'
 
 /**
  * Creates a toolbar for various tools related to the 
@@ -35,7 +36,7 @@ export const Toolbar = () => {
                     title='Undo'
                 >
                     <span
-                        style={{cursor: canUndo ? 'pointer' : 'not-allowed'}}
+                        style={{ cursor: canUndo ? 'pointer' : 'not-allowed' }}
                     >
                         <IconButton
                             // The button is disabled if there is nothing to undo 
@@ -49,7 +50,7 @@ export const Toolbar = () => {
                             }}
                         >
                             <UndoIcon
-                                sx={{color: 'grey'}}
+                                sx={{ color: 'grey' }}
                             />
                         </IconButton>
                     </span>
@@ -58,7 +59,7 @@ export const Toolbar = () => {
                     title='Redo'
                 >
                     <span
-                        style={{cursor: canRedo ? 'pointer' : 'not-allowed'}}
+                        style={{ cursor: canRedo ? 'pointer' : 'not-allowed' }}
                     >
                         <IconButton
                             // The button is disabled if there is nothing to redo 
@@ -72,7 +73,7 @@ export const Toolbar = () => {
                             }}
                         >
                             <RedoIcon
-                                sx={{color: 'grey'}}
+                                sx={{ color: 'grey' }}
                             />
                         </IconButton>
                     </span>
@@ -105,10 +106,11 @@ export const Toolbar = () => {
                         Simulate
                     </MaterialButton>
                 </Link>
-                
+
                 {/* Renders the save/load buttons of the toolbar */}
                 <ToolbarSave />
                 <ToolbarLoad />
+                <ToolbarUpload />
             </Stack>
         </div>
     )
