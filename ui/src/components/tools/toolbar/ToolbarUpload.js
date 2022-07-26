@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
     Button as MaterialButton,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+    Tooltip,
     IconButton,
     Dialog,
     DialogTitle,
@@ -42,13 +46,13 @@ export const ToolbarUpload = () => {
 
     const [IP, setIP] = useState('')
     const [error, setError] = useState(false)
+
+    let str = ''
     let ws_init = false
 
     let chunkSize = 1000
     let startPoint = 0
     let endPoint = chunkSize
-
-    let str = query.serialize().replaceAll('\\n', '').replaceAll('    ', '').replaceAll('<div>', '\n').replaceAll('</div>', '')
 
     // Function to close all dialogs
     const handleClose = () => {
@@ -60,6 +64,12 @@ export const ToolbarUpload = () => {
             ws.close()
         }
     }
+
+    const [checked, setChecked] = useState(false);
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
 
     const RemoteConnect = () => {
         if (ws == null || !ws_init) {
@@ -102,7 +112,7 @@ export const ToolbarUpload = () => {
         <ThemeProvider theme={theme}>
             <Snackbar open={open} autoHideDuration={4000} onClose={() => { setOpen(false) }} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert variant="filled" onClose={() => { setOpen(false) }} severity="success" sx={{ width: '100%' }}>
-                    Remote GUI upload successful!
+                    Remote GUI upload was successful!
                 </Alert>
             </Snackbar>
 
@@ -137,11 +147,28 @@ export const ToolbarUpload = () => {
                     <Divider />
                 </DialogTitle>
                 <DialogContent>
-                    <Grid container spacing={1} align='center'>
+                    <Grid container spacing={1} align='center' direction="row" justifyContent="center" alignItems="center">
                         <Grid item xs={6}>
                             <h4>Enter the IP of your display:</h4>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={6} sx={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={
+                                        <Tooltip title="If this is checked, the uploaded GUI will be stored in your display's persistant memory. That means the GUI persists and will be rendered on reboot."
+                                            placement="top" arrow>
+                                            <Checkbox
+                                                checked={checked}
+                                                onChange={handleChange}
+                                            />
+                                        </Tooltip>
+                                    }
+
+                                    label="Make persistant" />
+                            </FormGroup>
                         </Grid>
                         <Grid item xs={6}>
                             <TextField
@@ -165,7 +192,12 @@ export const ToolbarUpload = () => {
                                 variant='contained'
                                 component='label'
                                 endIcon={<SendIcon />}
-                                onClick={RemoteConnect}
+                                onClick={() => {
+                                    const doc = JSON.parse(query.serialize())
+                                    doc["ROOT"]["props"]["persistant"] = checked
+                                    str = JSON.stringify(doc).replaceAll('\\n', '').replaceAll('    ', '').replaceAll('<div>', '\n').replaceAll('</div>', '')
+                                    RemoteConnect()
+                                }}
                                 loading={loading}
                                 loadingPosition="end"
                             > Connect &amp; Send
