@@ -33,7 +33,7 @@ export default function Remote() {
         let document_received = false;
 
         if (ws == null || !ws_init) {
-            setWS("ws://" + IP + "/ws")
+            setWS("ws://" + IP.trim() + "/ws")
 
             ws.addEventListener('error', function (event) {
                 //console.log('WebSocket error: ', event);

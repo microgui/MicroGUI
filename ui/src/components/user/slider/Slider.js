@@ -72,8 +72,8 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                 height={0}
                 width={width}
                 onResize={resize}
-                minConstraints={[20,20]}
-                maxConstraints={[300,300]}
+                minConstraints={[20, 20]}
+                maxConstraints={[300, 300]}
             >
                 <div
                     style={{ position: 'absolute', paddingLeft: '10px', paddingRight: '10px' }}
@@ -111,8 +111,8 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                             onChangeCommitted={(_, val) => {
                                 const ws = getWS()
                                 if (ws != null) {
-                                    if(value != prevValue) {
-                                        let message = { "Parent":String(id), "Event":String(event), "Value":val };
+                                    if (value !== prevValue) {
+                                        let message = { "Parent": String(id), "Event": String(event), "Value": val };
                                         ws.send(JSON.stringify(message))
                                     }
                                     prevValue = val

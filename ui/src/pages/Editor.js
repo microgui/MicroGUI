@@ -36,7 +36,7 @@ export default function Editor() {
 						className='logoTest'
 					/>
 				</Link>
-				
+
 				<h1 className='topText'>MicroGUI</h1>
 			</header>
 			<CraftEditor

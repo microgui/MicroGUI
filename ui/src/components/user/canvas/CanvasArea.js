@@ -32,7 +32,7 @@ export const CanvasArea = ({ background, image, width, height, children }) => {
                     height: height,
                     backgroundColor: background ? `rgba(${Object.values(background)})` : null,
                     backgroundImage: image ? `url(${image})` : (background ? null : 'radial-gradient(#e2e2e2 20%, #fff 20%)'),
-                    backgroundSize: image ? `${width}px ${height}px` : (background ? null: '10px 10px'),
+                    backgroundSize: image ? `${width}px ${height}px` : (background ? null : '10px 10px'),
                     position: 'relative',
                     transition: 'width 0.8s, height 0.8s'
                 }}
@@ -47,8 +47,8 @@ CanvasArea.craft = {
     displayName: 'Canvas',
     props: {
         id: 'canvasElement',
-        width: 400,
-        height: 400
+        width: 480,
+        height: 320
     },
     related: {
         toolbar: CanvasAreaSettings

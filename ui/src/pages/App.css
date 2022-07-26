@@ -85,7 +85,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     background-color: white;
-    width: 500px;
+    min-width: 600px;
     height: 50px;
     border: 1px solid #E3E6E9;
     border-radius: 8px;
