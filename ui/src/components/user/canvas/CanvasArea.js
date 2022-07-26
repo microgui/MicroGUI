@@ -48,7 +48,8 @@ CanvasArea.craft = {
     props: {
         id: 'canvasElement',
         width: 480,
-        height: 320
+        height: 320,
+        persistant: false,
     },
     related: {
         toolbar: CanvasAreaSettings

@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
     Button as MaterialButton,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+    Tooltip,
     IconButton,
     Dialog,
     DialogTitle,
@@ -55,6 +59,12 @@ export const ToolbarSave = () => {
         setFormText('')
     }
 
+    const [checked, setChecked] = useState(false);
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
+
     return (
         <>
             <MaterialButton
@@ -67,7 +77,7 @@ export const ToolbarSave = () => {
                 <SaveAltIcon style={{ padding: '2px' }} />
                 Save
             </MaterialButton>
-            <Dialog open={openOuter} onClose={handleClose} fullWidth={true} maxWidth='xs' >
+            <Dialog open={openOuter} onClose={handleClose} fullWidth={true} maxWidth='sm' >
                 <DialogTitle>
                     Save data
                     <IconButton
@@ -103,7 +113,9 @@ export const ToolbarSave = () => {
                                 disabled={copied}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    navigator.clipboard.writeText(query.serialize())
+                                    const doc = JSON.parse(query.serialize())
+                                    doc["ROOT"]["props"]["persistant"] = checked
+                                    navigator.clipboard.writeText(JSON.stringify(doc))
                                     setCopied(true)
                                 }}
                             > {copied ? 'Copied' : 'Copy'}
@@ -115,7 +127,9 @@ export const ToolbarSave = () => {
                                 disabled={copiedString}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    navigator.clipboard.writeText(query.serialize().replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
+                                    const doc = JSON.parse(query.serialize())
+                                    doc["ROOT"]["props"]["persistant"] = checked
+                                    navigator.clipboard.writeText(JSON.stringify(doc).replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
                                     setcopiedString(true)
                                 }}
                             > {copiedString ? 'Copied' : 'Copy'}
@@ -129,6 +143,22 @@ export const ToolbarSave = () => {
                             </MaterialButton>
                         </Grid>
                     </Grid>
+
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Tooltip title="If this is checked, the uploaded GUI will be stored in your display's persistant memory. That means the GUI persists and will be rendered on reboot."
+                                    placement="top" arrow>
+                                    <Checkbox
+                                        checked={checked}
+                                        onChange={handleChange}
+                                    />
+                                </Tooltip>
+                            }
+
+                            label="Make persistant" />
+                    </FormGroup>
+
                 </DialogContent>
             </Dialog>
             <Dialog open={openInner} onClose={handleClose} fullWidth={true} maxWidth='xs' >
