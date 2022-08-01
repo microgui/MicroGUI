@@ -147,6 +147,8 @@ export const ToolbarUpload = () => {
                     <Divider />
                 </DialogTitle>
                 <DialogContent>
+                    This feature is useful for rapidly building and tweaking your GUI.<br />
+                    Note: 'Make persistant' only works for smaller GUIs (below 4 kB).<br /><br />
                     <Grid container spacing={1} align='center' direction="row" justifyContent="center" alignItems="center">
                         <Grid item xs={6}>
                             <h4>Enter the IP of your display:</h4>
