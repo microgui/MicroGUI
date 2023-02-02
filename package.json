@@ -3,26 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craftjs/core": "^0.2.0-beta.3",
-    "@emotion/react": "^11.8.2",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.2",
-    "@mui/lab": "^5.0.0-alpha.92",
-    "@mui/material": "^5.6.3",
-    "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
+    "@craftjs/core": "^0.2.0-beta.8",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.117",
+    "@mui/material": "^5.11.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "file-saver": "^2.0.5",
-    "react": "^16.14.0",
+    "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-contenteditable": "^3.3.6",
-    "react-dnd": "^15.1.2",
+    "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^16.14.0",
-    "react-draggable": "^4.4.4",
+    "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
     "react-resizable": "^3.0.4",
-    "react-router-dom": "^6.2.2",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^6.7.0",
+    "web-vitals": "^3.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,6 +49,6 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.1"
   }
 }
