@@ -11,7 +11,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/CarlClasson/MicroGUI">
+  <a href="https://github.com/microgui/MicroGUI">
     <img src="images/MicroGUI-1.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -20,12 +20,12 @@
   <p align="center">
     An open-source tool for creating embedded GUIs!
     <br />
-    <a href="https://github.com/CarlClasson/MicroGUI/wiki"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/microgui/MicroGUI/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/CarlClasson/MicroGUI/issues/new?labels=bug">Report Bug</a>
+    <a href="https://github.com/microgui/MicroGUI/issues/new?labels=bug">Report Bug</a>
     ·
-    <a href="https://github.com/CarlClasson/MicroGUI/issues/new?labels=enhancement">Request Feature</a>
+    <a href="https://github.com/microgui/MicroGUI/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -57,7 +57,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <div align='center'>
-<a href="https://github.com/CarlClasson/MicroGUI">
+<a href="https://github.com/microgui/MicroGUI">
   <img src="images/demo.gif" width="600">
 </a>
 </div>
@@ -91,11 +91,11 @@ Get the latest NPM version.
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/CarlClasson/MicroGUI.git
+   git clone https://github.com/microgui/MicroGUI.git
    ```
-2. Change directory to _ui_
+2. Change directory to _MicroGUI_
    ```sh
-   cd your_repo_location/ui
+   cd your_repo_location/MicroGUI
    ```
 3. Install NPM packages
    ```sh
@@ -162,14 +162,14 @@ A big thanks to [@othneildrew](https://github.com/othneildrew) for the [README t
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/CarlClasson/MicroGUI.svg?style=for-the-badge
-[contributors-url]: https://github.com/CarlClasson/MicroGUI/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/CarlClasson/MicroGUI.svg?style=for-the-badge
-[forks-url]: https://github.com/CarlClasson/MicroGUI/network/members
-[stars-shield]: https://img.shields.io/github/stars/CarlClasson/MicroGUI.svg?style=for-the-badge
-[stars-url]: https://github.com/CarlClasson/MicroGUI/stargazers
-[issues-shield]: https://img.shields.io/github/issues/CarlClasson/MicroGUI.svg?style=for-the-badge
-[issues-url]: https://github.com/CarlClasson/MicroGUI/issues
-[license-shield]: https://img.shields.io/github/license/CarlClasson/MicroGUI.svg?style=for-the-badge
-[license-url]: https://github.com/CarlClasson/MicroGUI/blob/main/LICENSE.md
+[contributors-shield]: https://img.shields.io/github/contributors/microgui/MicroGUI.svg?style=for-the-badge
+[contributors-url]: https://github.com/microgui/MicroGUI/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/microgui/MicroGUI.svg?style=for-the-badge
+[forks-url]: https://github.com/microgui/MicroGUI/network/members
+[stars-shield]: https://img.shields.io/github/stars/microgui/MicroGUI.svg?style=for-the-badge
+[stars-url]: https://github.com/microgui/MicroGUI/stargazers
+[issues-shield]: https://img.shields.io/github/issues/microgui/MicroGUI.svg?style=for-the-badge
+[issues-url]: https://github.com/microgui/MicroGUI/issues
+[license-shield]: https://img.shields.io/github/license/microgui/MicroGUI.svg?style=for-the-badge
+[license-url]: https://github.com/microgui/MicroGUI/blob/main/LICENSE.md
 [product-screenshot]: images/canvas.png
