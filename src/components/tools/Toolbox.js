@@ -8,6 +8,7 @@ import { Switch } from '../user/switch/Switch'
 import { Textfield } from '../user/textfield/Textfield'
 import { Checkbox } from '../user/checkbox/Checkbox'
 import { Divider } from '../user/divider/Divider'
+import { Radiobutton} from '../user/radiobutton/Radiobutton'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
@@ -15,6 +16,7 @@ import Crop75Icon from '@mui/icons-material/Crop75'
 import TuneIcon from '@mui/icons-material/Tune'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import DensityLargeIcon from '@mui/icons-material/DensityLarge'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 import { useDrag } from 'react-dnd'
 
@@ -32,7 +34,8 @@ export const Toolbox = () => {
         Slider,
         Textfield,
         Checkbox,
-        Divider
+        Divider,
+        Radiobutton
     ]
 
     // a counter for each component, used when assigning them IDs
@@ -42,7 +45,8 @@ export const Toolbox = () => {
         Slider: 1,
         Textfield: 1,
         Checkbox: 1,
-        Divider: 1
+        Divider: 1,
+        Radiobutton: 1,
     }
 
     // list of icons for the different components
@@ -52,7 +56,8 @@ export const Toolbox = () => {
         Slider: <TuneIcon />,
         Textfield: <TextFieldsIcon />,
         Checkbox: <CheckBoxIcon />,
-        Divider: <DensityLargeIcon />
+        Divider: <DensityLargeIcon />, 
+        Radiobutton:<RadioButtonUncheckedIcon />
     }
 
     // list where we store each component to be rendered in the toolbox.
