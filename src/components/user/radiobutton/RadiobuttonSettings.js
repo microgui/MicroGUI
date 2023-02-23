@@ -14,7 +14,7 @@ export const RadiobuttonSettings = () => {
         setCopied(true)
         navigator.clipboard.writeText(id)
     }
-    
+
     return (
         <React.Fragment>
             <EditSection
@@ -69,27 +69,11 @@ export const RadiobuttonSettings = () => {
                 </EditItem>
             </EditSection>
             <EditSection
-                title='Variant'
-                props={['variant']}
-                summary={({ variant }) => {
-                    return capitalize(variant)
-                }}
-            >
-                <EditItem
-                    propKey='variant'
-                    type='radio'
-                >
-                    <FormControlLabel value='text' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Text</Typography>} />
-                    <FormControlLabel value='contained' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Contained</Typography>} />
-                    <FormControlLabel value='outlined' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Outlined</Typography>} />
-                </EditItem>
-            </EditSection>
-            <EditSection
-                title='Colors'
+                title='Color'
                 props={['background', 'color']}
                 summary={({ background, color }) => {
                     return (
-                        <div style={{display:'flex', flexDirection:'row-reverse'}}>
+                        <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <div
                                 style={{
                                     background:
@@ -121,14 +105,9 @@ export const RadiobuttonSettings = () => {
                     full={true}
                     propKey='background'
                     type='bg'
-                    label='Background'
+                    label='Color'
                 />
-                <EditItem 
-                    full={true} 
-                    propKey='color' 
-                    type='color' 
-                    label='Text' 
-                />
+
             </EditSection>
             <EditSection
                 title='Event'
@@ -143,6 +122,16 @@ export const RadiobuttonSettings = () => {
                     label='Id'
                     full={true}
                 />
+            </EditSection>
+            <EditSection
+                title='Labels'
+                props={['labelA', 'labelB']}
+                summary={({ labelA, labelB }) => {
+                    return `A: ${labelA}, B: ${labelB}`
+                }}
+            >
+                <EditItem propKey='labelA' type='text' label='A' />
+                <EditItem propKey='labelB' type='text' label='B' />
             </EditSection>
         </React.Fragment>
     )
