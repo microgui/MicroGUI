@@ -109,6 +109,42 @@ export const RadiobuttonSettings = () => {
                 />
 
             </EditSection>
+
+            <EditSection
+                title='Amount'
+                props={['amount']}
+                summary={({ amount }) => {
+                    return amount
+                }}
+            >
+                <EditItem
+                    propKey='amount'
+                    type='number'
+                    label='Id'
+                    full={true}
+                />
+            </EditSection>
+
+            <EditSection
+                title='Labels'
+                props={['labelTexts']}
+
+            >
+                {[...Array(8)].map((_, i) => {
+                    return (
+
+                        <EditItem
+                            propKey={`labelTexts`}
+                            label={'labels'}
+                            type='text' />
+
+                    );
+                })}
+
+
+            </EditSection>
+
+
             <EditSection
                 title='Event'
                 props={['event']}
@@ -116,23 +152,9 @@ export const RadiobuttonSettings = () => {
                     return event
                 }}
             >
-                <EditItem
-                    propKey='event'
-                    type='text'
-                    label='Id'
-                    full={true}
-                />
+
             </EditSection>
-            <EditSection
-                title='Labels'
-                props={['labelA', 'labelB']}
-                summary={({ labelA, labelB }) => {
-                    return `A: ${labelA}, B: ${labelB}`
-                }}
-            >
-                <EditItem propKey='labelA' type='text' label='A' />
-                <EditItem propKey='labelB' type='text' label='B' />
-            </EditSection>
+
         </React.Fragment>
     )
 } 

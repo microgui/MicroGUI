@@ -10,11 +10,12 @@ import { handleStop, getX, getY, getWS } from '../Utilities'
 import { RadiobuttonSettings } from './RadiobuttonSettings'
 
 export const Radiobutton = ({ custom, onClick, size, background, event,
-    text, pageX, pageY, labelA, labelB, ...props }) => {
+    text, pageX, pageY, labelTexts, amount, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
     }))
+
 
     const {
         id,
@@ -26,6 +27,7 @@ export const Radiobutton = ({ custom, onClick, size, background, event,
     }))
 
     const nodeRef = useRef()
+
 
 
     return (
@@ -50,7 +52,7 @@ export const Radiobutton = ({ custom, onClick, size, background, event,
                 >
                     <MaterialRadiogroup
                         ref={connect}
-
+                        text={text}
                         onClick={() => {
                             const ws = getWS()
                             if (ws != null) {
@@ -66,9 +68,16 @@ export const Radiobutton = ({ custom, onClick, size, background, event,
                         }
                         {...props}
                     >
-                        {text}
-                        <FormControlLabel value="a" control={<Radio value="a" size={size} />} label={labelA} />
-                        <FormControlLabel value="b" control={<Radio value="b" size={size} />} label={labelB} />
+
+
+                        {[...Array(amount)].map((_, i) => {
+                            return (
+
+                                <FormControlLabel control={<Radio value={i} size={size} label={labelTexts[i]} />} label={labelTexts[i]} />
+
+                            );
+                        })}
+
                     </MaterialRadiogroup>
 
                 </Tooltip>
@@ -85,8 +94,9 @@ Radiobutton.craft = {
         background: { r: 0, g: 0, b: 0, a: 1 },
         color: { r: 255, g: 255, b: 255, a: 1 },
         event: '',
-        labelA: 'option a',
-        labelB: 'option b'
+        amount: 1,
+        labelTexts: ["label a", "label b", "label c", "label d", "label e"]
+
     },
     related: {
         toolbar: RadiobuttonSettings
