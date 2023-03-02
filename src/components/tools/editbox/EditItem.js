@@ -99,6 +99,38 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
         )
     }
 
+    const ArrayType = () => {
+        const [error, setError] = useState(false);
+
+        return (
+            <EditTextInput
+                {...props}
+                value={propValue}
+                onChange={(event) => {
+                    const newValue = event // get value entered into settings-form
+                    try {
+                        const parsedValue = newValue.split(',').map((item) => { // split on commas, map over every element
+                            const trimmedItem = item.trim();  //remove whitespaces before/after
+                            if (!isNaN(trimmedItem)) {
+                                return Number(trimmedItem); //return the item as a number 
+                            }
+                            return trimmedItem; // if it's a string, leave it as is
+                        });
+                        setProp((props) => {
+                            props[propKey] = parsedValue;   // if nothing is set, 0 is default value, e.g ',' ==> '0' for the label
+                        }, 500);
+                        setError(false);
+                    } catch {
+                        setError(true);
+                    }
+                }}
+                error={error}
+                helperText={error ? 'Insert valid array' : null}
+            />
+        );
+    };
+
+
     return (
         <Grid item xs={full ? 12 : 6}>
             <div style={{ paddingTop: '10px' }}>
@@ -115,6 +147,8 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                     />
                 ) : type === 'number' ? (
                     NumberType()
+                ) : type === 'array' ? (
+                    ArrayType()
                 ) : type === 'slider' ? (
                     <>
                         {props.label ? (
@@ -137,7 +171,7 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                         <RadioGroup
                             value={propValue}
                             onChange={(_, value) => {
-                                if(!isNaN(value)) value = parseInt(value)
+                                if (!isNaN(value)) value = parseInt(value)
                                 setProp((props) => {
                                     props[propKey] = value
                                 })

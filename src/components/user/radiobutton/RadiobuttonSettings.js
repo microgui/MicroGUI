@@ -15,6 +15,8 @@ export const RadiobuttonSettings = () => {
         navigator.clipboard.writeText(id)
     }
 
+
+
     return (
         <React.Fragment>
             <EditSection
@@ -120,7 +122,7 @@ export const RadiobuttonSettings = () => {
                 <EditItem
                     propKey='amount'
                     type='number'
-                    label='Id'
+                    label='amount'
                     full={true}
                 />
             </EditSection>
@@ -128,18 +130,25 @@ export const RadiobuttonSettings = () => {
             <EditSection
                 title='Labels'
                 props={['labelTexts']}
-
             >
-                {[...Array(8)].map((_, i) => {
-                    return (
+                <EditItem
+                    propKey='labelTexts'
+                    label={'labels'}
+                    type='array'
+                    full={true}
+                />
 
-                        <EditItem
-                            propKey={`labelTexts`}
-                            label={'labels'}
-                            type='text' />
-
-                    );
-                })}
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    Enter your labels separated by commas
+                </p>
 
 
             </EditSection>
@@ -153,8 +162,15 @@ export const RadiobuttonSettings = () => {
                 }}
             >
 
+                <EditItem
+                    propKey='event'
+                    type='text'
+                    label='Id'
+                    full={true}
+                />
+
             </EditSection>
 
-        </React.Fragment>
+        </React.Fragment >
     )
 } 
