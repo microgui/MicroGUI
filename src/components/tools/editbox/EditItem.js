@@ -110,11 +110,7 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                     const newValue = event // get value entered into settings-form
                     try {
                         const parsedValue = newValue.split(',').map((item) => { // split on commas, map over every element
-                            const trimmedItem = item.trim();  //remove whitespaces before/after
-                            if (!isNaN(trimmedItem)) {
-                                return Number(trimmedItem); //return the item as a number 
-                            }
-                            return trimmedItem; // if it's a string, leave it as is
+                            return item.trim(); //remove whitespaces before/after
                         });
                         setProp((props) => {
                             props[propKey] = parsedValue;   // if nothing is set, 0 is default value, e.g ',' ==> '0' for the label
