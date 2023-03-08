@@ -9,7 +9,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
-export const Progressbar = ({ custom, onClick, size, background, color, event,
+export const Progressbar = ({ custom, onClick, size, color, event,
     text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -48,28 +48,22 @@ export const Progressbar = ({ custom, onClick, size, background, color, event,
                     name={name}
                     id={id}
                 >
-
-                    <Box sx={{
-                        width: '300%'
-                    }} >
-
-
+                    <Box sx={{ width: '100%' }}>
                         {text}
-
-                        <MaterialProgress
-                            ref={connect}
-                            color="secondary"
-                            onClick={() => {
-                                const ws = getWS()
-                                if (ws != null) {
-                                    let message = { "Parent": String(id), "Event": String(event), "Value": 1 };
-                                    ws.send(JSON.stringify(message))
-                                }
-                            }}
-
-                        >
-                        </MaterialProgress>
-
+                        <div style={{ width: `${size}px`, margin: '0 auto' }}> 
+                            <MaterialProgress
+                                ref={connect}
+                                color={color} 
+                                onClick={() => {
+                                    const ws = getWS()
+                                    if (ws != null) {
+                                        let message = { "Parent": String(id), "Event": String(event), "Value": 1 };
+                                        ws.send(JSON.stringify(message))
+                                    }
+                                }}
+                                {...props}
+                            />
+                        </div>
                     </Box>
                 </Tooltip>
             </div>
@@ -81,10 +75,8 @@ Progressbar.craft = {
     displayName: 'Progressbar',
     props: {
         text: 'Progressbar',
-        variant: "determinate",
-        size: 'small',
-        background: { r: 63, g: 81, b: 181, a: 1 },
-        color: { r: 255, g: 255, b: 255, a: 1 },
+        size: '150',
+        color: "secondary",
         event: ''
     },
     related: {

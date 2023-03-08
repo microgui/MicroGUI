@@ -3,7 +3,6 @@ import { EditItem } from "../../tools/editbox/EditItem"
 import { FormControlLabel, Radio, Typography } from "@mui/material"
 import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
-import { capitalize } from '../Utilities'
 
 export const ProgressbarSettings = () => {
     const [copied, setCopied] = useState(false)
@@ -14,7 +13,7 @@ export const ProgressbarSettings = () => {
         setCopied(true)
         navigator.clipboard.writeText(id)
     }
-    
+
     return (
         <React.Fragment>
             <EditSection
@@ -52,69 +51,39 @@ export const ProgressbarSettings = () => {
                     full={true}
                 />
             </EditSection>
+            
             <EditSection
-                title='Size'
+                title='size'
                 props={['size']}
                 summary={({ size }) => {
-                    return capitalize(size)
+                    return size
                 }}
             >
                 <EditItem
                     propKey='size'
-                    type='radio'
-                >
-                    <FormControlLabel value='small' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Small</Typography>} />
-                    <FormControlLabel value='medium' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Medium</Typography>} />
-                    <FormControlLabel value='large' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Large</Typography>} />
-                </EditItem>
+                    type='number'
+                    label='Size'
+                    full={true}
+                />
             </EditSection>
 
             <EditSection
                 title='Colors'
-                props={['background', 'color']}
-                summary={({ background, color }) => {
-                    return (
-                        <div style={{display:'flex', flexDirection:'row-reverse'}}>
-                            <div
-                                style={{
-                                    background:
-                                        background && `rgba(${Object.values(background)})`,
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
-                                    textAlign: 'center',
-                                    alignItems: 'center',
-                                    borderRadius: '50%',
-                                    height: '20px',
-                                    width: '20px'
-                                }}
-                            >
-                                <p
-                                    style={{
-                                        color: color && `rgba(${Object.values(color)})`,
-                                        width: '100%',
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    T
-                                </p>
-                            </div>
-                        </div>
-                    )
-                }}
+                props={['color']}
+                
             >
                 <EditItem
-                    full={true}
-                    propKey='background'
-                    type='bg'
-                    label='Background'
-                />
-                <EditItem 
-                    full={true} 
-                    propKey='color' 
-                    type='color' 
-                    label='Text' 
-                />
+
+                    propKey='color'
+                    type='radio'
+                >
+                    <FormControlLabel value='secondary' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>secondary</Typography>} />
+                    <FormControlLabel value='success' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>success</Typography>} />
+                    <FormControlLabel value='inherit' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>inherit</Typography>} />
+
+                </EditItem>
             </EditSection>
+
             <EditSection
                 title='Event'
                 props={['event']}
