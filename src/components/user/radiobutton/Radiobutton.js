@@ -9,7 +9,7 @@ import { Tooltip } from '../../tools/Tooltip'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 import { RadiobuttonSettings } from './RadiobuttonSettings'
 
-export const Radiobutton = ({ custom, onClick, size, background, event,
+export const Radiobutton = ({ custom, onClick, size, color, event,
     text, pageX, pageY, labelTexts, amount, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -61,7 +61,7 @@ export const Radiobutton = ({ custom, onClick, size, background, event,
                         }}
                         sx={{
                             '& .MuiSvgIcon-root': {
-                                color: `rgba(${Object.values(background)})`,
+                                color: `rgba(${Object.values(color)})`,
                             }
                         }
                         }
@@ -91,8 +91,7 @@ Radiobutton.craft = {
     props: {
         size: 'small',
         text: 'Radiobuttons',
-        background: { r: 0, g: 0, b: 0, a: 1 },
-        color: { r: 255, g: 255, b: 255, a: 1 },
+        color: { r: 0, g: 0, b: 0, a: 1 },
         event: '',
         amount: 2,
         labelTexts: [""]

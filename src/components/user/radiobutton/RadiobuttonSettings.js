@@ -72,14 +72,14 @@ export const RadiobuttonSettings = () => {
             </EditSection>
             <EditSection
                 title='Color'
-                props={['background', 'color']}
-                summary={({ background, color }) => {
+                props={['color']}
+                summary={({ color }) => {
                     return (
                         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <div
                                 style={{
                                     background:
-                                        background && `rgba(${Object.values(background)})`,
+                                        color && `rgba(${Object.values(color)})`,
                                     display: 'flex',
                                     justifyContent: 'flex-end',
                                     textAlign: 'center',
@@ -88,28 +88,16 @@ export const RadiobuttonSettings = () => {
                                     height: '20px',
                                     width: '20px'
                                 }}
-                            >
-                                <p
-                                    style={{
-                                        color: color && `rgba(${Object.values(color)})`,
-                                        width: '100%',
-                                        textAlign: 'center'
-                                    }}
-                                >
-                                    T
-                                </p>
-                            </div>
+                            />
                         </div>
                     )
                 }}
             >
                 <EditItem
                     full={true}
-                    propKey='background'
-                    type='bg'
-                    label='Color'
+                    propKey='color'
+                    type='color'
                 />
-
             </EditSection>
 
             <EditSection
