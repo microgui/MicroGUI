@@ -9,7 +9,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
-export const Progressbar = ({ custom, onClick, size, event,
+export const Progressbar = ({ custom, onClick, size, color, event,
     text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -50,11 +50,10 @@ export const Progressbar = ({ custom, onClick, size, event,
                 >
                     <Box sx={{ width: '100%' }}>
                         {text}
-
-                        <div style={{ width: `${size}px`, margin: '0 auto' }}>
+                        <div style={{ width: `${size}px`, margin: '0 auto' }}> 
                             <MaterialProgress
                                 ref={connect}
-                                value={66}
+                                color={color} 
                                 onClick={() => {
                                     const ws = getWS()
                                     if (ws != null) {
@@ -77,7 +76,7 @@ Progressbar.craft = {
     props: {
         text: 'Progressbar',
         size: '150',
-        value: '0',
+        color: "secondary",
         event: ''
     },
     related: {
