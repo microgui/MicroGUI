@@ -1,4 +1,4 @@
-import { LinearProgress as MaterialProgress } from '@mui/material/';
+import { CircularProgress as MaterialProgress } from '@mui/material/';
 import { Box } from '@mui/material/';
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
@@ -9,7 +9,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
-export const Progressbar = ({ custom, onClick, size, event,
+export const CircularProgress = ({ custom, onClick, size, event,
     text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -71,14 +71,13 @@ export const Progressbar = ({ custom, onClick, size, event,
     )
 }
 
-Progressbar.craft = {
+CircularProgress.craft = {
     displayName: 'Progressbar',
     props: {
         text: 'Progressbar',
         size: '150',
         value: '',
         event: ''
-
     },
     related: {
         toolbar: ProgressbarSettings

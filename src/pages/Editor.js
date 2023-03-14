@@ -19,6 +19,7 @@ import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
 import { Progressbar } from '../components/user/progress/Progressbar'
+import { CircularProgress } from '../components/user/progress/CircularProgress'
 
 import GitHubIcon from '@mui/icons-material/GitHub'
 
@@ -51,7 +52,8 @@ export default function Editor() {
 					Textfield,
 					Checkbox,
 					Divider,
-					Progressbar
+					Progressbar,
+					CircularProgress
 				}}
 				// removes the 'drop-indicator' built into craft.js
 				indicator={false}

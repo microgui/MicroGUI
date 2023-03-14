@@ -1,6 +1,5 @@
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
-import { FormControlLabel, Radio, Typography } from "@mui/material"
 import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
 
@@ -67,22 +66,6 @@ export const ProgressbarSettings = () => {
                 />
             </EditSection>
 
-            <EditSection
-                title='Colors'
-                props={['color']}
-                
-            >
-                <EditItem
-
-                    propKey='color'
-                    type='radio'
-                >
-                    <FormControlLabel value='secondary' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>secondary</Typography>} />
-                    <FormControlLabel value='success' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>success</Typography>} />
-                    <FormControlLabel value='inherit' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>inherit</Typography>} />
-
-                </EditItem>
-            </EditSection>
 
             <EditSection
                 title='Event'
