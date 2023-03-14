@@ -10,6 +10,7 @@ import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
 import { Progressbar } from '../components/user/progress/Progressbar'
+import { CircularProgress } from '../components/user/progress/CircularProgress'
 
 import React from 'react'
 
@@ -55,7 +56,8 @@ export default function Simulator() {
                         Textfield,
                         Checkbox,
                         Divider,
-                        Progressbar
+                        Progressbar,
+                        CircularProgress
                     }}
                     indicator={false}
                 >

@@ -1,4 +1,4 @@
-import { LinearProgress as MaterialProgress } from '@mui/material/';
+import { CircularProgress as MaterialProgress } from '@mui/material/';
 import { Box } from '@mui/material/';
 import { useNode, useEditor } from '@craftjs/core'
 import { useRef } from 'react'
@@ -9,7 +9,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
-export const Progressbar = ({ custom, onClick, size, event,
+export const CircularProgress = ({ custom, onClick, size, event,
     text, pageX, pageY, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
@@ -50,10 +50,10 @@ export const Progressbar = ({ custom, onClick, size, event,
                 >
                     <Box sx={{ width: '100%' }}>
                         {text}
-
                         <div style={{ width: `${size}px`, margin: '0 auto' }}>
                             <MaterialProgress
                                 ref={connect}
+
                                 value={66}
                                 onClick={() => {
                                     const ws = getWS()
@@ -71,11 +71,10 @@ export const Progressbar = ({ custom, onClick, size, event,
         </Draggable>
     )
 }
-
-Progressbar.craft = {
-    displayName: 'Progressbar',
+CircularProgress.craft = {
+    displayName: 'Circular Progress',
     props: {
-        text: 'Progressbar',
+        text: 'Circular Progress',
         size: '150',
         value: '0',
         event: ''
