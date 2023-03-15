@@ -16,7 +16,7 @@ import Crop75Icon from '@mui/icons-material/Crop75'
 import TuneIcon from '@mui/icons-material/Tune'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import DensityLargeIcon from '@mui/icons-material/DensityLarge'
-import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
 import { useDrag } from 'react-dnd'
 
@@ -57,7 +57,7 @@ export const Toolbox = () => {
         Textfield: <TextFieldsIcon />,
         Checkbox: <CheckBoxIcon />,
         Divider: <DensityLargeIcon />,
-        Progressbar: <HourglassTopIcon/>
+        Progressbar: <HourglassBottomIcon/>
     }
 
     // list where we store each component to be rendered in the toolbox.
