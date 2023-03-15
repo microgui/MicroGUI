@@ -55,7 +55,7 @@ export const Tooltip = styled(({ className, name, id, ...props }) => {
         backgroundColor: 'grey',
         color: 'white',
         maxWidth: 220,
-        width: 100,
+        width: 90,
         fontSize: theme.typography.pxToRem(12),
         border: '1px solid #dadde9',
         display: 'flex',
