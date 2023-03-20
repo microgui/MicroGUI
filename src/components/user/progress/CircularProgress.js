@@ -79,8 +79,8 @@ CircularProgress.craft = {
         size: '150',
         color: { r: 0, g: 0, b: 0, a: 1 },
         value: '',
-        min: '',
-        max: '',
+        min: '0',
+        max: '100',
         event: ''
     },
     related: {
