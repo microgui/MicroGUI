@@ -10,7 +10,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
 export const CircularProgress = ({ custom, onClick, size, event,
-    text, pageX, pageY, ...props }) => {
+    text, pageX, pageY, rotation, color, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -48,12 +48,13 @@ export const CircularProgress = ({ custom, onClick, size, event,
                     name={name}
                     id={id}
                 >
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ width: '100%', transform: `rotate(${rotation}deg)` }}>
                         {text}
-                        <div style={{ width: `${size}px`, margin: '0 auto' }}> 
+                        <div style={{ width: `${size}px`, margin: '0 auto', color: `rgba(${Object.values(color)})` }}>
                             <MaterialProgress
                                 ref={connect}
                                 value={66}
+                                color="inherit"
                                 onClick={() => {
                                     const ws = getWS()
                                     if (ws != null) {
@@ -76,6 +77,7 @@ CircularProgress.craft = {
     props: {
         text: 'Progressbar',
         size: '150',
+        color: { r: 0, g: 0, b: 0, a: 1 },
         value: '',
         event: ''
     },

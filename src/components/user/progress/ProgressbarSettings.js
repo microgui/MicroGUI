@@ -2,6 +2,7 @@ import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
 import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
+import { FormControlLabel, Radio, Typography } from "@mui/material"
 
 export const ProgressbarSettings = () => {
     const [copied, setCopied] = useState(false)
@@ -50,9 +51,35 @@ export const ProgressbarSettings = () => {
                     full={true}
                 />
             </EditSection>
-            
+
             <EditSection
-                title='size'
+                title='Color'
+                props={[ 'color']}
+                summary={({ color }) => {
+                    return (
+                        <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
+                            <div
+                                style={{
+                                    background:
+                                        color && `rgba(${Object.values(color)})`,
+                                    borderRadius: '50%',
+                                    height: '20px',
+                                    width: '20px'
+                                }}
+                            />
+                        </div>
+                    )
+                }}
+            >
+                <EditItem
+                    full={true}
+                    propKey='color'
+                    type='color'
+                />
+            </EditSection>
+
+            <EditSection
+                title='Size'
                 props={['size']}
                 summary={({ size }) => {
                     return size
@@ -63,7 +90,29 @@ export const ProgressbarSettings = () => {
                     type='number'
                     label='Size'
                     full={true}
-                />
+                >
+
+                </EditItem>
+            </EditSection>
+
+            <EditSection
+                title='Rotation'
+                props={['rotation']}
+                summary={({ rotation }) => {
+                    return rotation
+                }}
+            >
+                <EditItem
+                    propKey='rotation'
+                    type='radio'
+                    label='Rotation'
+                    full={true}
+                >
+                    <FormControlLabel value='0' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>0 Degrees</Typography>} />
+                    <FormControlLabel value='90' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>90 Degrees</Typography>} />
+                    <FormControlLabel value='270' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>270 Degrees</Typography>} />
+
+                </EditItem>
             </EditSection>
 
 
