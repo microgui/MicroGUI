@@ -10,7 +10,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
 export const Progressbar = ({ custom, onClick, size, event,
-    text, pageX, pageY, rotation, color, ...props }) => {
+    text, pageX, pageY, rotation, color, min, max, ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -79,6 +79,8 @@ Progressbar.craft = {
         size: '150',
         color: { r: 0, g: 0, b: 0, a: 1 },
         value: '',
+        min: '0',
+        max: '100',
         event: ''
 
     },

@@ -54,7 +54,7 @@ export const ProgressbarSettings = () => {
 
             <EditSection
                 title='Color'
-                props={[ 'color']}
+                props={['color']}
                 summary={({ color }) => {
                     return (
                         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
@@ -113,6 +113,17 @@ export const ProgressbarSettings = () => {
                     <FormControlLabel value='270' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>270 Degrees</Typography>} />
 
                 </EditItem>
+            </EditSection>
+
+            <EditSection
+                title='Value range'
+                props={['min', 'max']}
+                summary={({ min, max }) => {
+                    return `[${Number(min)},${Number(max)}]`
+                }}
+            >
+                <EditItem propKey='min' type='min' label='Min' />
+                <EditItem propKey='max' type='max' label='Max' />
             </EditSection>
 
 
