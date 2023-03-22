@@ -50,9 +50,10 @@ export const CircularProgress = ({ custom, onClick, size, event,
                 >
                     <Box sx={{ width: '100%', transform: `rotate(${rotation}deg)` }}>
                         {text}
-                        <div style={{ width: `${size}px`, margin: '0 auto', color: `rgba(${Object.values(color)})` }}>
+                        <div style={{ width: '100%', margin: '0 auto', color: `rgba(${Object.values(color)})` }}>
                             <MaterialProgress
                                 ref={connect}
+                                size={size / 3.14}
                                 value={66}
                                 color="inherit"
                                 onClick={() => {
