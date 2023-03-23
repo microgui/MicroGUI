@@ -19,11 +19,13 @@ import { ToolbarUpload } from './ToolbarUpload'
 import { useEffect } from "react";
 
 /**
- * Creates a toolbar for various tools related to the 
- * canvas, such as redo etc.
- */
-export const Toolbar = () => {
-    // check if undo/redo is possible using craft.js functionality.
+* Creates a toolbar for various tools related to the
+* canvas, such as redo etc.
+*/
+
+import React, { useState } from 'react';
+
+export const Toolbar = ({ onSimulateToggle }) => {
     const { canUndo, canRedo } = useEditor((_, query) => ({
         canUndo: query.history.canUndo(),
         canRedo: query.history.canRedo()
@@ -47,6 +49,7 @@ export const Toolbar = () => {
             document.removeEventListener("keydown", handleKeyDown);
         };
     }, []);
+    const [hideOnSimulate, setHideOnSimulate] = useState(false);
 
     return (
         <div className='toolbar'>
@@ -55,10 +58,12 @@ export const Toolbar = () => {
                     title='Undo (Ctrl+Z or CMD+Z)'
                 >
                     <span
-                        style={{ cursor: canUndo ? 'pointer' : 'not-allowed' }}
+                        style={{
+                            cursor: canUndo ? 'pointer' : 'not-allowed',
+                            visibility: hideOnSimulate ? 'hidden' : 'visible',
+                        }}
                     >
                         <IconButton
-                            // The button is disabled if there is nothing to undo 
                             disabled={!canUndo}
                             onClick={() => {
                                 try {
@@ -79,10 +84,12 @@ export const Toolbar = () => {
                     title='Redo'
                 >
                     <span
-                        style={{ cursor: canRedo ? 'pointer' : 'not-allowed' }}
+                        style={{
+                            cursor: canRedo ? 'pointer' : 'not-allowed',
+                            visibility: hideOnSimulate ? 'hidden' : 'visible',
+                        }}
                     >
                         <IconButton
-                            // The button is disabled if there is nothing to redo 
                             disabled={!canRedo}
                             onClick={() => {
                                 try {
@@ -99,34 +106,26 @@ export const Toolbar = () => {
                     </span>
                 </Tooltip>
 
-                {/* Renders the clear button of the toolbar */}
-                <ToolbarClear />
-
+                <ToolbarClear
+                    style={{
+                        visibility: hideOnSimulate ? 'hidden' : 'visible',
+                    }}
+                />
             </Stack>
             <Stack direction='row' spacing={0.7} sx={{ paddingRight: '10px' }}>
-                <Link
-                    to='/simulator'
-                    target='_blank'
-                    rel='noreferrer'
-                    style={{ textDecoration: 'none' }}
+                <MaterialButton
+                    size='small'
+                    variant='contained'
+                    color='info'
+                    disableElevation
+                    onClick={() => {
+                        localStorage.setItem('data', query.serialize());
+                        onSimulateToggle();
+                    }}
                 >
-                    <MaterialButton
-                        size='small'
-                        variant='contained'
-                        color='info'
-                        disableElevation
-                        /* When the user clicks the 'simulate' button the state is serialized
-                           using craft.js functionality and the data is saved in the 
-                           browser's local storage. */
-                        onClick={() => {
-                            localStorage.setItem('data', query.serialize())
-                        }}
-                    >
-                        <PlayCircleOutlineIcon style={{ padding: '2px' }} />
-                        Simulate
-                    </MaterialButton>
-                </Link>
-
+                    <PlayCircleOutlineIcon style={{ padding: '2px' }} />
+                    Simulate
+                </MaterialButton>
                 {/* Renders the save/load buttons of the toolbar */}
                 <ToolbarSave />
                 <ToolbarLoad />
