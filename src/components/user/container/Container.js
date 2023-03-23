@@ -1,18 +1,34 @@
-import { useNode } from '@craftjs/core';
+import { useNode, useEditor, Element } from '@craftjs/core';
 import React, { useRef } from 'react';
 import { Box } from '@mui/material'
 import Draggable from 'react-draggable';
-import { useEditor } from '@craftjs/core';
 import { ContainerSettings } from './ContainerSettings'
+import { handleStop, getX, getY } from '../Utilities';
+import { useDrop } from 'react-dnd';
 
-export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, children, ...props }) => {
+export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, children, pageX, pageY, ...props }) => {
   const {
     connectors: { connect },
+    actions,
   } = useNode();
 
   const { enabled } = useEditor((state) => ({
     enabled: state.options.enabled,
   }));
+
+  const [, dropRef] = useDrop({
+    accept: 'component',
+    drop(item, monitor) {
+      const offset = monitor.getClientOffset();
+      if (offset && containerRef.current) {
+        const dropTargetXy = containerRef.current.getBoundingClientRect();
+        return {
+          x: parseInt(offset.x - dropTargetXy.left),
+          y: parseInt(offset.y - dropTargetXy.top),
+        };
+      }
+    },
+  });
 
   const containerRef = useRef(null);
 
@@ -21,23 +37,28 @@ export const Container = ({ width, height, backgroundColor, border, childrenJust
       disabled={!enabled}
       bounds="parent"
       nodeRef={containerRef}
+      onStop={() => handleStop(actions, containerRef)}
+      position={{
+        x: getX(pageX, containerRef),
+        y: getY(pageY, containerRef),
+      }}
     >
       <Box
         ref={(ref) => {
           if (ref) {
             containerRef.current = ref;
-            connect(containerRef.current);
+            connect(dropRef(ref));
           }
         }}
         {...props}
-
+        id='canvasElement'
         sx={{
           width: width,
           height: height,
           backgroundColor: backgroundColor ? `rgba(${Object.values(backgroundColor)})` : 'red',
           border: border,
-          position: 'relative',
-          overflow: 'hidden',
+          position: 'static',
+          overflow: 'visible',
           display: 'flex',
           justifyContent: childrenJustify,
           alignItems: childrenAlign,
@@ -45,6 +66,7 @@ export const Container = ({ width, height, backgroundColor, border, childrenJust
         }}>
         {children}
       </Box>
+
     </Draggable>
   );
 };
@@ -53,8 +75,8 @@ Container.craft = {
   displayName: 'Container',
   props: {
     id: 'container',
-    width: 100,
-    height: 120,
+    width: 150,
+    height: 180,
     backgroundColor: { r: 204, b: 153, g: 153, a: 1 },
     border: 'solid',
     childrenJustify: 'flex-start',
