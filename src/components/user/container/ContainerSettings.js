@@ -4,8 +4,10 @@ import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
 
 export const ContainerSettings = () => {
-  const { nodeName } = useNode((node) => ({
+  const { nodeName, childrenJustify, childrenAlign } = useNode((node) => ({
     nodeName: node.data.custom.displayName || node.data.displayName,
+    childrenJustify: node.data.props.childrenJustify,
+    childrenAlign: node.data.props.childrenAlign,
   }))
 
   return (
@@ -32,16 +34,6 @@ export const ContainerSettings = () => {
       </EditSection>
 
       <EditSection
-        title="Padding"
-        props={["padding"]}
-        summary={({ padding }) => {
-          return `${padding}px`
-        }}
-      >
-        <EditItem propKey="padding" type="number" label="Padding" />
-      </EditSection>
-
-      <EditSection
         title="Border"
         props={["border"]}
         summary={({ border }) => {
@@ -52,13 +44,36 @@ export const ContainerSettings = () => {
       </EditSection>
 
       <EditSection
-        title="Border Radius"
-        props={["borderRadius"]}
-        summary={({ borderRadius }) => {
-          return `${borderRadius}px`
-        }}
+        title="Children Alignment"
+        props={["childrenJustify", "childrenAlign"]}
+        summary={() => { return `Horizontal: ${childrenJustify}, Vertical: ${childrenAlign}` }}
+
       >
-        <EditItem propKey="borderRadius" type="number" label="Border Radius" />
+        <EditItem
+          propKey="childrenJustify"
+          type="select"
+          label="Horizontal Alignment"
+          options={[
+            { value: 'flex-start', label: 'Start' },
+            { value: 'center', label: 'Center' },
+            { value: 'flex-end', label: 'End' },
+            { value: 'space-between', label: 'Space Between' },
+            { value: 'space-around', label: 'Space Around' },
+            { value: 'space-evenly', label: 'Space Evenly' },
+          ]}
+        />
+        <EditItem
+          propKey="childrenAlign"
+          type="select"
+          label="Vertical Alignment"
+          options={[
+            { value: 'flex-start', label: 'Start' },
+            { value: 'center', label: 'Center' },
+            { value: 'flex-end', label: 'End' },
+            { value: 'stretch', label: 'Stretch' },
+            { value: 'baseline', label: 'Baseline' },
+          ]}
+        />
       </EditSection>
     </React.Fragment>
   )
