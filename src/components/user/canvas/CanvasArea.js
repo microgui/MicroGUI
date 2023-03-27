@@ -13,6 +13,7 @@ export const CanvasArea = ({ background, image, width, height, children }) => {
             if (offset) {
                 const dropTargetXy = document.getElementById('canvasElement').getBoundingClientRect();
                 return ({
+                    id: 'ROOT',
                     x: parseInt(offset.x - dropTargetXy.left),
                     y: parseInt(offset.y - dropTargetXy.top)
                 })

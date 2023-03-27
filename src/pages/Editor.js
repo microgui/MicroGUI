@@ -67,14 +67,7 @@ export default function Editor() {
 						<Toolbar />
 						<Frame >
 							{/*The canvas element where the user can drop components*/}
-							<Element is={CanvasArea} canvas>
-								<Checkbox></Checkbox>
-								<Element is={Container} canvas >
-									<Checkbox></Checkbox>
-								</Element>
-
-							</Element>
-
+							<Element is={CanvasArea} canvas />
 						</Frame>
 					</div>
 					<div className='right'>

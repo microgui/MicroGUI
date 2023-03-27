@@ -91,7 +91,7 @@ export const Toolbox = () => {
                         }
                         const node = query.parseFreshNode(freshNode).toNode()
                         // add the created node to the canvas.
-                        actions.add(node, 'ROOT')
+                        actions.add(node, dropResult.id)
                         count[component.name] += 1
                     }
                 }
