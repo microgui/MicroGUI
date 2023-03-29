@@ -10,6 +10,7 @@ import { Checkbox } from '../user/checkbox/Checkbox'
 import { Divider } from '../user/divider/Divider'
 import { Progressbar } from '../user/progress/Progressbar'
 import { CircularProgress } from '../user/progress/CircularProgress'
+import { Radiobutton} from '../user/radiobutton/Radiobutton'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
@@ -19,6 +20,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import DensityLargeIcon from '@mui/icons-material/DensityLarge'
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 import { useDrag } from 'react-dnd'
 
@@ -38,7 +40,8 @@ export const Toolbox = () => {
         Checkbox,
         Divider,
         Progressbar,
-        CircularProgress
+        CircularProgress,
+        Radiobutton
     ]
 
     // a counter for each component, used when assigning them IDs
@@ -50,7 +53,8 @@ export const Toolbox = () => {
         Checkbox: 1,
         Divider: 1,
         Progressbar: 1,
-        CircularProgress: 1
+        CircularProgress: 1,
+        Radiobutton: 1,
     }
 
     // list of icons for the different components
@@ -62,7 +66,8 @@ export const Toolbox = () => {
         Checkbox: <CheckBoxIcon />,
         Divider: <DensityLargeIcon />,
         Progressbar: <HourglassTopIcon/>,
-        CircularProgress: <AutorenewIcon/>
+        CircularProgress: <AutorenewIcon/>, 
+        Radiobutton:<RadioButtonUncheckedIcon />
     }
 
     // list where we store each component to be rendered in the toolbox.

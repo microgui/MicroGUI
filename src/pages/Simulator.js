@@ -9,6 +9,7 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
 import { Progressbar } from '../components/user/progress/Progressbar'
 import { CircularProgress } from '../components/user/progress/CircularProgress'
 
@@ -56,6 +57,7 @@ export default function Simulator() {
                         Textfield,
                         Checkbox,
                         Divider,
+                        Radiobutton,
                         Progressbar,
                         CircularProgress
                     }}
