@@ -9,6 +9,7 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { CanvasObject} from '../components/user/canvasObject/CanvasObject'
 
 import React from 'react'
 
@@ -53,7 +54,8 @@ export default function Simulator() {
                         Switch,
                         Textfield,
                         Checkbox,
-                        Divider
+                        Divider,
+                        CanvasObject
                     }}
                     indicator={false}
                 >
