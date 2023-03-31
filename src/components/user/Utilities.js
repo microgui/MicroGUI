@@ -7,14 +7,14 @@ export function capitalize(str) {
 /* Function used by the components to save their coordinates 
    after being dragged. */
 export function handleStop(actions, node) {
-    // getting the bounds of the canvas
-    const canvas = document.getElementById('canvasElement').getBoundingClientRect();
+    // getting the bounds of the parent
+    const parent = node.current.parentNode.getBoundingClientRect();
     // getting the bounds of the specific node(component)
     const rect = node.current.getBoundingClientRect()
-    // store the components position relative to the canvas
+    // store the components position relative to the parent
     const relativePos = {
-        left: rect.left - canvas.left,
-        top: rect.top - canvas.top
+        left: rect.left - parent.left,
+        top: rect.top - parent.top
     }
     // update the props of the component
     actions.setProp((props) => {
@@ -24,28 +24,29 @@ export function handleStop(actions, node) {
 }
 
 /* get the correct x position for the component, adjusting
-   to make sure the component is contained in the canvas */
+   to make sure the component is contained in the parent */
 export function getX(pageX, node) {
-    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
-    if (pageX < 0) return 0
-    // making sure there is a node
-    if (node.current) {
+
+    if (node.current) { // is null before first update
+        const parent = node.current.parentNode.getBoundingClientRect()
+        if (pageX < 0) return 0
         const element = node.current.getBoundingClientRect()
-        // checks if the component is outside of the canvas, if 
+        // checks if the component is outside of the parent, if 
         // it is then it will get a 'correct' position
-        if (pageX + element.width > canvas.width) return canvas.width - element.width
+        if (pageX + element.width > parent.width) return parent.width - element.width
     }
     return pageX
 }
 
 /* get the correct y position for the component, adjusting
-   to make sure the component is contained in the canvas */
+   to make sure the component is contained in the parent */
 export function getY(pageY, node) {
-    const canvas = document.getElementById('canvasElement')?.getBoundingClientRect()
-    if (pageY < 0) return 0
-    if (node.current) {
+
+    if (node.current) { // is null before first update
+        const parent = node.current.parentNode.getBoundingClientRect()
+        if (pageY < 0) return 0
         const element = node.current.getBoundingClientRect()
-        if (pageY + element.height > canvas.height) return canvas.height - element.height
+        if (pageY + element.height > parent.height) return parent.height - element.height
     }
     return pageY
 }
