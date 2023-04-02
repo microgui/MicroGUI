@@ -33,7 +33,7 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
         actions.setProp((props) => {
             props.width = data.size.width
             props.height = data.size.height
-            console.log(variant)
+
         })
     }
 
@@ -53,7 +53,7 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
                 height={height}
                 width={width}
                 onResize={resize}
-                minConstraints={[90, 90]}
+                minConstraints={[70, 70]}
                 maxConstraints={[480, 320]}>
 
                 <div
@@ -67,16 +67,14 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
                     >
                         <Box
                             ref={connect}
-                            id='canvasElement'
                             sx={{
                                 width: width,
                                 height: height,
                                 backgroundImage: `url(${image})`,
-                                backgroundSize:  variant, 
+                                backgroundSize: variant,
                                 backgroundRepeat: 'no-repeat',
                                 backgroundPosition: 'center',
                                 position: 'relative',
-
                                 border: '1px solid black'
                             }}
 
@@ -91,10 +89,10 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
 }
 
 CanvasObject.craft = {
-    displayName: 'Canvas object',
+    displayName: 'Canvas Object',
     props: {
-        text: 'Canvas object',
-        variant: '',
+        text: 'Canvas Object',
+        variant: '100%100%',
         width: 150,
         height: 150,
         event: ''
