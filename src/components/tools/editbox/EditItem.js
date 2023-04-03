@@ -1,5 +1,5 @@
 import { useNode } from '@craftjs/core'
-import { Grid, Slider, RadioGroup, Button } from '@mui/material'
+import { Grid, Slider, RadioGroup, Button, Switch } from '@mui/material'
 import { useState } from 'react'
 
 import { EditTextInput } from './EditTextInput'
@@ -137,7 +137,7 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                         <RadioGroup
                             value={propValue}
                             onChange={(_, value) => {
-                                if(!isNaN(value)) value = parseInt(value)
+                                if (!isNaN(value)) value = parseInt(value)
                                 setProp((props) => {
                                     props[propKey] = value
                                 })
@@ -166,6 +166,13 @@ export const EditItem = ({ full = false, propKey, type, ...props }) => {
                     MinMaxInput(type)
                 ) : type === 'sliderWidth' ? (
                     SliderWidth()
+                ) : type === 'switch' ? (
+                    <Switch checked={propValue}
+                        onChange={(_, value) => {
+                            setProp((props) => {
+                                props[propKey] = value
+                            })
+                        }} />
                 ) : null
                 }
             </div>
