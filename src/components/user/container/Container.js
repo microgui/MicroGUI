@@ -1,4 +1,4 @@
-import { useNode, useEditor, Element } from '@craftjs/core';
+import { useNode, useEditor } from '@craftjs/core';
 import React, { useRef } from 'react';
 import { Box } from '@mui/material'
 import Draggable from 'react-draggable';
@@ -7,7 +7,7 @@ import { handleStop, getX, getY } from '../Utilities';
 import { useDrop } from 'react-dnd';
 import { Tooltip } from '../../tools/Tooltip'
 
-export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, children, pageX, pageY, ...props }) => {
+export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, children, pageX, pageY, draggable, ...props }) => {
     const {
         id,
         name,
@@ -17,9 +17,6 @@ export const Container = ({ width, height, backgroundColor, border, childrenJust
         name: node.data.displayName,
     }))
 
-    const { enabled } = useEditor((state) => ({
-        enabled: state.options.enabled,
-    }));
 
     const [, dropTarget] = useDrop({
         accept: "component",
@@ -40,7 +37,7 @@ export const Container = ({ width, height, backgroundColor, border, childrenJust
 
     return (
         <Draggable
-            disabled={!enabled}
+            disabled={!draggable}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
@@ -93,6 +90,7 @@ Container.craft = {
         border: 'solid',
         childrenJustify: 'flex-start',
         childrenAlign: 'flex-start',
+        draggable: true
     },
     related: {
         toolbar: ContainerSettings
