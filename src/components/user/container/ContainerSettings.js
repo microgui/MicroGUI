@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
+import { FormControlLabel, Radio, Typography, Switch } from "@mui/material"
+
 
 export const ContainerSettings = () => {
     const [copied, setCopied] = useState(false)
 
-    const { id, childrenJustify, childrenAlign } = useNode((node) => ({
-        childrenJustify: node.data.props.childrenJustify,
-        childrenAlign: node.data.props.childrenAlign,
-    }))
+    const { id } = useNode()
 
     const copyId = () => {
         setCopied(true)
@@ -28,6 +27,15 @@ export const ContainerSettings = () => {
                     disabled={copied}
                 >
                     {copied ? 'Copied' : 'Copy'}
+                </EditItem>
+            </EditSection>
+            <EditSection
+                title='Draggable'
+                props={["draggable"]}
+                summary={({ draggable }) => {
+                    return draggable
+                }}>
+                <EditItem propKey='draggable' type='switch'>
                 </EditItem>
             </EditSection>
             <EditSection
@@ -80,37 +88,41 @@ export const ContainerSettings = () => {
                 <EditItem propKey="border" type="text" label="Border" />
             </EditSection>
             <EditSection
-                title="Children Alignment"
-                props={["childrenJustify", "childrenAlign"]}
-                summary={() => { return `Horizontal: ${childrenJustify}, Vertical: ${childrenAlign}` }}
-
+                title="Children Justify"
+                props={["childrenJustify"]}
+                summary={({ childrenJustify }) => {
+                    return childrenJustify
+                }}
             >
-                <EditItem
-                    propKey="childrenJustify"
-                    type="select"
-                    label="Horizontal Alignment"
-                    options={[
-                        { value: 'flex-start', label: 'Start' },
-                        { value: 'center', label: 'Center' },
-                        { value: 'flex-end', label: 'End' },
-                        { value: 'space-between', label: 'Space Between' },
-                        { value: 'space-around', label: 'Space Around' },
-                        { value: 'space-evenly', label: 'Space Evenly' },
-                    ]}
-                />
-                <EditItem
-                    propKey="childrenAlign"
-                    type="select"
-                    label="Vertical Alignment"
-                    options={[
-                        { value: 'flex-start', label: 'Start' },
-                        { value: 'center', label: 'Center' },
-                        { value: 'flex-end', label: 'End' },
-                        { value: 'stretch', label: 'Stretch' },
-                        { value: 'baseline', label: 'Baseline' },
-                    ]}
-                />
+                <EditItem propKey='childrenJustify' type='radio'>
+                    <FormControlLabel value='flex-start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-Start</Typography>} />
+                    <FormControlLabel value='flex-end' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-End</Typography>} />
+                    <FormControlLabel value='center' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
+                    <FormControlLabel value='space-between' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Space-Between</Typography>} />
+                    <FormControlLabel value='space-around' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Space-Around</Typography>} />
+                </EditItem>
             </EditSection>
+            <EditSection
+                title="Children Align"
+                props={["childrenAlign"]}
+                summary={({ childrenAlign }) => {
+                    return childrenAlign
+                }}
+            >
+                <EditItem propKey='childrenAlign' type='radio'>
+                    <FormControlLabel value='flex-start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-Start</Typography>} />
+                    <FormControlLabel value='flex-end' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-End</Typography>} />
+                    <FormControlLabel value='center' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
+                    <FormControlLabel value='stretch' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
+                    <FormControlLabel value='start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Start</Typography>} />
+                </EditItem>
+
+
+
+
+
+            </EditSection>
+
         </React.Fragment>
     )
 }
