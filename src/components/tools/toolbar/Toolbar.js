@@ -16,6 +16,7 @@ import { ToolbarClear } from './ToolbarClear'
 import { ToolbarSave } from './ToolbarSave'
 import { ToolbarLoad } from './ToolbarLoad'
 import { ToolbarUpload } from './ToolbarUpload'
+import { useEffect } from "react";
 
 /**
  * Creates a toolbar for various tools related to the 
@@ -29,11 +30,29 @@ export const Toolbar = () => {
     }))
     const { actions, query } = useEditor()
 
+    useEffect(() => {
+        function handleKeyDown(event) {
+            const isMac = /Mac/i.test(navigator.platform);
+            if ((isMac && event.metaKey && event.key === "z") || (!isMac && event.ctrlKey && event.key === "z")) {
+                // Call your undo function here
+                try {
+                    actions.history.undo()
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        }
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
     return (
         <div className='toolbar'>
             <Stack direction='row'>
                 <Tooltip
-                    title='Undo'
+                    title='Undo (Ctrl+Z or CMD+Z)'
                 >
                     <span
                         style={{ cursor: canUndo ? 'pointer' : 'not-allowed' }}
@@ -48,6 +67,7 @@ export const Toolbar = () => {
                                     console.log(error)
                                 }
                             }}
+
                         >
                             <UndoIcon
                                 sx={{ color: 'grey' }}
