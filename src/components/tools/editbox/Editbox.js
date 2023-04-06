@@ -43,10 +43,8 @@ export const Editbox = () => {
                         <h3 style={{ color: 'grey' }}>Layers</h3>
                     </Stack>
                 </div>
-                {active && related.toolbar && React.createElement(related.toolbar)}
-                {!active && (
-                    <p style={{ margin: '20px', fontWeight: 'normal' }}>Drag a component to the canvas area and click on it to start editing.</p>
-                )}
+                <p style={{ margin: '20px', fontWeight: 'normal' }}>Not implemented</p>
+
             </div>
 
         </div>
