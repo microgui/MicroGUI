@@ -1,4 +1,5 @@
 import EditIcon from '@mui/icons-material/Edit'
+import LayersIcon from '@mui/icons-material/Layers';
 import { Stack } from '@mui/material'
 import { useEditor } from '@craftjs/core'
 import React from 'react'
@@ -15,20 +16,37 @@ export const Editbox = () => {
 
     return (
         <div className="editbox">
-            <div className="editHeader">
-                <Stack
-                    direction='row'
-                    alignItems='center'
-                    spacing={1}
-                >
-                    <EditIcon style={{ color: 'grey' }} />
-                    <h2 style={{ color: 'grey' }}>Edit</h2>
-                </Stack>
+            <div className="editContainer">
+                <div className="editHeader">
+                    <Stack
+                        direction='row'
+                        alignItems='center'
+                        spacing={1}
+                    >
+                        <EditIcon style={{ color: 'grey' }} />
+                        <h3 style={{ color: 'grey' }}>Edit</h3>
+                    </Stack>
+                </div>
+                {active && related.toolbar && React.createElement(related.toolbar)}
+                {!active && (
+                    <p style={{ margin: '20px', fontWeight: 'normal' }}>Drag a component to the canvas area and click on it to start editing.</p>
+                )}
             </div>
-            {active && related.toolbar && React.createElement(related.toolbar)}
-            {!active && (
-                <h3 style={{ marginTop: '20px', fontWeight: 'normal' }}>Drag a component to the canvas area and click on it to start editing.</h3>
-            )}
+            <div className="editContainer">
+                <div className="editHeader" >
+                    <Stack
+                        direction='row'
+                        alignItems='center'
+                        spacing={1}
+                    >
+                        <LayersIcon style={{ color: 'grey' }} />
+                        <h3 style={{ color: 'grey' }}>Layers</h3>
+                    </Stack>
+                </div>
+                <p style={{ margin: '20px', fontWeight: 'normal' }}>Not implemented</p>
+
+            </div>
+
         </div>
     )
 } 
