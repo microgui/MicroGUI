@@ -10,7 +10,7 @@
 }
 
 header {
-    height: 10vh;
+    height: 7vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,7 +19,8 @@ header {
 }
 
 footer {
-    height: 10vh;
+    height: 5vh;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,8 +33,8 @@ footer {
 }
 
 .logoTest {
-    height: 48px;
-    width: 48px;
+    height: 36px;
+    width: 36px;
     border-radius: 10px;
 }
 
@@ -46,49 +47,45 @@ footer {
 }
 
 .row {
-    min-height: 80vh;
+    min-height: 85vh;
+    height: 100%;
     background-color: #F2F2F2;
+    display: flex;
+    justify-content: space-between;
 }
 
 .left {
-    width: 25%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: 60px;
-    padding-left: 10px;
 }
 
 .middle {
-    width: 50%;
+    width: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
 }
 
 .right {
-    width: 25%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
-    padding-top: 60px;
-    padding-right: 30px;
 }
 
 .toolbar {
-    margin: 10px;
-    height: 35px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: white;
     min-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     height: 50px;
     border: 1px solid #E3E6E9;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .toolbox {
@@ -97,9 +94,8 @@ footer {
     justify-content: center;
     background-color: white;
     width: 100px;
-    height: 500px;
+    height: 100%;
     border: 1px solid #E3E6E9;
-    border-radius: 8px;
 }
 
 .editbox {
@@ -109,18 +105,24 @@ footer {
     justify-content: flex-start;
     background-color: white;
     width: 250px;
-    height: 500px;
+    height: 100%;
     border: 1px solid #E3E6E9;
-    border-radius: 8px;
     overflow-y: scroll;
 }
 
 .editHeader {
     width: 100%;
+    height: 30px;
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #E3E6E9;
     padding-bottom: 5px;
+}
+
+.editContainer {
+    width: 100%;
+    height: 50%;
+    overflow-x: scroll;
 }
 
 h4,

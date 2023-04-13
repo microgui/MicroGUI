@@ -9,6 +9,9 @@ import { Textfield } from '../user/textfield/Textfield'
 import { Checkbox } from '../user/checkbox/Checkbox'
 import { Divider } from '../user/divider/Divider'
 import {CanvasObject} from '../user/canvasObject/CanvasObject'
+import { Progressbar } from '../user/progress/Progressbar'
+import { CircularProgress } from '../user/progress/CircularProgress'
+import { Radiobutton} from '../user/radiobutton/Radiobutton'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
@@ -17,6 +20,9 @@ import TuneIcon from '@mui/icons-material/Tune'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import DensityLargeIcon from '@mui/icons-material/DensityLarge'
 import PhotoIcon from '@mui/icons-material/Photo';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
 import { useDrag } from 'react-dnd'
 
@@ -35,7 +41,10 @@ export const Toolbox = () => {
         Textfield,
         Checkbox,
         Divider,
-        CanvasObject
+        CanvasObject,
+        Progressbar,
+        CircularProgress,
+        Radiobutton
     ]
 
     // a counter for each component, used when assigning them IDs
@@ -46,7 +55,10 @@ export const Toolbox = () => {
         Textfield: 1,
         Checkbox: 1,
         Divider: 1,
-        CanvasObject: 1
+        CanvasObject: 1,
+        Progressbar: 1,
+        CircularProgress: 1,
+        Radiobutton: 1,
     }
 
     // list of icons for the different components
@@ -57,7 +69,10 @@ export const Toolbox = () => {
         Textfield: <TextFieldsIcon />,
         Checkbox: <CheckBoxIcon />,
         Divider: <DensityLargeIcon />,
-        CanvasObject: <PhotoIcon/>
+        CanvasObject: <PhotoIcon/>,
+        Progressbar: <HourglassTopIcon/>,
+        CircularProgress: <AutorenewIcon/>, 
+        Radiobutton:<RadioButtonUncheckedIcon />
     }
 
     // list where we store each component to be rendered in the toolbox.
