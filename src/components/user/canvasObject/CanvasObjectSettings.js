@@ -1,6 +1,6 @@
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
-import { FormControlLabel, Radio, Typography} from "@mui/material"
+import { FormControlLabel, Radio, Typography } from "@mui/material"
 
 import { Tooltip } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear';
@@ -137,17 +137,27 @@ export const CanvasObjectSettings = () => {
                     propKey='variant'
                     type='radio'
                 >
-            
 
 
-                            <FormControlLabel value='100% 100%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
-                            <FormControlLabel value='cover' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Cover</Typography>} />
-                            <FormControlLabel value='contain' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Contain</Typography>} />
-                            <FormControlLabel value='50%50%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
 
-                
+                    <FormControlLabel value='100% 100%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
+                    <FormControlLabel value='cover' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Cover</Typography>} />
+                    <FormControlLabel value='contain' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Contain</Typography>} />
+                    <FormControlLabel value='50%50%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
+
+
                 </EditItem>
             </EditSection>
+
+
+            <EditSection
+                title='URL'
+                props={['URL']}
+
+            >
+                <EditItem propKey='URL' type='text' label='URL' full={true} />
+            </EditSection>
+
 
 
 

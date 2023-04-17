@@ -97,6 +97,16 @@ export const TextfieldSettings = () => {
             >
                 <EditItem full={true} propKey='color' type='color' label='Text' />
             </EditSection>
+
+            <EditSection
+                title='URL'
+                props={['URL']}
+
+            >
+                <EditItem propKey='URL' type='text' label='URL' full={true} />
+            </EditSection>
+
+
         </React.Fragment>
     )
 }

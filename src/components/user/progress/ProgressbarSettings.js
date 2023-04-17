@@ -126,6 +126,16 @@ export const ProgressbarSettings = () => {
                 <EditItem propKey='max' type='max' label='Max' />
             </EditSection>
 
+            <EditSection
+                title='URL'
+                props={['URL']}
+
+            >
+                <EditItem propKey='URL' type='text' label='URL' full={true} />
+            </EditSection>
+
+
+
 
             <EditSection
                 title='Event'

@@ -10,7 +10,7 @@ import { ProgressbarSettings } from './ProgressbarSettings'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
 export const CircularProgress = ({ custom, onClick, size, event,
-    text, pageX, pageY, rotation, color, min, max, ...props }) => {
+    text, pageX, pageY, rotation, color, min, max, URL,  ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -82,6 +82,7 @@ CircularProgress.craft = {
         value: '',
         min: '0',
         max: '100',
+        URL: '',
         event: ''
     },
     related: {
