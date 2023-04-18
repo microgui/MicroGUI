@@ -29,7 +29,8 @@ export function getX(pageX, node) {
 
     if (node.current) { // is null before first update
         const parent = node.current.parentNode.getBoundingClientRect()
-        if (pageX < 0) return 0
+        // Checks if parent is a container
+        if (pageX < 0 || node.current.parentNode.id.includes('Container') ) return 0
         const element = node.current.getBoundingClientRect()
         // checks if the component is outside of the parent, if 
         // it is then it will get a 'correct' position
@@ -44,7 +45,8 @@ export function getY(pageY, node) {
 
     if (node.current) { // is null before first update
         const parent = node.current.parentNode.getBoundingClientRect()
-        if (pageY < 0) return 0
+        // Checks if parent is a container
+        if (pageY < 0 || node.current.parentNode.id.includes('Container'))  return 0
         const element = node.current.getBoundingClientRect()
         if (pageY + element.height > parent.height) return parent.height - element.height
     }
