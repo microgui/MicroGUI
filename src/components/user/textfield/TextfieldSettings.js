@@ -106,6 +106,14 @@ export const TextfieldSettings = () => {
                 <EditItem propKey='URL' type='text' label='URL' full={true} />
             </EditSection>
 
+            <EditSection
+                title='Interval'
+                props={['interval']}
+
+            >
+                <EditItem propKey='interval' type='number' label='Interval' full={true} />
+            </EditSection>
+
 
         </React.Fragment>
     )

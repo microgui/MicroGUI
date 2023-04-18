@@ -21,6 +21,8 @@ export const CanvasObjectSettings = () => {
 
     const [isImage, setIsImage] = useState(false)
 
+
+    
     const loadFile = (file) => {
         var reader = new FileReader()
         reader.onload = function () {
@@ -30,7 +32,9 @@ export const CanvasObjectSettings = () => {
             })
         }
         reader.readAsDataURL(file)
+        
     }
+    
 
     return (
         <React.Fragment>
@@ -157,6 +161,15 @@ export const CanvasObjectSettings = () => {
             >
                 <EditItem propKey='URL' type='text' label='URL' full={true} />
             </EditSection>
+
+            <EditSection
+                title='Interval'
+                props={['interval']}
+
+            >
+                <EditItem propKey='interval' type='number' label='Interval' full={true} />
+            </EditSection>
+
 
 
 
