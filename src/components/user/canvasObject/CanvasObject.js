@@ -11,7 +11,7 @@ import { Tooltip } from '../../tools/Tooltip'
 import { CanvasObjectSettings } from './CanvasObjectSettings'
 import { handleStop, getX, getY } from '../Utilities'
 
-export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, URL, interval,  ...props }) => {
+export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, URL, interval, key,  ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -36,6 +36,8 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
 
         })
     }
+
+    // lägg en liten förklaring grej för hur API skiten funkar i frontenden 
 
     return (
         <Draggable
@@ -96,6 +98,7 @@ CanvasObject.craft = {
         width: 150,
         height: 150,
         URL: '',
+        key: '',
         interval: '',
         event: ''
     },

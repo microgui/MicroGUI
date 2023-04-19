@@ -132,6 +132,19 @@ export const ProgressbarSettings = () => {
 
             >
                 <EditItem propKey='URL' type='text' label='URL' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    URL for an API 
+                </p>
+
             </EditSection>
 
             <EditSection
@@ -140,6 +153,39 @@ export const ProgressbarSettings = () => {
 
             >
                 <EditItem propKey='interval' type='number' label='Interval' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    This interval referes to the frequency of how often the API updates (in seconds)
+                </p>
+
+            </EditSection>
+
+            <EditSection
+                title='Key '
+                props={['key']}
+
+            >
+                <EditItem propKey='key' type='text' label='Key' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    This is the JSON key to be extracted from the API 
+                </p>
             </EditSection>
 
 
