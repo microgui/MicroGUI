@@ -7,7 +7,7 @@ import { handleStop, getX, getY } from '../Utilities';
 import { useDrop } from 'react-dnd';
 import { Tooltip } from '../../tools/Tooltip'
 
-export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, children, pageX, pageY, draggable, ...props }) => {
+export const Container = ({ width, height, backgroundColor, border, childrenJustify, childrenAlign, childrenDirection, children, pageX, pageY, draggable, ...props }) => {
     const {
         id,
         name,
@@ -68,7 +68,7 @@ export const Container = ({ width, height, backgroundColor, border, childrenJust
                                 display: 'flex',
                                 justifyContent: childrenJustify,
                                 alignItems: childrenAlign,
-                                flexDirection: 'column',
+                                flexDirection: childrenDirection,
                             }}
                             {...props}
                         >
@@ -90,6 +90,7 @@ Container.craft = {
         border: 'solid',
         childrenJustify: 'flex-start',
         childrenAlign: 'flex-start',
+        childrenDirection: 'column',
         draggable: true
     },
     related: {

@@ -110,18 +110,25 @@ export const ContainerSettings = () => {
                 }}
             >
                 <EditItem propKey='childrenAlign' type='radio'>
-                    <FormControlLabel value='flex-start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-Start</Typography>} />
-                    <FormControlLabel value='flex-end' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Flex-End</Typography>} />
+                    <FormControlLabel value='flex-start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Start</Typography>} />
+                    <FormControlLabel value='flex-end' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>End</Typography>} />
                     <FormControlLabel value='center' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
                     <FormControlLabel value='stretch' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
-                    <FormControlLabel value='start' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Start</Typography>} />
                 </EditItem>
-
-
-
-
-
             </EditSection>
+            <EditSection
+                title="Children Direction"
+                props={["childrenDirection"]}
+                summary={({ childrenDirection }) => {
+                    return childrenDirection
+                }}
+            >
+                <EditItem propKey='childrenDirection' type='radio'>
+                    <FormControlLabel value='column' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Column</Typography>} />
+                    <FormControlLabel value='row' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Row</Typography>} />
+                </EditItem>
+            </EditSection>
+
 
         </React.Fragment>
     )
