@@ -11,6 +11,7 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { Container } from '../components/user/container/Container'
 
 import { setWS, ws } from '../components/user/Utilities'
 
@@ -35,22 +36,22 @@ export default function Remote() {
         if (ws == null || !ws_init) {
             setWS("ws://" + IP.trim() + "/ws")
 
-            ws.addEventListener('error', function (event) {
+            ws.addEventListener('error', function(event) {
                 //console.log('WebSocket error: ', event);
                 setError(true)
             });
 
-            ws.onopen = function () {
+            ws.onopen = function() {
                 //alert("Connection opened");
                 ws.send("documentRequest")
                 ws_init = true
             };
 
-            ws.onclose = function () {
+            ws.onclose = function() {
                 //alert("Connection closed");
             };
 
-            ws.onmessage = function (event) {
+            ws.onmessage = function(event) {
                 console.log(event.data)
                 if (event.data === 'DOCUMENT SENT') {
                     document_received = true;
@@ -68,7 +69,7 @@ export default function Remote() {
         const { actions } = useEditor()
 
         if (ws != null) {
-            ws.onmessage = function (event) {
+            ws.onmessage = function(event) {
                 const eventData = JSON.parse(event.data)
                 console.log(eventData)
 
@@ -129,7 +130,8 @@ export default function Remote() {
                             Switch,
                             Textfield,
                             Checkbox,
-                            Divider
+                            Divider,
+                            Container
                         }}
                         indicator={false}
                     >

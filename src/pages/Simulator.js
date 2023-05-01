@@ -9,6 +9,7 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { Container } from '../components/user/container/Container'
 
 import React from 'react'
 
@@ -42,7 +43,7 @@ export default function Simulator() {
                 <h1>Simulating GUI</h1>
             </div>
             <div
-                style={{ border: '1px solid black'}}
+                style={{ border: '1px solid black' }}
             >
                 <CraftEditor
                     enabled={false}
@@ -53,7 +54,8 @@ export default function Simulator() {
                         Switch,
                         Textfield,
                         Checkbox,
-                        Divider
+                        Divider,
+                        Container
                     }}
                     indicator={false}
                 >
