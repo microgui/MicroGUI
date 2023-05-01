@@ -18,6 +18,7 @@ import { Editbox } from '../components/tools/editbox/Editbox'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import {CanvasObject} from  '../components/user/canvasObject/CanvasObject'
 import { Progressbar } from '../components/user/progress/Progressbar'
 import { CircularProgress } from '../components/user/progress/CircularProgress'
 import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
@@ -53,6 +54,7 @@ export default function Editor() {
 					Textfield,
 					Checkbox,
 					Divider,
+					CanvasObject,
 					Progressbar,
 					CircularProgress,
 					Radiobutton,
