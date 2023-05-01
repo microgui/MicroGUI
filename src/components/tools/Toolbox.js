@@ -8,6 +8,9 @@ import { Switch } from '../user/switch/Switch'
 import { Textfield } from '../user/textfield/Textfield'
 import { Checkbox } from '../user/checkbox/Checkbox'
 import { Divider } from '../user/divider/Divider'
+import { Progressbar } from '../user/progress/Progressbar'
+import { CircularProgress } from '../user/progress/CircularProgress'
+import { Radiobutton } from '../user/radiobutton/Radiobutton'
 import { Container } from '../user/container/Container'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
@@ -16,6 +19,9 @@ import Crop75Icon from '@mui/icons-material/Crop75'
 import TuneIcon from '@mui/icons-material/Tune'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import DensityLargeIcon from '@mui/icons-material/DensityLarge'
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import ViewComfyIcon from '@mui/icons-material/ViewComfy';
 
 import { useDrag } from 'react-dnd'
@@ -35,6 +41,9 @@ export const Toolbox = () => {
         Textfield,
         Checkbox,
         Divider,
+        Progressbar,
+        CircularProgress,
+        Radiobutton,
         Container
     ]
 
@@ -46,6 +55,9 @@ export const Toolbox = () => {
         Textfield: 1,
         Checkbox: 1,
         Divider: 1,
+        Progressbar: 1,
+        CircularProgress: 1,
+        Radiobutton: 1,
         Container: 1
     }
 
@@ -57,6 +69,9 @@ export const Toolbox = () => {
         Textfield: <TextFieldsIcon />,
         Checkbox: <CheckBoxIcon />,
         Divider: <DensityLargeIcon />,
+        Progressbar: <HourglassTopIcon />,
+        CircularProgress: <AutorenewIcon />,
+        Radiobutton: <RadioButtonUncheckedIcon />,
         Container: <ViewComfyIcon />
     }
 

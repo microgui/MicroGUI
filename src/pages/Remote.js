@@ -11,6 +11,9 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { Progressbar } from '../components/user/progress/Progressbar'
+import { CircularProgress } from '../components/user/progress/CircularProgress'
+import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
 import { Container } from '../components/user/container/Container'
 
 import { setWS, ws } from '../components/user/Utilities'
@@ -131,6 +134,9 @@ export default function Remote() {
                             Textfield,
                             Checkbox,
                             Divider,
+                            Progressbar,
+                            CircularProgress,
+                            Radiobutton,
                             Container
                         }}
                         indicator={false}

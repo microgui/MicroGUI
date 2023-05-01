@@ -18,6 +18,9 @@ import { Editbox } from '../components/tools/editbox/Editbox'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { Progressbar } from '../components/user/progress/Progressbar'
+import { CircularProgress } from '../components/user/progress/CircularProgress'
+import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
 import { Container } from '../components/user/container/Container'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
@@ -50,6 +53,9 @@ export default function Editor() {
 					Textfield,
 					Checkbox,
 					Divider,
+					Progressbar,
+					CircularProgress,
+					Radiobutton,
 					Container
 				}}
 				// removes the 'drop-indicator' built into craft.js
