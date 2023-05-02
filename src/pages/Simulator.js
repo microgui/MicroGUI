@@ -9,9 +9,11 @@ import { Textfield } from '../components/user/textfield/Textfield'
 import { CanvasArea } from '../components/user/canvas/CanvasArea'
 import { Checkbox } from '../components/user/checkbox/Checkbox'
 import { Divider } from '../components/user/divider/Divider'
+import { CanvasObject} from '../components/user/canvasObject/CanvasObject'
 import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
 import { Progressbar } from '../components/user/progress/Progressbar'
 import { CircularProgress } from '../components/user/progress/CircularProgress'
+import { Container } from '../components/user/container/Container'
 
 import React from 'react'
 
@@ -45,7 +47,7 @@ export default function Simulator() {
                 <h1>Simulating GUI</h1>
             </div>
             <div
-                style={{ border: '1px solid black'}}
+                style={{ border: '1px solid black' }}
             >
                 <CraftEditor
                     enabled={false}
@@ -57,9 +59,11 @@ export default function Simulator() {
                         Textfield,
                         Checkbox,
                         Divider,
+                        CanvasObject,
                         Radiobutton,
                         Progressbar,
-                        CircularProgress
+                        CircularProgress,
+                        Container
                     }}
                     indicator={false}
                 >
