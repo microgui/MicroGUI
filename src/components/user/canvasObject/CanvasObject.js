@@ -11,7 +11,7 @@ import { Tooltip } from '../../tools/Tooltip'
 import { CanvasObjectSettings } from './CanvasObjectSettings'
 import { handleStop, getX, getY } from '../Utilities'
 
-export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, URL, interval, key,  ...props }) => {
+export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, URL,  ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -97,9 +97,7 @@ CanvasObject.craft = {
         variant: '100%100%',
         width: 150,
         height: 150,
-        URL: '',
-        key: '',
-        interval: '',
+        image: '',
         event: ''
     },
     related: {

@@ -188,6 +188,27 @@ export const ProgressbarSettings = () => {
                 </p>
             </EditSection>
 
+            <EditSection
+                title='Type'
+                props={['type']}
+
+            >
+                <EditItem propKey='type' type='text' label='type' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    Specify the type of the JSON value
+                </p>
+
+            </EditSection>
+
 
 
 
