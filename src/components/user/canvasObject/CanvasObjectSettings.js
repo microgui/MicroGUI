@@ -1,6 +1,6 @@
 import { EditSection } from "../../tools/editbox/EditSection"
 import { EditItem } from "../../tools/editbox/EditItem"
-import { FormControlLabel, Radio, Typography} from "@mui/material"
+import { FormControlLabel, Radio, Typography } from "@mui/material"
 
 import { Tooltip } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear';
@@ -21,6 +21,8 @@ export const CanvasObjectSettings = () => {
 
     const [isImage, setIsImage] = useState(false)
 
+
+
     const loadFile = (file) => {
         var reader = new FileReader()
         reader.onload = function () {
@@ -30,7 +32,9 @@ export const CanvasObjectSettings = () => {
             })
         }
         reader.readAsDataURL(file)
+
     }
+
 
     return (
         <React.Fragment>
@@ -113,6 +117,22 @@ export const CanvasObjectSettings = () => {
                         : null
                     }
                 </div>
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    Load an image locally, or enter a URL to the image below
+                </p>
+
+                <EditItem propKey='image' type='text' label='image' full={true} />
+
+
             </EditSection>
 
             <EditSection
@@ -137,18 +157,17 @@ export const CanvasObjectSettings = () => {
                     propKey='variant'
                     type='radio'
                 >
-            
 
 
-                            <FormControlLabel value='100% 100%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
-                            <FormControlLabel value='cover' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Cover</Typography>} />
-                            <FormControlLabel value='contain' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Contain</Typography>} />
-                            <FormControlLabel value='50%50%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
 
-                
+                    <FormControlLabel value='100% 100%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Stretch</Typography>} />
+                    <FormControlLabel value='cover' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Cover</Typography>} />
+                    <FormControlLabel value='contain' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Contain</Typography>} />
+                    <FormControlLabel value='50%50%' control={<Radio size='small' />} label={<Typography fontSize='0.9rem'>Center</Typography>} />
+
+
                 </EditItem>
             </EditSection>
-
 
 
 

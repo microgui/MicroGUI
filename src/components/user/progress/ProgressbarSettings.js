@@ -126,6 +126,91 @@ export const ProgressbarSettings = () => {
                 <EditItem propKey='max' type='max' label='Max' />
             </EditSection>
 
+            <EditSection
+                title='URL'
+                props={['URL']}
+
+            >
+                <EditItem propKey='URL' type='text' label='URL' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    URL for an API 
+                </p>
+
+            </EditSection>
+
+            <EditSection
+                title='Interval'
+                props={['interval']}
+
+            >
+                <EditItem propKey='interval' type='number' label='Interval' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    This interval referes to the frequency of how often the API updates (in seconds)
+                </p>
+
+            </EditSection>
+
+            <EditSection
+                title='Key '
+                props={['key']}
+
+            >
+                <EditItem propKey='key' type='text' label='Key' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    This is the JSON key to be extracted from the API 
+                </p>
+            </EditSection>
+
+            <EditSection
+                title='Type'
+                props={['type']}
+
+            >
+                <EditItem propKey='type' type='text' label='type' full={true} />
+
+                <p
+                    style={{
+                        width: '100%',
+                        textAlign: 'center',
+                        fontSize: 13,
+                        color: 'gray',
+                        marginTop: '20px'
+                    }}
+                >
+                    Specify the type of the JSON value
+                </p>
+
+            </EditSection>
+
+
+
 
             <EditSection
                 title='Event'

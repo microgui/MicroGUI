@@ -13,7 +13,7 @@ import { handleStop, getX, getY } from '../Utilities'
  * @returns The 'Textfield' object
  */
 export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, width, height, ...props }) => {
+    text, pageX, pageY, width, height, URL, interval, key, event,   ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -100,7 +100,12 @@ Textfield.craft = {
         fontWeight: 500,
         width: 40,
         height: 30,
-        color: { r: 0, g: 0, b: 0, a: 1 }
+        color: { r: 0, g: 0, b: 0, a: 1 },
+        URL: '',
+        interval: '',
+        key: '',
+        type: '',
+        event: ''
     },
     related: {
         toolbar: TextfieldSettings

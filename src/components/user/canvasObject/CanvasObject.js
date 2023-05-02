@@ -11,7 +11,7 @@ import { Tooltip } from '../../tools/Tooltip'
 import { CanvasObjectSettings } from './CanvasObjectSettings'
 import { handleStop, getX, getY } from '../Utilities'
 
-export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, ...props }) => {
+export const CanvasObject = ({ event, pageX, pageY, width, height, image, background, variant, URL,  ...props }) => {
 
     const { enabled } = useEditor((state) => ({
         enabled: state.options.enabled
@@ -36,6 +36,7 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
 
         })
     }
+
 
     return (
         <Draggable
@@ -95,6 +96,7 @@ CanvasObject.craft = {
         variant: '100%100%',
         width: 150,
         height: 150,
+        image: '',
         event: ''
     },
     related: {
