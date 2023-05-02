@@ -159,3 +159,8 @@ h5 {
     box-sizing: border-box;
     cursor: se-resize;
 }
+
+/* Pattern match Container id. Children should have relative position */
+[id^="Container_"] > div {
+    position: relative !important;
+}

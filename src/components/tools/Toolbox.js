@@ -8,10 +8,11 @@ import { Switch } from '../user/switch/Switch'
 import { Textfield } from '../user/textfield/Textfield'
 import { Checkbox } from '../user/checkbox/Checkbox'
 import { Divider } from '../user/divider/Divider'
-import {CanvasObject} from '../user/canvasObject/CanvasObject'
+import { CanvasObject } from '../user/canvasObject/CanvasObject'
 import { Progressbar } from '../user/progress/Progressbar'
 import { CircularProgress } from '../user/progress/CircularProgress'
-import { Radiobutton} from '../user/radiobutton/Radiobutton'
+import { Radiobutton } from '../user/radiobutton/Radiobutton'
+import { Container } from '../user/container/Container'
 
 import TextFieldsIcon from '@mui/icons-material/TextFields'
 import ToggleOnIcon from '@mui/icons-material/ToggleOn'
@@ -23,6 +24,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import ViewComfyIcon from '@mui/icons-material/ViewComfy';
 
 import { useDrag } from 'react-dnd'
 
@@ -44,7 +46,8 @@ export const Toolbox = () => {
         CanvasObject,
         Progressbar,
         CircularProgress,
-        Radiobutton
+        Radiobutton,
+        Container
     ]
 
     // a counter for each component, used when assigning them IDs
@@ -59,6 +62,7 @@ export const Toolbox = () => {
         Progressbar: 1,
         CircularProgress: 1,
         Radiobutton: 1,
+        Container: 1
     }
 
     // list of icons for the different components
@@ -69,10 +73,11 @@ export const Toolbox = () => {
         Textfield: <TextFieldsIcon />,
         Checkbox: <CheckBoxIcon />,
         Divider: <DensityLargeIcon />,
-        CanvasObject: <PhotoIcon/>,
-        Progressbar: <HourglassTopIcon/>,
-        CircularProgress: <AutorenewIcon/>, 
-        Radiobutton:<RadioButtonUncheckedIcon />
+        CanvasObject: <PhotoIcon />,
+        Progressbar: <HourglassTopIcon />,
+        CircularProgress: <AutorenewIcon />,
+        Radiobutton: <RadioButtonUncheckedIcon />,
+        Container: <ViewComfyIcon />
     }
 
     // list where we store each component to be rendered in the toolbox.
@@ -106,7 +111,7 @@ export const Toolbox = () => {
                         }
                         const node = query.parseFreshNode(freshNode).toNode()
                         // add the created node to the canvas.
-                        actions.add(node, 'ROOT')
+                        actions.add(node, dropResult.id)
                         count[component.name] += 1
                     }
                 }

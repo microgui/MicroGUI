@@ -21,8 +21,8 @@ import { Divider } from '../components/user/divider/Divider'
 import {CanvasObject} from  '../components/user/canvasObject/CanvasObject'
 import { Progressbar } from '../components/user/progress/Progressbar'
 import { CircularProgress } from '../components/user/progress/CircularProgress'
-import {Radiobutton} from '../components/user/radiobutton/Radiobutton'
-
+import { Radiobutton } from '../components/user/radiobutton/Radiobutton'
+import { Container } from '../components/user/container/Container'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
 /**
@@ -57,7 +57,8 @@ export default function Editor() {
 					CanvasObject,
 					Progressbar,
 					CircularProgress,
-					Radiobutton
+					Radiobutton,
+					Container
 				}}
 				// removes the 'drop-indicator' built into craft.js
 				indicator={false}
@@ -74,10 +75,7 @@ export default function Editor() {
 						<Toolbar />
 						<Frame >
 							{/*The canvas element where the user can drop components*/}
-							<Element
-								is={CanvasArea}
-								canvas
-							/>
+							<Element is={CanvasArea} canvas />
 						</Frame>
 					</div>
 					<div className='right'>
