@@ -37,7 +37,6 @@ export const CanvasObject = ({ event, pageX, pageY, width, height, image, backgr
         })
     }
 
-    // lägg en liten förklaring grej för hur API skiten funkar i frontenden 
 
     return (
         <Draggable
