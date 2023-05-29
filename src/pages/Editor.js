@@ -3,7 +3,7 @@ import './App.css'
 import { Stack } from '@mui/material';
 import { Editor as CraftEditor, Frame, Element } from '@craftjs/core';
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import logo from '../logo.png'
@@ -29,6 +29,11 @@ import GitHubIcon from '@mui/icons-material/GitHub'
  * The homepage of the web app, where the user can create their GUIs.
  */
 export default function Editor() {
+	const [hideOnSimulate, setHideOnSimulate] = useState(false);
+
+  	const handleSimulateToggle = () => {
+    	setHideOnSimulate(!hideOnSimulate);
+  }
 
 	return (
 		<div className='App'>
@@ -68,17 +73,20 @@ export default function Editor() {
 					direction='row'
 					spacing={0}
 				>
-					<div className='left'>
+					<div className='left' style={{ visibility: hideOnSimulate ? 'hidden' : 'visible' }}>
 						<Toolbox />
 					</div>
 					<div className='middle'>
-						<Toolbar />
+						<Toolbar onSimulateToggle={handleSimulateToggle} />
 						<Frame >
 							{/*The canvas element where the user can drop components*/}
-							<Element is={CanvasArea} canvas />
+							<Element
+								is={CanvasArea}
+								canvas
+							/>
 						</Frame>
 					</div>
-					<div className='right'>
+					<div className='right' style={{ visibility: hideOnSimulate ? 'hidden' : 'visible' }}>
 						<Editbox />
 					</div>
 				</Stack >
