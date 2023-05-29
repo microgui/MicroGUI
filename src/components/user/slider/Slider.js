@@ -10,62 +10,64 @@ import { SliderSettings } from './SliderSettings'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 
 /**
- * Creates a slider object. 
+ * Creates a slider object.
  * @returns The 'slider' object
  */
 
 let prevValue = 0
 
-export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
-    value, valueLabelDisplay, connectedNode, ...props }) => {
+export const Slider = ({
+  size, width, min, max, color, pageX, pageY, event,
+  value, valueLabelDisplay, connectedNode, ...props
+}) => {
+  const { enabled, query: { node } } = useEditor((state) => ({
+    enabled: state.options.enabled
+  }))
 
-    const { enabled, query: { node } } = useEditor((state) => ({
-        enabled: state.options.enabled
-    }))
+  const editorActions = useEditor().actions
 
-    const editorActions = useEditor().actions
+  const {
+    id,
+    name,
+    connectors: { connect },
+    actions
+  } = useNode((node) => ({
+    name: node.data.custom.displayName || node.data.displayName
+  }))
 
-    const {
-        id,
-        name,
-        connectors: { connect },
-        actions
-    } = useNode((node) => ({
-        name: node.data.custom.displayName || node.data.displayName
-    }))
+  const nodeRef = useRef()
 
-    const nodeRef = useRef()
-
-    const updateText = (value) => {
-        if (node(connectedNode).get()) {
-            editorActions.setProp(connectedNode, (props) => {
-                props.text = value
-            })
-            actions.setProp((props) => {
-                props.valueLabelDisplay = 'off'
-            })
-        }
-        else actions.setProp((props) => {
-            props.connectedNode = null
-        })
+  const updateText = (value) => {
+    if (node(connectedNode).get()) {
+      editorActions.setProp(connectedNode, (props) => {
+        props.text = value
+      })
+      actions.setProp((props) => {
+        props.valueLabelDisplay = 'off'
+      })
+    } else {
+      actions.setProp((props) => {
+        props.connectedNode = null
+      })
     }
+  }
 
-    const resize = (_, data) => {
-        actions.setProp((props) => {
-            props.width = data.size.width
-        })
-    }
+  const resize = (_, data) => {
+    actions.setProp((props) => {
+      props.width = data.size.width
+    })
+  }
 
-    return (
+  return (
         <Draggable
             disabled={!enabled}
-            cancel={".react-resizable-handle"}
+            cancel={'.react-resizable-handle'}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
             position={{
-                x: getX(pageX, nodeRef),
-                y: getY(pageY, nodeRef)
+              x: getX(pageX, nodeRef),
+              y: getY(pageY, nodeRef)
             }}
         >
             <Resizable
@@ -87,36 +89,36 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                             ref={connect}
                             size={size}
                             sx={{
-                                color: `rgba(${Object.values(color)})`,
-                                width: `${width}px`,
-                                "& .MuiSlider-thumb.Mui-focusVisible": {
-                                    boxShadow: 'none'
-                                },
-                                "& .MuiSlider-thumb:hover": {
-                                    boxShadow: 'none'
-                                },
-                                "& .MuiSlider-thumb.Mui-active": {
-                                    boxShadow: 'none'
-                                }
+                              color: `rgba(${Object.values(color)})`,
+                              width: `${width}px`,
+                              '& .MuiSlider-thumb.Mui-focusVisible': {
+                                boxShadow: 'none'
+                              },
+                              '& .MuiSlider-thumb:hover': {
+                                boxShadow: 'none'
+                              },
+                              '& .MuiSlider-thumb.Mui-active': {
+                                boxShadow: 'none'
+                              }
                             }}
                             min={min}
                             max={max}
                             value={value}
                             onChange={(_, val) => {
-                                if (connectedNode) updateText(val.toString())
-                                actions.setProp((props) => {
-                                    props.value = val
-                                })
+                              if (connectedNode) updateText(val.toString())
+                              actions.setProp((props) => {
+                                props.value = val
+                              })
                             }}
                             onChangeCommitted={(_, val) => {
-                                const ws = getWS()
-                                if (ws != null) {
-                                    if (value !== prevValue) {
-                                        let message = { "Parent": String(id), "Event": String(event), "Value": val };
-                                        ws.send(JSON.stringify(message))
-                                    }
-                                    prevValue = val
+                              const ws = getWS()
+                              if (ws != null) {
+                                if (value !== prevValue) {
+                                  const message = { Parent: String(id), Event: String(event), Value: val }
+                                  ws.send(JSON.stringify(message))
                                 }
+                                prevValue = val
+                              }
                             }}
                             valueLabelDisplay={valueLabelDisplay}
                             {...props}
@@ -125,22 +127,22 @@ export const Slider = ({ size, width, min, max, color, pageX, pageY, event,
                 </div>
             </Resizable>
         </Draggable>
-    )
+  )
 }
 
 Slider.craft = {
-    displayName: 'Slider',
-    props: {
-        size: 'small',
-        width: 100,
-        value: 0,
-        min: 0,
-        max: 100,
-        color: { r: 63, g: 81, b: 181, a: 1 },
-        valueLabelDisplay: 'auto',
-        event: ''
-    },
-    related: {
-        toolbar: SliderSettings
-    }
+  displayName: 'Slider',
+  props: {
+    size: 'small',
+    width: 100,
+    value: 0,
+    min: 0,
+    max: 100,
+    color: { r: 63, g: 81, b: 181, a: 1 },
+    valueLabelDisplay: 'auto',
+    event: ''
+  },
+  related: {
+    toolbar: SliderSettings
+  }
 }

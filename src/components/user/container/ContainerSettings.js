@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
-import { EditSection } from "../../tools/editbox/EditSection"
-import { EditItem } from "../../tools/editbox/EditItem"
-import { FormControlLabel, Radio, Typography, Switch } from "@mui/material"
-
+import { EditSection } from '../../tools/editbox/EditSection'
+import { EditItem } from '../../tools/editbox/EditItem'
+import { FormControlLabel, Radio, Typography, Switch } from '@mui/material'
 
 export const ContainerSettings = () => {
-    const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-    const { id } = useNode()
+  const { id } = useNode()
 
-    const copyId = () => {
-        setCopied(true)
-        navigator.clipboard.writeText(id)
-    }
+  const copyId = () => {
+    setCopied(true)
+    navigator.clipboard.writeText(id)
+  }
 
-    return (
+  return (
         <React.Fragment>
             <EditSection
                 title='Id'
@@ -31,9 +30,9 @@ export const ContainerSettings = () => {
             </EditSection>
             <EditSection
                 title='Draggable'
-                props={["draggable"]}
+                props={['draggable']}
                 summary={({ draggable }) => {
-                    return draggable
+                  return draggable
                 }}>
                 <EditItem propKey='draggable' type='switch'>
                 </EditItem>
@@ -42,7 +41,7 @@ export const ContainerSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
+                  return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
                 <EditItem propKey='pageX' type='number' label='X' />
@@ -52,7 +51,7 @@ export const ContainerSettings = () => {
                 title='Size'
                 props={['width', 'height']}
                 summary={({ width, height }) => {
-                    return `${width}x${height} px`
+                  return `${width}x${height} px`
                 }}
             >
                 <EditItem propKey='width' type='number' label='Width' />
@@ -60,38 +59,38 @@ export const ContainerSettings = () => {
             </EditSection>
             <EditSection
                 title="Background"
-                props={["backgroundColor"]}
+                props={['backgroundColor']}
                 summary={({ backgroundColor }) => {
-                    return (
+                  return (
                         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <div
                                 style={{
-                                    backgroundColor: `rgba(${Object.values(backgroundColor)})`,
-                                    borderRadius: "50%",
-                                    height: "20px",
-                                    width: "20px",
+                                  backgroundColor: `rgba(${Object.values(backgroundColor)})`,
+                                  borderRadius: '50%',
+                                  height: '20px',
+                                  width: '20px'
                                 }}
                             />
                         </div>
-                    )
+                  )
                 }}
             >
                 <EditItem propKey="backgroundColor" type="color" label="Background Color" />
             </EditSection>
             <EditSection
                 title="Border"
-                props={["border"]}
+                props={['border']}
                 summary={({ border }) => {
-                    return border
+                  return border
                 }}
             >
                 <EditItem propKey="border" type="text" label="Border" />
             </EditSection>
             <EditSection
                 title="Children Justify"
-                props={["childrenJustify"]}
+                props={['childrenJustify']}
                 summary={({ childrenJustify }) => {
-                    return childrenJustify
+                  return childrenJustify
                 }}
             >
                 <EditItem propKey='childrenJustify' type='radio'>
@@ -104,9 +103,9 @@ export const ContainerSettings = () => {
             </EditSection>
             <EditSection
                 title="Children Align"
-                props={["childrenAlign"]}
+                props={['childrenAlign']}
                 summary={({ childrenAlign }) => {
-                    return childrenAlign
+                  return childrenAlign
                 }}
             >
                 <EditItem propKey='childrenAlign' type='radio'>
@@ -118,9 +117,9 @@ export const ContainerSettings = () => {
             </EditSection>
             <EditSection
                 title="Children Direction"
-                props={["childrenDirection"]}
+                props={['childrenDirection']}
                 summary={({ childrenDirection }) => {
-                    return childrenDirection
+                  return childrenDirection
                 }}
             >
                 <EditItem propKey='childrenDirection' type='radio'>
@@ -129,7 +128,6 @@ export const ContainerSettings = () => {
                 </EditItem>
             </EditSection>
 
-
         </React.Fragment>
-    )
+  )
 }

@@ -1,54 +1,53 @@
 import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
-    Button as MaterialButton,
-    IconButton,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions,
-    Divider,
-    Grid,
-    TextField
+  Button as MaterialButton,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Divider,
+  Grid,
+  TextField
 } from '@mui/material'
 
 import UploadIcon from '@mui/icons-material/Upload'
 import CloseIcon from '@mui/icons-material/Close'
 
 export const ToolbarLoad = () => {
+  const { actions } = useEditor()
 
-    const { actions } = useEditor()
+  const [openOuter, setOpenOuter] = useState(false)
+  const [openInner, setOpenInner] = useState(false)
+  const [pasteText, setPasteText] = useState('')
 
-    const [openOuter, setOpenOuter] = useState(false)
-    const [openInner, setOpenInner] = useState(false)
-    const [pasteText, setPasteText] = useState('')
-
-    /* Function to load a file using FileReader.
+  /* Function to load a file using FileReader.
        deserializing the file using craft.js functionality. */
-    const loadFile = (file) => {
-        var reader = new FileReader()
-        reader.onload = function (e) {
-            actions.deserialize(e.target.result)
-        }
-        reader.readAsText(file, 'UTF-8')
-        handleClose()
+  const loadFile = (file) => {
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      actions.deserialize(e.target.result)
     }
-    
-    /* This function deserialize the JSON if a user 
+    reader.readAsText(file, 'UTF-8')
+    handleClose()
+  }
+
+  /* This function deserialize the JSON if a user
        paste from clipboard */
-    const loadText = (text) => {
-        actions.deserialize(text)
-        handleClose()
-    }
+  const loadText = (text) => {
+    actions.deserialize(text)
+    handleClose()
+  }
 
-    // Function to close all dialogs
-    const handleClose = () => {
-        setOpenOuter(false)
-        setOpenInner(false)
-        setPasteText('')
-    }
+  // Function to close all dialogs
+  const handleClose = () => {
+    setOpenOuter(false)
+    setOpenInner(false)
+    setPasteText('')
+  }
 
-    return (
+  return (
         <>
             <MaterialButton
                 size='small'
@@ -67,10 +66,10 @@ export const ToolbarLoad = () => {
                         aria-label="close"
                         onClick={handleClose}
                         sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: 'grey'
+                          position: 'absolute',
+                          right: 8,
+                          top: 8,
+                          color: 'grey'
                         }}
                     >
                         <CloseIcon />
@@ -125,7 +124,7 @@ export const ToolbarLoad = () => {
                         multiline
                         rows={6}
                         onChange={(e) => {
-                            setPasteText(e.target.value)
+                          setPasteText(e.target.value)
                         }}
                     />
                 </DialogContent>
@@ -137,5 +136,5 @@ export const ToolbarLoad = () => {
                 </DialogActions>
             </Dialog>
         </>
-    )
+  )
 }

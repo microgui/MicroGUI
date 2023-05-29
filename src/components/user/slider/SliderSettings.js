@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { useNode } from '@craftjs/core'
-import { EditSection } from "../../tools/editbox/EditSection"
-import { EditItem } from "../../tools/editbox/EditItem"
-import { FormControlLabel, Radio, Typography } from "@mui/material"
+import { EditSection } from '../../tools/editbox/EditSection'
+import { EditItem } from '../../tools/editbox/EditItem'
+import { FormControlLabel, Radio, Typography } from '@mui/material'
 import { capitalize } from '../Utilities'
 
 export const SliderSettings = () => {
-    const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-    const { id, props } = useNode((node) => ({
-        props: node.data.props
-    }))
+  const { id, props } = useNode((node) => ({
+    props: node.data.props
+  }))
 
-    const [connected, setConnected] = useState(false)
+  const [connected, setConnected] = useState(false)
 
-    useEffect(() => {
-        const connectedNode = props.connectedNode
-        if (connectedNode) setConnected(true)
-        else setConnected(false)
-    }, [props.connectedNode])
+  useEffect(() => {
+    const connectedNode = props.connectedNode
+    if (connectedNode) setConnected(true)
+    else setConnected(false)
+  }, [props.connectedNode])
 
-    const copyId = () => {
-        setCopied(true)
-        navigator.clipboard.writeText(id)
-    }
+  const copyId = () => {
+    setCopied(true)
+    navigator.clipboard.writeText(id)
+  }
 
-    return (
+  return (
         <React.Fragment>
             <EditSection
                 title='Id'
@@ -43,7 +43,7 @@ export const SliderSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
+                  return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
                 <EditItem propKey='pageX' type='number' label='X' />
@@ -53,7 +53,7 @@ export const SliderSettings = () => {
                 title='Size'
                 props={['size']}
                 summary={({ size }) => {
-                    return capitalize(size)
+                  return capitalize(size)
                 }}
             >
                 <EditItem
@@ -68,7 +68,7 @@ export const SliderSettings = () => {
                 title='Width'
                 props={['width']}
                 summary={({ width }) => {
-                    return `${width}px`
+                  return `${width}px`
                 }}
             >
                 <EditItem propKey='width' type='sliderWidth' label='px' full={true} />
@@ -77,7 +77,7 @@ export const SliderSettings = () => {
                 title='Value range'
                 props={['min', 'max']}
                 summary={({ min, max }) => {
-                    return `[${Number(min)},${Number(max)}]`
+                  return `[${Number(min)},${Number(max)}]`
                 }}
             >
                 <EditItem propKey='min' type='min' label='Min' />
@@ -87,7 +87,7 @@ export const SliderSettings = () => {
                 title='Value label'
                 props={['valueLabelDisplay']}
                 summary={({ valueLabelDisplay }) => {
-                    return capitalize(valueLabelDisplay)
+                  return capitalize(valueLabelDisplay)
                 }}
             >
                 <EditItem
@@ -103,19 +103,19 @@ export const SliderSettings = () => {
                 title='Color'
                 props={['background', 'color']}
                 summary={({ color }) => {
-                    return (
+                  return (
                         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <div
                                 style={{
-                                    background:
+                                  background:
                                         color && `rgba(${Object.values(color)})`,
-                                    borderRadius: '50%',
-                                    height: '20px',
-                                    width: '20px'
+                                  borderRadius: '50%',
+                                  height: '20px',
+                                  width: '20px'
                                 }}
                             />
                         </div>
-                    )
+                  )
                 }}
             >
                 <EditItem
@@ -128,7 +128,7 @@ export const SliderSettings = () => {
                 title={connected ? 'Connected' : 'Connect'}
                 props={['connectedNode']}
                 summary={({ connectedNode }) => {
-                    return connectedNode
+                  return connectedNode
                 }}
             >
                 <EditItem propKey='connectedNode' type='text' full={true} label='Id' />
@@ -137,7 +137,7 @@ export const SliderSettings = () => {
                 title='Event'
                 props={['event']}
                 summary={({ event }) => {
-                    return event
+                  return event
                 }}
             >
                 <EditItem
@@ -148,5 +148,5 @@ export const SliderSettings = () => {
                 />
             </EditSection>
         </React.Fragment>
-    )
+  )
 }

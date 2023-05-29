@@ -1,61 +1,60 @@
 import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
-    Button as MaterialButton,
-    IconButton,
-    Tooltip,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    Divider,
+  Button as MaterialButton,
+  IconButton,
+  Tooltip,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Divider
 } from '@mui/material'
 
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 
 export const ToolbarClear = () => {
+  const { canUndo, actions, query } = useEditor((_, query) => ({
+    canUndo: query.history.canUndo()
+  }))
 
-    const { canUndo, actions, query } = useEditor((_, query) => ({
-        canUndo: query.history.canUndo()
-    }))
+  const [open, setOpen] = useState(false)
 
-    const [open, setOpen] = useState(false)
-
-    /* Function that clears the canvas by iterating over all
+  /* Function that clears the canvas by iterating over all
        nodes currently in the canvas and deleting them one by one */
-    const clearCanvas = () => {
-        var nodes = query.getSerializedNodes()
-        for (let key in nodes) {
-            // making sure to not delete the ROOT(canvas)...
-            if (key !== 'ROOT') {
-                actions.delete(key);
-            } else {
-                // reset the canvas background/image 
-                actions.setProp(key, (props) => {
-                    props.background = null
-                    props.image = null
-                })
-            }
-        }
-        setOpen(false)
+  const clearCanvas = () => {
+    const nodes = query.getSerializedNodes()
+    for (const key in nodes) {
+      // making sure to not delete the ROOT(canvas)...
+      if (key !== 'ROOT') {
+        actions.delete(key)
+      } else {
+        // reset the canvas background/image
+        actions.setProp(key, (props) => {
+          props.background = null
+          props.image = null
+        })
+      }
     }
-    return (
+    setOpen(false)
+  }
+  return (
         <>
             <Tooltip
                 title='Clear all'
             >
                 <span
-                    style={{cursor: canUndo ? 'pointer' : 'not-allowed'}}   
+                    style={{ cursor: canUndo ? 'pointer' : 'not-allowed' }}
                 >
                     <IconButton
                         onClick={() => {
-                            setOpen(true)
+                          setOpen(true)
                         }}
                         disabled={!canUndo}
                     >
                         <HighlightOffIcon
-                            sx={{color: 'grey'}}
+                            sx={{ color: 'grey' }}
                         />
                     </IconButton>
                 </span>
@@ -78,5 +77,5 @@ export const ToolbarClear = () => {
                 </DialogActions>
             </Dialog>
         </>
-    )
+  )
 }

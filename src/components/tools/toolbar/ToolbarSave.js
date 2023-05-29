@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
-    Button as MaterialButton,
-    FormGroup,
-    FormControlLabel,
-    Checkbox,
-    Tooltip,
-    IconButton,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    TextField,
-    Grid,
-    Divider,
+  Button as MaterialButton,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Tooltip,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  TextField,
+  Grid,
+  Divider
 } from '@mui/material'
 
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
@@ -23,49 +23,48 @@ import CloseIcon from '@mui/icons-material/Close'
 import { saveAs } from 'file-saver'
 
 export const ToolbarSave = () => {
+  const { query } = useEditor()
 
-    const { query } = useEditor()
+  const [openOuter, setOpenOuter] = useState(false)
+  const [openInner, setOpenInner] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [copiedString, setcopiedString] = useState(false)
+  const [formText, setFormText] = useState('')
+  const [error, setError] = useState(false)
 
-    const [openOuter, setOpenOuter] = useState(false)
-    const [openInner, setOpenInner] = useState(false)
-    const [copied, setCopied] = useState(false)
-    const [copiedString, setcopiedString] = useState(false)
-    const [formText, setFormText] = useState('')
-    const [error, setError] = useState(false)
-
-    /* Function that saves the file representing the 
+  /* Function that saves the file representing the
        canvas-state to downloads. The file is saved
-       as a JSON file.*/
-    const saveFile = (data, name) => {
-        if (formText !== '') {
-            const file = new File(
-                [JSON.stringify(JSON.parse(data), null, 4)],
+       as a JSON file. */
+  const saveFile = (data, name) => {
+    if (formText !== '') {
+      const file = new File(
+        [JSON.stringify(JSON.parse(data), null, 4)],
                 `${name}.json`,
                 { type: 'text/json;charset=utf-8' }
-            )
-            saveAs(file)
-            handleClose()
-        }
-        if (formText === '') setError(true)
+      )
+      saveAs(file)
+      handleClose()
     }
+    if (formText === '') setError(true)
+  }
 
-    // Function to close all dialogs
-    const handleClose = () => {
-        setOpenOuter(false)
-        setOpenInner(false)
-        setCopied(false)
-        setcopiedString(false)
-        setError(false)
-        setFormText('')
-    }
+  // Function to close all dialogs
+  const handleClose = () => {
+    setOpenOuter(false)
+    setOpenInner(false)
+    setCopied(false)
+    setcopiedString(false)
+    setError(false)
+    setFormText('')
+  }
 
-    const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
 
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
+  const handleChange = (event) => {
+    setChecked(event.target.checked)
+  }
 
-    return (
+  return (
         <>
             <MaterialButton
                 size='small'
@@ -84,10 +83,10 @@ export const ToolbarSave = () => {
                         aria-label="close"
                         onClick={handleClose}
                         sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: 'grey'
+                          position: 'absolute',
+                          right: 8,
+                          top: 8,
+                          color: 'grey'
                         }}
                     >
                         <CloseIcon />
@@ -113,10 +112,10 @@ export const ToolbarSave = () => {
                                 disabled={copied}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    const doc = JSON.parse(query.serialize())
-                                    doc["ROOT"]["props"]["persistant"] = checked
-                                    navigator.clipboard.writeText(JSON.stringify(doc))
-                                    setCopied(true)
+                                  const doc = JSON.parse(query.serialize())
+                                  doc.ROOT.props.persistant = checked
+                                  navigator.clipboard.writeText(JSON.stringify(doc))
+                                  setCopied(true)
                                 }}
                             > {copied ? 'Copied' : 'Copy'}
                             </MaterialButton>
@@ -127,10 +126,10 @@ export const ToolbarSave = () => {
                                 disabled={copiedString}
                                 // copy the JSON data to the clipboard using craft.js functionality
                                 onClick={() => {
-                                    const doc = JSON.parse(query.serialize())
-                                    doc["ROOT"]["props"]["persistant"] = checked
-                                    navigator.clipboard.writeText(JSON.stringify(doc).replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
-                                    setcopiedString(true)
+                                  const doc = JSON.parse(query.serialize())
+                                  doc.ROOT.props.persistant = checked
+                                  navigator.clipboard.writeText(JSON.stringify(doc).replaceAll('\\n', '').replaceAll('"', '\\"').replaceAll('    ', '').replaceAll('<div>', '\\n').replaceAll('</div>', ''))
+                                  setcopiedString(true)
                                 }}
                             > {copiedString ? 'Copied' : 'Copy'}
                             </MaterialButton>
@@ -179,8 +178,8 @@ export const ToolbarSave = () => {
                         fullWidth
                         variant="standard"
                         onChange={(e) => {
-                            setError(false)
-                            setFormText(e.target.value)
+                          setError(false)
+                          setFormText(e.target.value)
                         }}
                         error={error}
                         helperText={error ? "Name can't be empty" : null}
@@ -195,5 +194,5 @@ export const ToolbarSave = () => {
                 </DialogActions>
             </Dialog>
         </>
-    )
+  )
 }

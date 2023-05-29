@@ -6,20 +6,20 @@ import { FormControlLabel, Radio, Typography } from '@mui/material'
 import { capitalize } from '../Utilities'
 
 const weightDescription = (weight) => {
-    return weight === 400 ? 'Regular' : weight === 500 ? 'Medium' : 'Bold'
+  return weight === 400 ? 'Regular' : weight === 500 ? 'Medium' : 'Bold'
 }
 
 export const TextfieldSettings = () => {
-    const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-    const { id } = useNode()
+  const { id } = useNode()
 
-    const copyId = () => {
-        setCopied(true)
-        navigator.clipboard.writeText(id)
-    }
+  const copyId = () => {
+    setCopied(true)
+    navigator.clipboard.writeText(id)
+  }
 
-    return (
+  return (
         <React.Fragment>
             <EditSection
                 title='Id'
@@ -37,7 +37,7 @@ export const TextfieldSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
+                  return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
                 <EditItem propKey='pageX' type='number' label='X' />
@@ -47,7 +47,7 @@ export const TextfieldSettings = () => {
                 title='Size'
                 props={['width', 'height']}
                 summary={({ width, height }) => {
-                    return `${width}x${height} px`
+                  return `${width}x${height} px`
                 }}
             >
                 <EditItem propKey='width' type='number' label='Width' />
@@ -57,7 +57,7 @@ export const TextfieldSettings = () => {
                 title='Typography'
                 props={['fontSize', 'fontWeight', 'textAlign']}
                 summary={({ fontSize, fontWeight, textAlign }) => {
-                    return `${fontSize || 0}, ${capitalize(textAlign)}, ${weightDescription(fontWeight)}`
+                  return `${fontSize || 0}, ${capitalize(textAlign)}, ${weightDescription(fontWeight)}`
                 }}
             >
                 <EditItem
@@ -81,18 +81,18 @@ export const TextfieldSettings = () => {
                 title='Color'
                 props={['color']}
                 summary={({ color }) => {
-                    return (
+                  return (
                         <div style={{ textAlign: 'right' }}>
                             <p
                                 style={{
-                                    color: color && `rgba(${Object.values(color)})`,
-                                    textAlign: 'right'
+                                  color: color && `rgba(${Object.values(color)})`,
+                                  textAlign: 'right'
                                 }}
                             >
                                 T
                             </p>
                         </div>
-                    )
+                  )
                 }}
             >
                 <EditItem full={true} propKey='color' type='color' label='Text' />
@@ -107,14 +107,14 @@ export const TextfieldSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
-                    URL for an API 
+                    URL for an API
                 </p>
 
             </EditSection>
@@ -128,11 +128,11 @@ export const TextfieldSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
                     This interval referes to the frequency of how often the API updates (in seconds)
@@ -149,14 +149,14 @@ export const TextfieldSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
-                    This is the JSON key to be extracted from the API 
+                    This is the JSON key to be extracted from the API
                 </p>
             </EditSection>
 
@@ -169,11 +169,11 @@ export const TextfieldSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
                     Specify the type of the JSON value
@@ -181,12 +181,11 @@ export const TextfieldSettings = () => {
 
             </EditSection>
 
-
             <EditSection
                 title='Event'
                 props={['event']}
                 summary={({ event }) => {
-                    return event
+                  return event
                 }}
             >
                 <EditItem
@@ -197,8 +196,6 @@ export const TextfieldSettings = () => {
                 />
             </EditSection>
 
-
-
         </React.Fragment>
-    )
+  )
 }

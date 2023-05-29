@@ -1,21 +1,21 @@
 import EditIcon from '@mui/icons-material/Edit'
-import LayersIcon from '@mui/icons-material/Layers';
+import LayersIcon from '@mui/icons-material/Layers'
 import { Stack } from '@mui/material'
 import { useEditor } from '@craftjs/core'
 import React from 'react'
 import { Layers } from '@craftjs/layers'
 
 export const Editbox = () => {
-    const { active, related } = useEditor((state, query) => {
-        const currentlySelectedNodeId = query.getEvent('selected').first();
-        return {
-            active: currentlySelectedNodeId,
-            related:
-                currentlySelectedNodeId && state.nodes[currentlySelectedNodeId].related,
-        }
-    })
+  const { active, related } = useEditor((state, query) => {
+    const currentlySelectedNodeId = query.getEvent('selected').first()
+    return {
+      active: currentlySelectedNodeId,
+      related:
+                currentlySelectedNodeId && state.nodes[currentlySelectedNodeId].related
+    }
+  })
 
-    return (
+  return (
         <div className="editbox">
             <div className="editContainer">
                 <div className="editHeader">
@@ -49,5 +49,5 @@ export const Editbox = () => {
             </div>
 
         </div>
-    )
-} 
+  )
+}

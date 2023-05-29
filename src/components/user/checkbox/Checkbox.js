@@ -7,33 +7,34 @@ import { Tooltip } from '../../tools/Tooltip'
 import { handleStop, getX, getY, getWS } from '../Utilities'
 import { CheckboxSettings } from './CheckboxSettings'
 
-export const Checkbox = ({ size, color, pageX, pageY, state, event,
-    defaultChecked, ...props }) => {
+export const Checkbox = ({
+  size, color, pageX, pageY, state, event,
+  defaultChecked, ...props
+}) => {
+  const { enabled } = useEditor((state) => ({
+    enabled: state.options.enabled
+  }))
 
-    const { enabled } = useEditor((state) => ({
-        enabled: state.options.enabled
-    }))
+  const {
+    id,
+    name,
+    connectors: { connect },
+    actions
+  } = useNode((node) => ({
+    name: node.data.custom.displayName || node.data.displayName
+  }))
 
-    const {
-        id,
-        name,
-        connectors: { connect },
-        actions
-    } = useNode((node) => ({
-        name: node.data.custom.displayName || node.data.displayName,
-    }))
+  const nodeRef = useRef()
 
-    const nodeRef = useRef()
-
-    return (
+  return (
         <Draggable
             disabled={!enabled}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
             position={{
-                x: getX(pageX, nodeRef),
-                y: getY(pageY, nodeRef)
+              x: getX(pageX, nodeRef),
+              y: getY(pageY, nodeRef)
             }}
         >
             <div
@@ -50,21 +51,21 @@ export const Checkbox = ({ size, color, pageX, pageY, state, event,
                             size={size}
                             disableRipple={true}
                             sx={{
-                                color: `rgba(${Object.values(color)})`,
-                                "& .MuiSvgIcon-root": {
-                                    fill: `rgba(${Object.values(color)})`
-                                },
-                                padding: 0
+                              color: `rgba(${Object.values(color)})`,
+                              '& .MuiSvgIcon-root': {
+                                fill: `rgba(${Object.values(color)})`
+                              },
+                              padding: 0
                             }}
                             checked={Boolean(state)}
                             onClick={() => {
-                                actions.setProp((props) => {props.state = !props.state})
-                                
-                                const ws = getWS()
-                                if (ws != null) {
-                                    let message = { "Parent":String(id), "Event":String(event), "Value":!state };
-                                    ws.send(JSON.stringify(message))
-                                }
+                              actions.setProp((props) => { props.state = !props.state })
+
+                              const ws = getWS()
+                              if (ws != null) {
+                                const message = { Parent: String(id), Event: String(event), Value: !state }
+                                ws.send(JSON.stringify(message))
+                              }
                             }}
                             {...props}
                         />
@@ -72,18 +73,18 @@ export const Checkbox = ({ size, color, pageX, pageY, state, event,
                 </Tooltip>
             </div>
         </Draggable>
-    )
+  )
 }
 
 Checkbox.craft = {
-    displayName: 'Checkbox',
-    props: {
-        state: false,
-        size: 'small',
-        color: { r: 63, g: 81, b: 181, a: 1 },
-        event: ''
-    },
-    related: {
-        toolbar: CheckboxSettings
-    }
+  displayName: 'Checkbox',
+  props: {
+    state: false,
+    size: 'small',
+    color: { r: 63, g: 81, b: 181, a: 1 },
+    event: ''
+  },
+  related: {
+    toolbar: CheckboxSettings
+  }
 }

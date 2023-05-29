@@ -1,9 +1,9 @@
 import { useEditor } from '@craftjs/core'
 import {
-    Button as MaterialButton,
-    IconButton,
-    Tooltip,
-    Stack
+  Button as MaterialButton,
+  IconButton,
+  Tooltip,
+  Stack
 } from '@mui/material'
 
 import UndoIcon from '@mui/icons-material/Undo'
@@ -16,42 +16,40 @@ import { ToolbarClear } from './ToolbarClear'
 import { ToolbarSave } from './ToolbarSave'
 import { ToolbarLoad } from './ToolbarLoad'
 import { ToolbarUpload } from './ToolbarUpload'
-import { useEffect } from "react";
+import React, { useEffect, useState } from 'react'
 
 /**
 * Creates a toolbar for various tools related to the
 * canvas, such as redo etc.
 */
 
-import React, { useState } from 'react';
-
 export const Toolbar = ({ onSimulateToggle }) => {
-    const { canUndo, canRedo } = useEditor((_, query) => ({
-        canUndo: query.history.canUndo(),
-        canRedo: query.history.canRedo()
-    }))
-    const { actions, query } = useEditor()
+  const { canUndo, canRedo } = useEditor((_, query) => ({
+    canUndo: query.history.canUndo(),
+    canRedo: query.history.canRedo()
+  }))
+  const { actions, query } = useEditor()
 
-    useEffect(() => {
-        function handleKeyDown(event) {
-            const isMac = /Mac/i.test(navigator.platform);
-            if ((isMac && event.metaKey && event.key === "z") || (!isMac && event.ctrlKey && event.key === "z")) {
-                // Call your undo function here
-                try {
-                    actions.history.undo()
-                } catch (error) {
-                    console.log(error)
-                }
-            }
+  useEffect(() => {
+    function handleKeyDown (event) {
+      const isMac = /Mac/i.test(navigator.platform)
+      if ((isMac && event.metaKey && event.key === 'z') || (!isMac && event.ctrlKey && event.key === 'z')) {
+        // Call your undo function here
+        try {
+          actions.history.undo()
+        } catch (error) {
+          console.log(error)
         }
-        document.addEventListener("keydown", handleKeyDown);
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown);
-        };
-    }, []);
-    const [hideOnSimulate, setHideOnSimulate] = useState(false);
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+  const [hideOnSimulate, setHideOnSimulate] = useState(false)
 
-    return (
+  return (
         <div className='toolbar'>
             <Stack direction='row'>
                 <Tooltip
@@ -59,18 +57,18 @@ export const Toolbar = ({ onSimulateToggle }) => {
                 >
                     <span
                         style={{
-                            cursor: canUndo ? 'pointer' : 'not-allowed',
-                            visibility: hideOnSimulate ? 'hidden' : 'visible',
+                          cursor: canUndo ? 'pointer' : 'not-allowed',
+                          visibility: hideOnSimulate ? 'hidden' : 'visible'
                         }}
                     >
                         <IconButton
                             disabled={!canUndo}
                             onClick={() => {
-                                try {
-                                    actions.history.undo()
-                                } catch (error) {
-                                    console.log(error)
-                                }
+                              try {
+                                actions.history.undo()
+                              } catch (error) {
+                                console.log(error)
+                              }
                             }}
 
                         >
@@ -85,18 +83,18 @@ export const Toolbar = ({ onSimulateToggle }) => {
                 >
                     <span
                         style={{
-                            cursor: canRedo ? 'pointer' : 'not-allowed',
-                            visibility: hideOnSimulate ? 'hidden' : 'visible',
+                          cursor: canRedo ? 'pointer' : 'not-allowed',
+                          visibility: hideOnSimulate ? 'hidden' : 'visible'
                         }}
                     >
                         <IconButton
                             disabled={!canRedo}
                             onClick={() => {
-                                try {
-                                    actions.history.redo()
-                                } catch (error) {
-                                    console.log(error)
-                                }
+                              try {
+                                actions.history.redo()
+                              } catch (error) {
+                                console.log(error)
+                              }
                             }}
                         >
                             <RedoIcon
@@ -108,7 +106,7 @@ export const Toolbar = ({ onSimulateToggle }) => {
 
                 <ToolbarClear
                     style={{
-                        visibility: hideOnSimulate ? 'hidden' : 'visible',
+                      visibility: hideOnSimulate ? 'hidden' : 'visible'
                     }}
                 />
             </Stack>
@@ -119,8 +117,8 @@ export const Toolbar = ({ onSimulateToggle }) => {
                     color='info'
                     disableElevation
                     onClick={() => {
-                        localStorage.setItem('data', query.serialize());
-                        onSimulateToggle();
+                      localStorage.setItem('data', query.serialize())
+                      onSimulateToggle()
                     }}
                 >
                     <PlayCircleOutlineIcon style={{ padding: '2px' }} />
@@ -132,5 +130,5 @@ export const Toolbar = ({ onSimulateToggle }) => {
                 <ToolbarUpload />
             </Stack>
         </div>
-    )
+  )
 }

@@ -12,41 +12,42 @@ import { handleStop, getX, getY } from '../Utilities'
  * Creates a textfield that can be edited.
  * @returns The 'Textfield' object
  */
-export const Textfield = ({ fontSize, textAlign, fontWeight, color,
-    text, pageX, pageY, width, height, URL, interval, key, event,   ...props }) => {
+export const Textfield = ({
+  fontSize, textAlign, fontWeight, color,
+  text, pageX, pageY, width, height, URL, interval, key, event, ...props
+}) => {
+  const { enabled } = useEditor((state) => ({
+    enabled: state.options.enabled
+  }))
 
-    const { enabled } = useEditor((state) => ({
-        enabled: state.options.enabled
-    }))
+  const {
+    id,
+    name,
+    connectors: { connect },
+    actions
+  } = useNode((node) => ({
+    name: node.data.custom.displayName || node.data.displayName
+  }))
 
-    const {
-        id,
-        name,
-        connectors: { connect },
-        actions
-    } = useNode((node) => ({
-        name: node.data.custom.displayName || node.data.displayName,
-    }))
+  const nodeRef = useRef()
 
-    const nodeRef = useRef()
+  const resize = (_, data) => {
+    actions.setProp((props) => {
+      props.width = data.size.width
+      props.height = data.size.height
+    })
+  }
 
-    const resize = (_, data) => {
-        actions.setProp((props) => {
-            props.width = data.size.width
-            props.height = data.size.height
-        })
-    }
-
-    return (
+  return (
         <Draggable
             disabled={!enabled}
-            cancel={".react-resizable-handle"}
+            cancel={'.react-resizable-handle'}
             onStop={() => handleStop(actions, nodeRef)}
             nodeRef={nodeRef}
             bounds='parent'
             position={{
-                x: getX(pageX, nodeRef),
-                y: getY(pageY, nodeRef)
+              x: getX(pageX, nodeRef),
+              y: getY(pageY, nodeRef)
             }}
         >
             <Resizable
@@ -70,16 +71,16 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                                 html={text}
                                 disabled={!enabled}
                                 onChange={(e) => {
-                                    actions.setProp((props) => (props.text = e.target.value), 500)
+                                  actions.setProp((props) => (props.text = e.target.value), 500)
                                 }}
                                 tagName='h2'
                                 style={{
-                                    minWidth: `${width}px`,
-                                    minHeight: `${height}px`,
-                                    color: `rgba(${Object.values(color)})`,
-                                    fontSize: `${fontSize}px`,
-                                    fontWeight: fontWeight,
-                                    textAlign: textAlign,
+                                  minWidth: `${width}px`,
+                                  minHeight: `${height}px`,
+                                  color: `rgba(${Object.values(color)})`,
+                                  fontSize: `${fontSize}px`,
+                                  fontWeight,
+                                  textAlign
                                 }}
                                 {...props}
                             />
@@ -88,26 +89,26 @@ export const Textfield = ({ fontSize, textAlign, fontWeight, color,
                 </div>
             </Resizable>
         </Draggable >
-    )
+  )
 }
 
 Textfield.craft = {
-    displayName: 'Textfield',
-    props: {
-        text: 'Text',
-        fontSize: 15,
-        textAlign: 'left',
-        fontWeight: 500,
-        width: 40,
-        height: 30,
-        color: { r: 0, g: 0, b: 0, a: 1 },
-        URL: '',
-        interval: '',
-        key: '',
-        type: '',
-        event: ''
-    },
-    related: {
-        toolbar: TextfieldSettings
-    }
+  displayName: 'Textfield',
+  props: {
+    text: 'Text',
+    fontSize: 15,
+    textAlign: 'left',
+    fontWeight: 500,
+    width: 40,
+    height: 30,
+    color: { r: 0, g: 0, b: 0, a: 1 },
+    URL: '',
+    interval: '',
+    key: '',
+    type: '',
+    event: ''
+  },
+  related: {
+    toolbar: TextfieldSettings
+  }
 }

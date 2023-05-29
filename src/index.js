@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client'
 import './index.css'
 import Home from './pages/Home'
 import Editor from './pages/Editor'
@@ -14,8 +14,8 @@ import Error from './pages/Error'
 // Use HashRouter instead of BrowserRouter if published to github-pages
 // HashRouter worked while BrowserRouter did not
 
-export default function App() {
-    return (
+export default function App () {
+  return (
         // enables react-dnd functionality
         <DndProvider backend={HTML5Backend} >
             {/* Routes to the different pages of the app,
@@ -30,7 +30,7 @@ export default function App() {
                 </Routes>
             </BrowserRouter>
         </DndProvider>
-    )
+  )
 }
 const domNode = document.getElementById('root')
 const root = createRoot(domNode)

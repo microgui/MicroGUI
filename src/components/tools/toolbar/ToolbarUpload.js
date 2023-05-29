@@ -1,114 +1,113 @@
 import { useState } from 'react'
 import { useEditor } from '@craftjs/core'
 import {
-    Button as MaterialButton,
-    FormGroup,
-    FormControlLabel,
-    Checkbox,
-    Tooltip,
-    IconButton,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    Divider,
-    Grid,
-    TextField,
-    Alert,
-    Snackbar
+  Button as MaterialButton,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Tooltip,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Divider,
+  Grid,
+  TextField,
+  Alert,
+  Snackbar
 } from '@mui/material'
 
-import LoadingButton from '@mui/lab/LoadingButton';
-
+import LoadingButton from '@mui/lab/LoadingButton'
 
 import UploadIcon from '@mui/icons-material/InstallMobile'
 import CloseIcon from '@mui/icons-material/Close'
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from '@mui/icons-material/Send'
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 import { setWS, ws } from '../../user/Utilities'
 
 const theme = createTheme({
-    palette: {
-        yellow: {
-            main: '#FBEE60',
-            darker: '#053e85',
-        },
-    },
-});
+  palette: {
+    yellow: {
+      main: '#FBEE60',
+      darker: '#053e85'
+    }
+  }
+})
 
 export const ToolbarUpload = () => {
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-    const { query } = useEditor()
-    const [openOuter, setOpenOuter] = useState(false)
-    const [loading, setLoading] = useState(false);
+  const { query } = useEditor()
+  const [openOuter, setOpenOuter] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-    const [IP, setIP] = useState('')
-    const [error, setError] = useState(false)
+  const [IP, setIP] = useState('')
+  const [error, setError] = useState(false)
 
-    let str = ''
-    let ws_init = false
+  let str = ''
+  let ws_init = false
 
-    let chunkSize = 1000
-    let startPoint = 0
-    let endPoint = chunkSize
+  const chunkSize = 1000
+  let startPoint = 0
+  let endPoint = chunkSize
 
-    // Function to close all dialogs
-    const handleClose = () => {
-        setOpenOuter(false)
-        setLoading(false);
-        setError(false)
-        if (ws_init) {
-            ws_init = false
-            ws.close()
-        }
+  // Function to close all dialogs
+  const handleClose = () => {
+    setOpenOuter(false)
+    setLoading(false)
+    setError(false)
+    if (ws_init) {
+      ws_init = false
+      ws.close()
     }
+  }
 
-    const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(false)
 
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
+  const handleChange = (event) => {
+    setChecked(event.target.checked)
+  }
 
-    const RemoteConnect = () => {
-        if (ws == null || !ws_init) {
-            setLoading(true);
-            setWS("ws://" + IP.trim() + "/ws")
+  const RemoteConnect = () => {
+    if (ws == null || !ws_init) {
+      setLoading(true)
+      setWS('ws://' + IP.trim() + '/ws')
 
-            ws.addEventListener('error', function (event) {
-                setError(true)
-                setLoading(false);
-            });
+      ws.addEventListener('error', function (event) {
+        setError(true)
+        setLoading(false)
+      })
 
-            ws.onopen = function () {
-                ws_init = true
-                startPoint = 0
-                endPoint = chunkSize
+      ws.onopen = function () {
+        ws_init = true
+        startPoint = 0
+        endPoint = chunkSize
 
-                ws.send("newDocument")
-            };
+        ws.send('newDocument')
+      }
 
-            ws.onmessage = function (event) {
-                if (event.data === 'OK') {
-                    let sub = str.substring(startPoint, endPoint)
-                    if (sub) {
-                        ws.send(sub)
-                        startPoint += chunkSize
-                        endPoint += chunkSize
-                    } else {
-                        ws.send("NEW DOCUMENT SENT")
-                    }
-                }
-                if (event.data === 'NEW DOCUMENT RECEIVED') {
-                    handleClose()
-                    setOpen(true)
-                }
-            }
+      ws.onmessage = function (event) {
+        if (event.data === 'OK') {
+          const sub = str.substring(startPoint, endPoint)
+          if (sub) {
+            ws.send(sub)
+            startPoint += chunkSize
+            endPoint += chunkSize
+          } else {
+            ws.send('NEW DOCUMENT SENT')
+          }
         }
+        if (event.data === 'NEW DOCUMENT RECEIVED') {
+          handleClose()
+          setOpen(true)
+        }
+      }
     }
+  }
 
-    return (
+  return (
         <ThemeProvider theme={theme}>
             <Snackbar open={open} autoHideDuration={4000} onClose={() => { setOpen(false) }} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert variant="filled" onClose={() => { setOpen(false) }} severity="success" sx={{ width: '100%' }}>
@@ -121,8 +120,8 @@ export const ToolbarUpload = () => {
                 variant='contained'
                 color='yellow'
                 onClick={() => {
-                    setOpenOuter(true)
-                    setError(false)
+                  setOpenOuter(true)
+                  setError(false)
                 }}
                 disableElevation
             >
@@ -136,10 +135,10 @@ export const ToolbarUpload = () => {
                         aria-label="close"
                         onClick={handleClose}
                         sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: 'grey'
+                          position: 'absolute',
+                          right: 8,
+                          top: 8,
+                          color: 'grey'
                         }}
                     >
                         <CloseIcon />
@@ -154,8 +153,8 @@ export const ToolbarUpload = () => {
                             <h4>Enter the IP of your display:</h4>
                         </Grid>
                         <Grid item xs={6} sx={{
-                            display: 'flex',
-                            justifyContent: 'center'
+                          display: 'flex',
+                          justifyContent: 'center'
                         }}>
                             <FormGroup>
                                 <FormControlLabel
@@ -178,13 +177,13 @@ export const ToolbarUpload = () => {
                                 type="text"
                                 sx={{ paddingRight: '10px', paddingLeft: '10px' }}
                                 onChange={(event) => {
-                                    setIP(event.target.value)
-                                    setError(false)
+                                  setIP(event.target.value)
+                                  setError(false)
                                 }}
                                 error={error}
-                                helperText={error ?
-                                    'WebSocket connection failed'
-                                    : null
+                                helperText={error
+                                  ? 'WebSocket connection failed'
+                                  : null
                                 }
                             />
                         </Grid>
@@ -195,10 +194,10 @@ export const ToolbarUpload = () => {
                                 component='label'
                                 endIcon={<SendIcon />}
                                 onClick={() => {
-                                    const doc = JSON.parse(query.serialize())
-                                    doc["ROOT"]["props"]["persistant"] = checked
-                                    str = JSON.stringify(doc).replaceAll('\\n', '').replaceAll('    ', '').replaceAll('<div>', '\n').replaceAll('</div>', '')
-                                    RemoteConnect()
+                                  const doc = JSON.parse(query.serialize())
+                                  doc.ROOT.props.persistant = checked
+                                  str = JSON.stringify(doc).replaceAll('\\n', '').replaceAll('    ', '').replaceAll('<div>', '\n').replaceAll('</div>', '')
+                                  RemoteConnect()
                                 }}
                                 loading={loading}
                                 loadingPosition="end"
@@ -209,5 +208,5 @@ export const ToolbarUpload = () => {
                 </DialogContent>
             </Dialog>
         </ThemeProvider >
-    )
+  )
 }

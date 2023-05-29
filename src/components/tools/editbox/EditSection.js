@@ -1,26 +1,26 @@
 import { useNode } from '@craftjs/core'
 import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Grid,
-    Divider,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Grid,
+  Divider
 } from '@mui/material'
 
 export const EditSection = ({ title, props, summary, children }) => {
-    const { nodeProps } = useNode((node) => ({
-        nodeProps: props && props.reduce((res, key) => {
-            res[key] = node.data.props[key] || null
-            return res
-        }, {})
-    }))
+  const { nodeProps } = useNode((node) => ({
+    nodeProps: props && props.reduce((res, key) => {
+      res[key] = node.data.props[key] || null
+      return res
+    }, {})
+  }))
 
-    return (
+  return (
         <Accordion
             sx={{
-                width: '100%',
-                background: 'transparent',
-                boxShadow: 'none'
+              width: '100%',
+              background: 'transparent',
+              boxShadow: 'none'
             }}
         >
             <AccordionSummary >
@@ -33,19 +33,20 @@ export const EditSection = ({ title, props, summary, children }) => {
                             {title}
                         </h5>
                     </Grid>
-                    {summary && props ? (
+                    {summary && props
+                      ? (
                         <Grid item xs={6}>
                             <h5 style={{ color: 'grey', textAlign: 'right' }}>
                                 {summary(
-                                    props.reduce((acc, key) => {
-                                        acc[key] = nodeProps[key]
-                                        return acc
-                                    }, {})
+                                  props.reduce((acc, key) => {
+                                    acc[key] = nodeProps[key]
+                                    return acc
+                                  }, {})
                                 )}
                             </h5>
                         </Grid>
-                    ) :
-                        <Grid item xs={6}>
+                        )
+                      : <Grid item xs={6}>
                             <h5 style={{ color: 'grey', textAlign: 'right' }}>
                                 {summary}
                             </h5>
@@ -63,5 +64,5 @@ export const EditSection = ({ title, props, summary, children }) => {
                 </Grid>
             </AccordionDetails>
         </Accordion>
-    )
+  )
 }

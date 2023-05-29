@@ -1,20 +1,20 @@
-import { EditSection } from "../../tools/editbox/EditSection"
-import { EditItem } from "../../tools/editbox/EditItem"
+import { EditSection } from '../../tools/editbox/EditSection'
+import { EditItem } from '../../tools/editbox/EditItem'
 import React, { useState } from 'react'
 import { useNode } from '@craftjs/core'
-import { FormControlLabel, Radio, Typography } from "@mui/material"
+import { FormControlLabel, Radio, Typography } from '@mui/material'
 
 export const ProgressbarSettings = () => {
-    const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-    const { id } = useNode()
+  const { id } = useNode()
 
-    const copyId = () => {
-        setCopied(true)
-        navigator.clipboard.writeText(id)
-    }
+  const copyId = () => {
+    setCopied(true)
+    navigator.clipboard.writeText(id)
+  }
 
-    return (
+  return (
         <React.Fragment>
             <EditSection
                 title='Id'
@@ -32,7 +32,7 @@ export const ProgressbarSettings = () => {
                 title='Position'
                 props={['pageX', 'pageY']}
                 summary={({ pageX, pageY }) => {
-                    return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
+                  return `X: ${Number(pageX)}, Y: ${Number(pageY)}`
                 }}
             >
                 <EditItem propKey='pageX' type='number' label='X' />
@@ -42,7 +42,7 @@ export const ProgressbarSettings = () => {
                 title='Text'
                 props={['text']}
                 summary={({ text }) => {
-                    return text
+                  return text
                 }}
             >
                 <EditItem
@@ -56,19 +56,19 @@ export const ProgressbarSettings = () => {
                 title='Color'
                 props={['color']}
                 summary={({ color }) => {
-                    return (
+                  return (
                         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
                             <div
                                 style={{
-                                    background:
+                                  background:
                                         color && `rgba(${Object.values(color)})`,
-                                    borderRadius: '50%',
-                                    height: '20px',
-                                    width: '20px'
+                                  borderRadius: '50%',
+                                  height: '20px',
+                                  width: '20px'
                                 }}
                             />
                         </div>
-                    )
+                  )
                 }}
             >
                 <EditItem
@@ -82,7 +82,7 @@ export const ProgressbarSettings = () => {
                 title='Size'
                 props={['size']}
                 summary={({ size }) => {
-                    return size
+                  return size
                 }}
             >
                 <EditItem
@@ -99,7 +99,7 @@ export const ProgressbarSettings = () => {
                 title='Rotation'
                 props={['rotation']}
                 summary={({ rotation }) => {
-                    return rotation
+                  return rotation
                 }}
             >
                 <EditItem
@@ -119,7 +119,7 @@ export const ProgressbarSettings = () => {
                 title='Value range'
                 props={['min', 'max']}
                 summary={({ min, max }) => {
-                    return `[${Number(min)},${Number(max)}]`
+                  return `[${Number(min)},${Number(max)}]`
                 }}
             >
                 <EditItem propKey='min' type='min' label='Min' />
@@ -135,14 +135,14 @@ export const ProgressbarSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
-                    URL for an API 
+                    URL for an API
                 </p>
 
             </EditSection>
@@ -156,11 +156,11 @@ export const ProgressbarSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
                     This interval referes to the frequency of how often the API updates (in seconds)
@@ -177,14 +177,14 @@ export const ProgressbarSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
-                    This is the JSON key to be extracted from the API 
+                    This is the JSON key to be extracted from the API
                 </p>
             </EditSection>
 
@@ -197,11 +197,11 @@ export const ProgressbarSettings = () => {
 
                 <p
                     style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        fontSize: 13,
-                        color: 'gray',
-                        marginTop: '20px'
+                      width: '100%',
+                      textAlign: 'center',
+                      fontSize: 13,
+                      color: 'gray',
+                      marginTop: '20px'
                     }}
                 >
                     Specify the type of the JSON value
@@ -209,14 +209,11 @@ export const ProgressbarSettings = () => {
 
             </EditSection>
 
-
-
-
             <EditSection
                 title='Event'
                 props={['event']}
                 summary={({ event }) => {
-                    return event
+                  return event
                 }}
             >
                 <EditItem
@@ -227,5 +224,5 @@ export const ProgressbarSettings = () => {
                 />
             </EditSection>
         </React.Fragment>
-    )
+  )
 }
